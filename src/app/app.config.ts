@@ -12,14 +12,13 @@ import {
 } from '@angular/core';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { APIAuthInterceptor } from '@interceptor/api-auth-interceptor.service';
-import { SettingsService } from '@service/setting/settings.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideAppInitializer(() => {
-      const settingsService = inject(SettingsService);
-      return settingsService.initialize();
-    }),
+    // provideAppInitializer(() => {
+    //   const settingsService = inject(SettingsService);
+    //   return settingsService.initialize();
+    // }),
     provideAnimationsAsync(),
     provideHttpClient(withInterceptors([APIAuthInterceptor])),
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },

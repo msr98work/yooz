@@ -13,8 +13,6 @@ import {
   IonCol,
 } from '@ionic/angular/standalone';
 import { RequestModel } from '@model/request.model';
-import { RequestService } from '@service/request/request.service';
-import { WidgetMapService } from '@widget-map/widget-map-service/widget-map.service';
 import { MainHeaderComponent } from '@pages/dashboard/main-header/main-header.component';
 
 @Component({
@@ -24,9 +22,6 @@ import { MainHeaderComponent } from '@pages/dashboard/main-header/main-header.co
   imports: [IonText, IonContent, MainHeaderComponent],
 })
 export class HomePage {
-  private requestService = inject(RequestService);
-  private destroyRef = inject(DestroyRef);
-  private widgetMap = inject(WidgetMapService);
   requestsList: RequestModel.Full[] = [];
   loading = false;
 
@@ -38,17 +33,17 @@ export class HomePage {
 
   getList() {
     this.loading = true;
-    this.requestService
-      .getByParams({
-        limit: 50,
-        offset: 0,
-      })
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe((response) => {
-        if (response.success) {
-          this.requestsList = response.result.results;
-        }
-        this.loading = false;
-      });
+    // this.requestService
+    //   .getByParams({
+    //     limit: 50,
+    //     offset: 0,
+    //   })
+    //   .pipe(takeUntilDestroyed(this.destroyRef))
+    //   .subscribe((response) => {
+    //     if (response.success) {
+    //       this.requestsList = response.result.results;
+    //     }
+    //     this.loading = false;
+    //   });
   }
 }

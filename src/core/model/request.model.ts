@@ -6,7 +6,7 @@ export namespace RequestModel {
     node: any;
     arrival_time: string;
     last_modify: string;
-    owner: UserModel.User;
+    owner: UserModel.Full;
     enable: true;
     request: {
       title: string;

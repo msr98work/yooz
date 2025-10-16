@@ -1,68 +1,32 @@
-import { inject, Injectable } from '@angular/core';
-import { AuthModel } from '@model/auth.model';
+import { Injectable } from '@angular/core';
+import { BaseApiService } from '@service/base-api/base-api.service';
 import { ResponseBaseApiModel } from '@model/response-base-api.model';
-import { ApiService } from '@service/api/api.service';
-import { Observable } from 'rxjs';
+import { AuthModel } from '@model/auth.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private _apiUrl = 'auth';
-  private _loginApiUrl = `${this._apiUrl}/login`;
-  private _refreshApiUrl = `${this._apiUrl}/refresh`;
-  private _captchaApiUrl = `captcha`;
+  private readonly _api_base = 'auth/';
+  private readonly _api_sign_in = this._api_base + 'sign_in';
+  private readonly _api_send_email = this._api_base + 'send_email';
 
-  constructor(private apiService: ApiService) {}
+  constructor(private baseApiService: BaseApiService) {}
 
-  login(
-    data: AuthModel.Login
-  ): Observable<ResponseBaseApiModel.ApiResponse<AuthModel.LoginResponse>> {
-    return this.apiService.post<
-      ResponseBaseApiModel.ApiResponse<AuthModel.LoginResponse>,
-      AuthModel.Login
-    >({
-      route: this._loginApiUrl,
-      body: data,
+  sendEmail(body: AuthModel.SendEmail) {
+    return this.baseApiService.post<ResponseBaseApiModel.ApiResponse<{}>, {}>({
+      route: this._api_send_email,
+      body: body,
     });
   }
 
-  refreshToken(
-    data: AuthModel.LoginRefresh
-  ): Observable<
-    ResponseBaseApiModel.ApiResponse<AuthModel.LoginRefreshResponse>
-  > {
-    return this.apiService.post<
-      ResponseBaseApiModel.ApiResponse<AuthModel.LoginRefreshResponse>,
-      AuthModel.LoginRefresh
+  signIn(body: AuthModel.VerifyEmailParams) {
+    return this.baseApiService.post<
+      ResponseBaseApiModel.ApiResponse<AuthModel.Token>,
+      AuthModel.VerifyEmailParams
     >({
-      route: this._refreshApiUrl,
-      body: data,
+      route: this._api_sign_in,
+      body: body,
     });
   }
-
-  // captcha() {
-  //   return this.apiService.post<
-  //     ApiResponse<LoginRefreshResponse>,
-  //     LoginRefresh
-  //   >({
-  //     route: this._captchaApiUrl,
-  //   });
-  // }
-
-  // changePassword(username: string, data: Partial<User>) {
-  //   return this.apiService.put<ApiResponse<User>, Partial<User>>({
-  //     route: `${this._apiUrl}/${username}/change-password`,
-  //     id: undefined,
-  //     body: data,
-  //   });
-  // }
-
-  // resetPassword(username: string, data: Partial<User>) {
-  //   return this.apiService.put<ApiResponse<User>, Partial<User>>({
-  //     route: `${this._apiUrl}/${username}/reset-password`,
-  //     id: undefined,
-  //     body: data,
-  //   });
-  // }
 }

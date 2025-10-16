@@ -25,7 +25,6 @@ import {
   pieChart,
   home,
 } from 'ionicons/icons';
-import { NewRequestComponent } from '@shared/components/new-request/new-request.component';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -33,22 +32,13 @@ import { CommonModule } from '@angular/common';
   templateUrl: './main-tabs.component.html',
   styleUrls: ['./main-tabs.component.scss'],
   imports: [
-    IonText,
-    IonSpinner,
-    IonFooter,
-    IonButton,
-    IonButtons,
-    IonTitle,
-    IonContent,
-    IonToolbar,
-    IonHeader,
     IonModal,
     IonTabs,
     IonIcon,
     IonTabButton,
     IonTabBar,
     IonFabButton,
-    NewRequestComponent,
+    // NewRequestComponent,
     CommonModule,
   ],
 })

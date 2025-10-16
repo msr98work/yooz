@@ -5,7 +5,7 @@ export namespace LocalStorage {
     | 'welcome'
     | 'language';
   function storageKeys(key: StorageKeysType) {
-    return `Drilling.Storage.${key}`;
+    return `Yooz.Storage.${key}`;
   }
   export function get<Value extends string | number | boolean | null = string>(
     key: StorageKeysType

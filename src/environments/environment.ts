@@ -1,4 +1,4 @@
 export const environment = {
-  base_url: '185.7.212.24:8088',
+  base_url: 'http://localhost:3000',
   production: false,
 };

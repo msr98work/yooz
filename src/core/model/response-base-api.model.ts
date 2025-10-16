@@ -1,6 +1,6 @@
 export namespace ResponseBaseApiModel {
   export interface Base {
-    status: number;
+    statusCode: number;
     success: boolean;
     messages: any;
   }

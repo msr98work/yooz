@@ -4,16 +4,17 @@ import { ToastController, ToastOptions } from '@ionic/angular';
 @Injectable({
   providedIn: 'root',
 })
-export class MessagesService {
+export class MessageService {
   private toastController = inject(ToastController);
+
   defaultOptions: ToastOptions = {
     duration: 3000,
     position: 'top',
     animated: true,
     layout: 'stacked',
-    cssClass: 'message-toast',
     translucent: true,
   };
+
   async success(options?: ToastOptions) {
     const toast = await this.toastController.create({
       message: 'عملیات با موفقیت انجام شد.',
@@ -54,29 +55,6 @@ export class MessagesService {
       icon: 'information-circle',
       ...this.defaultOptions,
       ...options,
-    });
-    await toast.present();
-  }
-
-  async confirm(options: { options?: ToastOptions; handler: () => any }) {
-    const toast = await this.toastController.create({
-      message: 'آیا از این اقدام مطمئن هستید؟',
-      color: 'light',
-      icon: 'close-circle',
-      swipeGesture: 'vertical',
-      buttons: [
-        {
-          text: 'انصراف',
-          role: 'cancel',
-        },
-        {
-          text: 'تایید',
-          handler: options.handler,
-        },
-      ],
-      ...this.defaultOptions,
-      duration: 0,
-      ...options.options,
     });
     await toast.present();
   }

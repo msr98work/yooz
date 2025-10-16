@@ -5,12 +5,12 @@ import {
   HttpResponse,
 } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { ResponseBaseApiModel } from '@model/response-base-api.model';
-import { MessagesService } from '@service/messages/messages.service';
-import { parseErrorMessages } from '@util/api-error-parser.util';
-import { convertParamsToString } from '@util/convert-params-to-string.util';
-import { SettingUtil } from '@util/setting.util';
 import { Observable, catchError, map, of } from 'rxjs';
+import { ResponseBaseApiModel } from '@model/response-base-api.model';
+import { MessageService } from '@service/message/message.service';
+import { convertParamsToString } from '@core/util/convert-params-to-string.util';
+import { SettingUtil } from '@util/setting.util';
+import { parseErrorMessages } from '@util/api-error-parser.util';
 
 const http_options = {
   headers: new HttpHeaders({
@@ -21,65 +21,31 @@ const http_options = {
 @Injectable({
   providedIn: 'root',
 })
-export class ApiService {
-  base_api = `${SettingUtil.apiUrl()}`;
+export class BaseApiService {
   private httpClient = inject(HttpClient);
-  private messagesService = inject(MessagesService);
+  private messageService = inject(MessageService);
 
-  createRoute(route: string, ignoreSlashRoute?: boolean) {
-    return route + (ignoreSlashRoute ? '' : '/');
-  }
+  base_api = `${SettingUtil.baseUrl()}`;
 
   get<ResponseType>(options: {
     route: string;
     params?: object;
-    ignoreSlashRoute?: boolean;
   }): Observable<ResponseType | ResponseBaseApiModel.Error> {
     const url = options.params
-      ? `${this.createRoute(
-          `${this.base_api}/${options.route}`,
-          options.ignoreSlashRoute
-        )}?${convertParamsToString(options.params)}`
-      : `${this.createRoute(
-          `${this.base_api}/${options.route}`,
-          options.ignoreSlashRoute
-        )}`;
+      ? `${this.base_api}/${options.route}?${convertParamsToString(
+          options.params
+        )}`
+      : `${this.base_api}/${options.route}`;
     return this.httpClient
       .get<ResponseType>(url, http_options)
-      .pipe(catchError(this.errorHandler.bind(this)));
-  }
-
-  getFile<ResponseType>(options: {
-    route: string;
-    params?: object;
-    ignoreSlashRoute?: boolean;
-  }): Observable<Blob | ResponseBaseApiModel.Error> {
-    const url = options.params
-      ? `${this.createRoute(
-          `${this.base_api}/${options.route}`,
-          options.ignoreSlashRoute
-        )}?${convertParamsToString(options.params)}`
-      : `${this.createRoute(
-          `${this.base_api}/${options.route}`,
-          options.ignoreSlashRoute
-        )}`;
-    return this.httpClient
-      .get<Blob>(url, {
-        ...http_options,
-        responseType: 'blob' as 'json',
-      })
       .pipe(catchError(this.errorHandler.bind(this)));
   }
 
   getById<ResponseType>(options: {
     route: string;
     id: string | number;
-    ignoreSlashRoute?: boolean;
   }): Observable<ResponseType | ResponseBaseApiModel.Error> {
-    const url = `${this.createRoute(
-      `${this.base_api}/${options.route}/${options.id}`,
-      options.ignoreSlashRoute
-    )}`;
+    const url = `${this.base_api}/${options.route}/${options.id}/`;
     return this.httpClient
       .get<ResponseType>(url, http_options)
       .pipe(catchError(this.errorHandler.bind(this)));
@@ -88,21 +54,14 @@ export class ApiService {
   post<ResponseType, EntityType>(options: {
     route: string;
     body?: EntityType;
-    ignoreFinalSlash?: boolean;
-  }): Observable<ResponseType> {
-    const url = options.ignoreFinalSlash
-      ? `${this.base_api}/${options.route}`
-      : `${this.base_api}/${options.route}/`;
+  }): Observable<ResponseType | ResponseBaseApiModel.Error> {
+    const url = `${this.base_api}/${options.route}`;
     return this.httpClient
       .post<ResponseType>(url, options.body ?? undefined, http_options)
       .pipe(catchError(this.errorHandler.bind(this)));
   }
 
-  postFormdata(options: {
-    route: string;
-    body: FormData;
-    ignoreSlashRoute?: boolean;
-  }): Observable<any> {
+  postFormdata(options: { route: string; body: FormData }): Observable<any> {
     const url = `${this.base_api}/${options.route}/`;
     return this.httpClient
       .post<any>(url, options.body)
@@ -113,7 +72,6 @@ export class ApiService {
     route: string;
     id: string | number | undefined;
     body: EntityType;
-    ignoreSlashRoute?: boolean;
   }): Observable<ResponseType | ResponseBaseApiModel.Error> {
     const url = options.id
       ? `${this.base_api}/${options.route}/${options.id}/`
@@ -127,7 +85,6 @@ export class ApiService {
     route: string;
     id: string | number | undefined;
     body: FormData;
-    ignoreSlashRoute?: boolean;
   }): Observable<ResponseType | ResponseBaseApiModel.Error> {
     const url = options.id
       ? `${this.base_api}/${options.route}/${options.id}/`
@@ -141,7 +98,6 @@ export class ApiService {
     route: string;
     id: string | number | undefined;
     body: EntityType;
-    ignoreSlashRoute?: boolean;
   }): Observable<ResponseType | ResponseBaseApiModel.Error> {
     const url = `${this.base_api}/${options.route}/${options.id}/`;
     return this.httpClient
@@ -153,7 +109,6 @@ export class ApiService {
     route: string;
     id: string | number | undefined;
     body: FormData;
-    ignoreSlashRoute?: boolean;
   }): Observable<ResponseType | ResponseBaseApiModel.Error> {
     const url = options.id
       ? `${this.base_api}/${options.route}/${options.id}/`
@@ -163,14 +118,13 @@ export class ApiService {
       .pipe(catchError(this.errorHandler.bind(this)));
   }
 
-  delete(options: {
+  delete<ResponseType>(options: {
     route: string;
     id: string | number;
-    ignoreSlashRoute?: boolean;
-  }): Observable<ResponseBaseApiModel.Error> {
+  }): Observable<ResponseType | ResponseBaseApiModel.Error> {
     const url = `${this.base_api}/${options.route}/${options.id}/`;
     return this.httpClient
-      .delete<ResponseBaseApiModel.Error>(url, {
+      .delete<ResponseType>(url, {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
         }),
@@ -181,7 +135,7 @@ export class ApiService {
           return {
             result: null,
             messages: '',
-            status: response.status,
+            statusCode: response.status,
             success: response.ok ? true : false,
           };
         }),
@@ -189,17 +143,19 @@ export class ApiService {
       );
   }
 
-  errorHandler(error: HttpErrorResponse) {
+  errorHandler(
+    error: HttpErrorResponse
+  ): Observable<ResponseBaseApiModel.Error> {
     if (error.status !== 401) {
       const errMessage = parseErrorMessages(error);
       //  this.message.create('error', errMessage, messageOptions);
-      this.messagesService.error({
+      this.messageService.error({
         message: errMessage,
       });
       return of({
         result: null,
         messages: errMessage,
-        status: error.status,
+        statusCode: error.status,
         success: error.ok,
       });
     } else {
@@ -213,7 +169,7 @@ export class ApiService {
       return of({
         result: null,
         messages: 'Token expired',
-        status: error.status,
+        statusCode: error.status,
         success: error.ok,
       });
     }

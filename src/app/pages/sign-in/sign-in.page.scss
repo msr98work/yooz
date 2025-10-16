@@ -1,0 +1,35 @@
+#sign-main {
+  width: 100%;
+  background-image: url(/assets/image/bg-signin.svg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  height: 100%;
+}
+.sign {
+  height: calc(100% - 56px);
+}
+.logo {
+  height: 100px;
+}
+.sign-title {
+  #title {
+    font-weight: bold;
+  }
+}
+
+.sign-form {
+  .block-password {
+    position: relative;
+  }
+  .toggle-password {
+    position: absolute;
+    top: 0;
+    z-index: 2;
+    inset-block-start: 15px;
+    inset-inline-end: 0px;
+  }
+}
+
+.marign-vertical {
+  margin-block: 30px;
+}

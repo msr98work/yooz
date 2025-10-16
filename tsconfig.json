@@ -1,0 +1,45 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "sourceMap": true,
+    "declaration": false,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2022",
+    "module": "es2020",
+    "lib": ["es2018", "dom"],
+    "useDefineForClassFields": false,
+     "paths": {
+      "@environment/*":["src/environments/*"],
+      "@model/*":["src/core/model/*"],
+      "@service/*":["src/core/service/*"],
+      "@db/*":["src/core/database/*"],
+      "@type/*":["src/core/type/*"],
+      "@guard/*":["src/core/guard/*"],
+      "@pipe/*":["src/core/pipe/*"],
+      "@interceptor/*":["src/core/interceptor/*"],
+      "@util/*":["src/core/util/*"],
+      "@core/*":["src/core/*"],
+      "@pages/*":["src/app/pages/*"],
+      "@widget-map/*":["src/shared/components/widget-map/*"],
+      "@shared/*":["src/shared/*"],
+    }
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
+}

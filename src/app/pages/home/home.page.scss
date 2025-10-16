@@ -1,0 +1,688 @@
+#latest-requests {
+    overflow: auto;
+
+    ion-card {
+        width: 300px;
+        height: 160px;
+    }
+}
+
+.card-gradient {
+    background: linear-gradient(135deg, var(--ion-color-primary) 0%, var(--ion-color-tertiary) 100%);
+    border-radius: 20px;
+    padding: 25px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    width: 300px;
+}
+
+.card-gradient::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+}
+
+.card-gradient-danger {
+    width: 300px;
+    background:
+        /* خطوط مورب نازک */
+        linear-gradient(45deg, transparent 49%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.1) 51%, transparent 52%),
+        linear-gradient(-45deg, transparent 49%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.05) 51%, transparent 52%),
+        /* دایره‌های بزرگ */
+        radial-gradient(circle at 20% 80%, rgba(197, 0, 15, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(203, 26, 39, 0.3) 0%, transparent 50%),
+        /* گرادیان اصلی */
+        linear-gradient(135deg, var(--ion-color-danger) 0%, var(--ion-color-danger-tint) 100%);
+
+    background-size:
+        50px 50px,
+        /* اندازه خطوط مورب */
+        50px 50px,
+        /* اندازه خطوط مورب معکوس */
+        300px 300px,
+        /* اندازه دایره اول */
+        300px 300px,
+        /* اندازه دایره دوم */
+        cover;
+    /* اندازه گرادیان اصلی */
+
+    border-radius: 20px;
+    padding: 25px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.card-gradient-danger::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    animation: float-danger 6s ease-in-out infinite;
+}
+
+.card-gradient-danger::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -30%;
+    width: 150px;
+    height: 150px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    animation: float-danger 8s ease-in-out infinite reverse;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.card-header h3 {
+    margin: 0;
+    font-size: 1.4em;
+    font-weight: bold;
+}
+
+.badge {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8em;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.card-content {
+    margin-bottom: 25px;
+    position: relative;
+    z-index: 2;
+}
+
+.card-content p {
+    margin: 0;
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
+.card-footer {
+    position: relative;
+    z-index: 2;
+}
+
+.btn-danger {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    padding: 12px 30px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: bold;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-danger::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.btn-danger:hover::before {
+    left: 100%;
+}
+
+.btn-danger:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateX(5px);
+}
+
+@keyframes float-danger {
+
+    0%,
+    100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-20px) rotate(180deg);
+    }
+}
+
+/* انیمیشن برای خطوط */
+@keyframes moveLines-danger {
+    0% {
+        background-position: 0 0, 0 0, 20% 80%, 80% 20%, 0 0;
+    }
+
+    100% {
+        background-position: 50px 50px, 50px 50px, 30% 70%, 70% 30%, 0 0;
+    }
+}
+
+
+///////////////////////////////
+
+.welcome-card {
+    background:
+        /* خطوط دکوراتیو */
+        linear-gradient(45deg, transparent 49%, rgba(255, 255, 255, 0.1) 50%, rgba(255, 255, 255, 0.1) 51%, transparent 52%),
+        linear-gradient(-45deg, transparent 49%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.05) 51%, transparent 52%),
+        /* گرادیان اصلی */
+        linear-gradient(135deg, var(--ion-color-primary) 0%, var(--ion-color-primary-tint) 100%);
+
+    background-size: 50px 50px, 50px 50px, cover;
+    border-radius: 25px;
+    padding: 30px;
+    color: white;
+    box-shadow: 0 15px 40px rgba(31, 65, 187, 0.3);
+    margin: 20px;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.welcome-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    animation: float 8s ease-in-out infinite;
+}
+
+.welcome-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 25px;
+    position: relative;
+    z-index: 2;
+}
+
+.greeting h1 {
+    margin: 0 0 5px 0;
+    font-size: 2.2em;
+    font-weight: bold;
+}
+
+.greeting p {
+    margin: 0;
+    opacity: 0.9;
+    font-size: 1.1em;
+}
+
+.time-section {
+    text-align: left;
+}
+
+.current-time {
+    font-size: 3em;
+    font-weight: bold;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+    margin-bottom: 5px;
+}
+
+.time-label {
+    font-size: 0.9em;
+    opacity: 0.8;
+}
+
+.date-section {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 2;
+}
+
+.today-badge {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.persian-date {
+    font-size: 1.1em;
+    font-weight: 500;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 25px;
+    position: relative;
+    z-index: 2;
+}
+
+.stat-item {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-3px);
+}
+
+.stat-number {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-variant-numeric: persian;
+}
+
+.stat-label {
+    font-size: 0.85em;
+    opacity: 0.9;
+}
+
+.weather-section {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+.weather-info {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.weather-icon {
+    font-size: 1.2em;
+}
+
+/* انیمیشن‌ها */
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-20px) rotate(180deg);
+    }
+}
+
+@keyframes moveLines {
+    0% {
+        background-position: 0 0, 0 0, 0 0;
+    }
+
+    100% {
+        background-position: 50px 50px, 50px 50px, 0 0;
+    }
+}
+
+.welcome-card {
+    animation: moveLines 20s linear infinite;
+}
+
+/* ریسپانسیو */
+@media (max-width: 768px) {
+    .welcome-card {
+        padding: 20px;
+        margin: 10px;
+    }
+
+    .welcome-header {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+
+    .time-section {
+        text-align: center;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .current-time {
+        font-size: 2.5em;
+    }
+
+    .greeting h1 {
+        font-size: 1.8em;
+    }
+}
+
+/* انیمیشن برای آپدیت زمان */
+@keyframes timeUpdate {
+    0% {
+        opacity: 0.7;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.7;
+    }
+}
+
+.time-updating {
+    animation: timeUpdate 1s ease-in-out;
+}
+
+
+
+//////////////////////////////////////////// 
+.mobile-welcome-card {
+    background:
+        /* گرادیان اصلی */
+        linear-gradient(135deg, var(--ion-color-primary) 0%, var(--ion-color-primary-tint) 100%),
+        /* خطوط مورب دکوراتیو */
+        repeating-linear-gradient(45deg,
+            transparent,
+            transparent 10px,
+            rgba(255, 255, 255, 0.05) 10px,
+            rgba(255, 255, 255, 0.05) 20px),
+        repeating-linear-gradient(-45deg,
+            transparent,
+            transparent 15px,
+            rgba(255, 255, 255, 0.03) 15px,
+            rgba(255, 255, 255, 0.03) 30px),
+        /* دایره‌های دکوراتیو */
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 70%, rgba(53, 84, 194, 0.2) 0%, transparent 50%),
+        radial-gradient(circle at 70% 30%, rgba(31, 65, 187, 0.2) 0%, transparent 50%);
+
+    background-blend-mode: overlay, normal, normal, normal, normal, normal;
+    border-radius: 30px;
+    padding: 25px;
+    color: white;
+    box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.2),
+        0 0 0 1px rgba(255, 255, 255, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+}
+
+/* افکت شیشه‌ای روی کارت */
+.mobile-welcome-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.1) 0%,
+            rgba(255, 255, 255, 0.05) 50%,
+            rgba(255, 255, 255, 0) 100%);
+    pointer-events: none;
+    border-radius: 30px;
+}
+
+/* دایره‌های متحرک در بک‌گراند کارت */
+.mobile-welcome-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -30%;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: float 8s ease-in-out infinite;
+}
+
+.card-background {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.1;
+    background:
+        radial-gradient(circle at 80% 20%, var(--ion-color-success) 0%, transparent 50%),
+        radial-gradient(circle at 20% 80%, var(--ion-color-warning) 0%, transparent 50%);
+    z-index: 0;
+}
+
+.card-content {
+    position: relative;
+    z-index: 1;
+}
+
+.header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 25px;
+}
+
+.greeting h1 {
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+.greeting p {
+    opacity: 0.8;
+    font-size: 0.9rem;
+}
+
+.profile-icon {
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.time-section {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.current-time {
+    font-size: 3.5rem;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    margin-bottom: 5px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.time-label {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.date-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.today-badge {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.persian-date {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.stat-item {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    border-radius: 18px;
+    padding: 15px 10px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.stat-number {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+    font-variant-numeric: persian;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    opacity: 0.9;
+}
+
+.weather-section {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.weather-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.weather-icon {
+    font-size: 1.8rem;
+}
+
+.weather-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.temperature {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.condition {
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+.location {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+
+/* ریسپانسیو برای صفحه‌های کوچک‌تر */
+@media (max-width: 380px) {
+    .mobile-welcome-card {
+        padding: 20px;
+        border-radius: 25px;
+    }
+
+    .greeting h1 {
+        font-size: 1.6rem;
+    }
+
+    .current-time {
+        font-size: 3rem;
+    }
+
+    .stats-container {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .date-section {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+}
+
+/* افکت‌های لمسی برای موبایل */
+.stat-item:active {
+    transform: scale(0.95);
+}
+
+/* اسکرول نرم برای محتوای طولانی */
+.card-content {
+    -webkit-overflow-scrolling: touch;
+}

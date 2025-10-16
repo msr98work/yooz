@@ -1,0 +1,53 @@
+<ion-tabs>
+  <!-- <ion-fab vertical="bottom" horizontal="center" translucent="true">
+
+  </ion-fab> -->
+
+  <ion-tab-bar slot="bottom" class="ion-no-border">
+    <ion-tab-button tab="/">
+      <ion-icon name="home"></ion-icon>
+      خانه
+    </ion-tab-button>
+
+    <ion-tab-button class="chart">
+      <ion-icon name="pie-chart"></ion-icon>
+      گزارشات
+    </ion-tab-button>
+
+    <ion-fab-button id="open-modal">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+
+    <!-- <svg
+      height="50"
+      viewBox="0 0 100 50"
+      width="100"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M100 0v50H0V0c.543 27.153 22.72 49 50 49S99.457 27.153 99.99 0h.01z"
+        fill="red"
+        fill-rule="evenodd"
+      ></path>
+    </svg> -->
+
+    <ion-tab-button class="notifs">
+      <ion-icon name="file-tray-full"></ion-icon>
+      <!-- <ion-badge>3</ion-badge> -->
+      درخواست‌ها
+    </ion-tab-button>
+    <ion-tab-button [tab]="'user-profile'">
+      <!-- <ion-avatar *ngIf="user?.profile?.image_path">
+        <img [src]="user?.profile?.image_path" />
+      </ion-avatar> -->
+      <ion-icon name="person" aria-hidden="true"></ion-icon>
+      پروفایل
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
+<!-- <app-new-off-days [modalID]="modalID"></app-new-off-days> -->
+<ion-modal #modal trigger="open-modal" [presentingElement]="presentingElement">
+  <ng-template>
+    <app-new-request></app-new-request>
+  </ng-template>
+</ion-modal>

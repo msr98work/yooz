@@ -1,0 +1,89 @@
+<ion-content [fullscreen]="true">
+  <div id="sign-main">
+    <div class="sign-header ion-text-end">
+      <ion-button fill="clear" shape="round" size="large">
+        <ion-icon name="settings-outline"></ion-icon>
+      </ion-button>
+    </div>
+    <div class="sign ion-display-grid ion-justify-content-center">
+      <div class="sign-title ion-text-center">
+        <ion-img
+          class="logo"
+          [src]="logo"
+          alt="The Wisconsin State Capitol building in Madison, WI at night"
+        ></ion-img>
+        <ion-text color="primary">
+          <h1 id="title">{{title}}</h1>
+        </ion-text>
+        <h4 class="marign-vertical ion-margin-horizontal">
+          برای ورود نام کاربری و گذرواژه را وارد کنید
+        </h4>
+      </div>
+      <div class="sign-form ion-margin-horizontal">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <ion-input
+            [formControl]="getControl('username')"
+            label="نام کاربری"
+            label-placement="floating"
+            fill="outline"
+          ></ion-input>
+          <div class="block-password marign-vertical">
+            <ion-input
+              [formControl]="getControl('password')"
+              [type]="showPassword ? 'text' : 'password'"
+              label="گذرواژه"
+              label-placement="floating"
+              fill="outline"
+            >
+              <!-- <ion-input-password-toggle slot="end"></ion-input-password-toggle> -->
+            </ion-input>
+            <ion-button
+              shape="round"
+              fill="clear"
+              class="toggle-password"
+              (click)="togglePassword()"
+            >
+              @if (!showPassword) {
+              <ion-icon name="eye-outline"></ion-icon>
+              } @else {
+              <ion-icon name="eye-off-outline"></ion-icon>
+              }
+            </ion-button>
+          </div>
+          <ion-button type="button" fill="clear" size="small">
+            رمز عبور خود را فراموش کرده اید؟
+          </ion-button>
+
+          <ion-button
+            type="submit"
+            class="marign-vertical"
+            fill="solid"
+            size="large"
+            expand="block"
+            [disabled]="loginForm.invalid || loading"
+          >
+            ورود @if (loading) {
+            <ion-spinner
+              class="ion-margin-start"
+              name="lines-sharp"
+            ></ion-spinner>
+            }
+          </ion-button>
+        </form>
+      </div>
+      <div class="sign-social ion-text-center">
+        <ion-text color="primary">
+          <h4>یا ادامه دهید با</h4>
+        </ion-text>
+        <ion-button fill="outline" color="light" shape="round">
+          <ion-icon
+            color="dark"
+            slot="icon-only"
+            name="finger-print"
+            size="large"
+          ></ion-icon>
+        </ion-button>
+      </div>
+    </div>
+  </div>
+</ion-content>

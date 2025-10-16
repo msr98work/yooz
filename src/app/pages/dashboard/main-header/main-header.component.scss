@@ -1,0 +1,21 @@
+.header-title {
+  width: max-content;
+  margin: 0 auto;
+
+  ion-img {
+    width: 30px;
+  }
+}
+
+ion-header {
+  width: auto !important;
+  margin: var(--ion-margin, 16px);
+  border-radius: 15px;
+
+  ion-toolbar {
+    border-radius: 15px;
+    height: 65px;
+    --padding-start: var(--ion-padding, 16px);
+    --padding-end: var(--ion-padding, 16px);
+  }
+}

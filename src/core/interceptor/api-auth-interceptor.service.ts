@@ -32,7 +32,7 @@ export function APIAuthInterceptor(
 
   request = addAcceptLanguage(request);
 
-  if (accessToken && refreshToken) {
+  if (accessToken) {
     request = addToken(
       request,
       request.url.indexOf('/api/user/refresh/') > -1

@@ -46,4 +46,8 @@ export const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'new-request',
+    loadComponent: () => import('./pages/new-request/new-request.page').then( m => m.NewRequestPage)
+  },
 ];

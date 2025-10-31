@@ -8,8 +8,8 @@ import { AuthModel } from '@model/auth.model';
 })
 export class AuthService {
   private readonly _api_base = 'auth/';
-  private readonly _api_sign_in = this._api_base + 'sign_in';
-  private readonly _api_send_email = this._api_base + 'send_email';
+  private readonly _api_sign_in = this._api_base + 'sign-in';
+  private readonly _api_send_email = this._api_base + 'send-email';
 
   constructor(private baseApiService: BaseApiService) {}
 
@@ -20,10 +20,10 @@ export class AuthService {
     });
   }
 
-  signIn(body: AuthModel.VerifyEmailParams) {
+  signIn(body: AuthModel.SignIn) {
     return this.baseApiService.post<
       ResponseBaseApiModel.ApiResponse<AuthModel.Token>,
-      AuthModel.VerifyEmailParams
+      AuthModel.SignIn
     >({
       route: this._api_sign_in,
       body: body,

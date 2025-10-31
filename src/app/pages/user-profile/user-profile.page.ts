@@ -1,103 +1,45 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, effect, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  FormBuilder,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+  IonContent,
+  IonIcon,
+  IonModal,
+  IonButton,
+} from '@ionic/angular/standalone';
+import { UserService } from '@service/user/user.service';
+import { UserModel } from '@model/user.model';
+import { NavController } from '@ionic/angular';
+import { LocalStorage } from '@db/local-storage.database';
 
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.page.html',
   styleUrls: ['./user-profile.page.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [IonButton, IonModal, IonIcon, IonContent, CommonModule],
 })
 export class UserProfilePage implements OnInit {
-  currentStep = 1;
-  totalSteps = 4;
+  private userSerivce = inject(UserService);
+  private navController = inject(NavController);
 
-  wizardForm: FormGroup;
+  isModalOpen = false;
+  user: UserModel.Full;
 
-  constructor(private fb: FormBuilder) {
-    this.wizardForm = this.fb.group({
-      step1: this.fb.group({
-        projectName: ['', Validators.required],
-        projectType: ['', Validators.required],
-      }),
-      step2: this.fb.group({
-        budget: ['', Validators.required],
-        timeline: ['', Validators.required],
-      }),
-      step3: this.fb.group({
-        contactName: ['', Validators.required],
-        email: ['', [Validators.required, Validators.email]],
-      }),
-      step4: this.fb.group({
-        agreement: [false, Validators.requiredTrue],
-      }),
+  constructor() {
+    effect(() => {
+      this.user = this.userSerivce.me();
     });
   }
 
-  get step1(): FormGroup {
-    return this.wizardForm.get('step1') as FormGroup;
-  }
-  get step2(): FormGroup {
-    return this.wizardForm.get('step2') as FormGroup;
-  }
-  get step3(): FormGroup {
-    return this.wizardForm.get('step3') as FormGroup;
-  }
-  get step4(): FormGroup {
-    return this.wizardForm.get('step4') as FormGroup;
-  }
-
-  get progressPercentage(): number {
-    return ((this.currentStep - 1) / (this.totalSteps - 1)) * 100;
-  }
-
-  nextStep(): void {
-    if (this.validateCurrentStep() && this.currentStep < this.totalSteps) {
-      this.currentStep++;
-    }
-  }
-
-  previousStep(): void {
-    if (this.currentStep > 1) {
-      this.currentStep--;
-    }
-  }
-
-  private validateCurrentStep(): boolean {
-    const stepGroup = this.wizardForm.get(
-      `step${this.currentStep}`
-    ) as FormGroup;
-    return stepGroup.valid;
-  }
-
-  isStepActive(step: number): boolean {
-    return this.currentStep === step;
-  }
-
-  isStepCompleted(step: number): boolean {
-    const stepGroup = this.wizardForm.get(`step${step}`) as FormGroup;
-    return stepGroup.valid && step < this.currentStep;
-  }
-
-  onSubmit(): void {
-    if (this.wizardForm.valid) {
-      console.log('Form Data:', this.wizardForm.value);
-      // Submit logic here
-      alert('پروژه با موفقیت ایجاد شد!');
-    }
-  }
-
-  getStepStatus(step: number): string {
-    if (this.isStepActive(step)) return 'active';
-    if (this.isStepCompleted(step)) return 'completed';
-    return 'pending';
-  }
   ngOnInit() {}
+
+  setOpen(status) {
+    this.isModalOpen = status;
+  }
+
+  logout() {
+    this.isModalOpen = false;
+    this.navController.navigateForward(['/sign-in']);
+    LocalStorage.clear();
+  }
 }

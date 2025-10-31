@@ -15,6 +15,19 @@ import {
   checkmarkOutline,
   chevronForwardOutline,
   chevronBackOutline,
+  eye,
+  lockClosed,
+  time,
+  list,
+  calendar,
+  business,
+  statsChart,
+  documentText,
+  notifications,
+  settings,
+  logOut,
+  personCircle,
+  logOutOutline,
 } from 'ionicons/icons';
 
 @Component({
@@ -38,6 +51,19 @@ export class AppComponent {
       checkmarkOutline,
       chevronForwardOutline,
       chevronBackOutline,
+      eye,
+      lockClosed,
+      time,
+      list,
+      calendar,
+      business,
+      statsChart,
+      documentText,
+      notifications,
+      settings,
+      logOut,
+      personCircle,
+      logOutOutline,
     });
   }
 }

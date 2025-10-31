@@ -1,3 +1,9 @@
+:host::ng-deep {
+  ion-content {
+    --padding-start: 0px;
+    --padding-end: 0px;
+  }
+}
 #sign-main {
   width: 100%;
   background-image: url(/assets/image/bg-signin.svg);
@@ -9,7 +15,7 @@
   height: calc(100% - 56px);
 }
 .logo {
-  height: 100px;
+  height: 85px;
 }
 .sign-title {
   #title {
@@ -25,7 +31,7 @@
     position: absolute;
     top: 0;
     z-index: 2;
-    inset-block-start: 15px;
+    inset-block-start: 10px;
     inset-inline-end: 0px;
   }
 }

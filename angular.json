@@ -35,8 +35,9 @@
             ],
             "styles": [
               "src/assets/theme/base.scss",
-              "src/assets/theme/global.scss",
-              "src/assets/theme/variables.scss"
+              "src/assets/theme/variables.scss",
+              "node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
+              "src/assets/theme/global.scss"
             ],
             "scripts": [],
             "browser": "src/main.ts"

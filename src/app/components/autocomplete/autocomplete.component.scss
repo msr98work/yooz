@@ -1,0 +1,40 @@
+ion-list {
+  background: transparent;
+}
+
+ion-item {
+  --background: transparent;
+}
+
+// استایل برای نتایج جستجو
+ion-list [role="list"] {
+  background: var(--ion-background-color);
+  border-radius: 8px;
+  margin: 8px 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+// استایل برای آیتم‌های نتایج
+ion-item[button] {
+  --border-color: var(--ion-color-light);
+
+  ion-label {
+    h3 {
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    p {
+      color: var(--ion-color-medium);
+      font-size: 12px;
+      margin: 0;
+    }
+  }
+}
+
+// استایل برای آیتم انتخاب شده
+ion-item:has(ion-label h2) {
+  --background: var(--ion-color-light);
+  border-radius: 8px;
+  margin: 16px 0;
+}

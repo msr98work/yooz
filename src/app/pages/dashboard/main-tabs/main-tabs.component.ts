@@ -1,20 +1,16 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import {
+  Component,
+  inject,
+  OnInit,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core';
 import {
   IonTabs,
   IonFabButton,
   IonTabBar,
   IonTabButton,
   IonIcon,
-  IonModal,
-  IonHeader,
-  IonToolbar,
-  IonContent,
-  IonTitle,
-  IonButtons,
-  IonButton,
-  IonFooter,
-  IonSpinner,
-  IonText,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
@@ -26,24 +22,24 @@ import {
   home,
 } from 'ionicons/icons';
 import { CommonModule } from '@angular/common';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-main-tabs',
   templateUrl: './main-tabs.component.html',
   styleUrls: ['./main-tabs.component.scss'],
   imports: [
-    IonModal,
     IonTabs,
     IonIcon,
     IonTabButton,
     IonTabBar,
     IonFabButton,
-    // NewRequestComponent,
     CommonModule,
   ],
 })
 export class MainTabsComponent implements OnInit {
   // private widgetModalService = inject(WidgetModalService);
+  private navController = inject(NavController);
 
   @ViewChild('formModal', {
     static: true,
@@ -64,8 +60,8 @@ export class MainTabsComponent implements OnInit {
   ngOnInit() {
     this.presentingElement = document.querySelector('.ion-page');
   }
-  newRequest() {
-    // this.navController.navigateForward(['/dashboard/new-request']);
+  gotoNewRequest() {
+    this.navController.navigateForward(['/new-request']);
     // this.widgetModalService.openTemplate({
     //   templateRef: this.formModal,
     //   buttons: [

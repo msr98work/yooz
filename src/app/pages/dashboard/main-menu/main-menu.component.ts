@@ -7,7 +7,9 @@ import {
   IonFooter,
   IonToolbar,
 } from '@ionic/angular/standalone';
-import { Component, OnInit } from '@angular/core';
+import { Component, effect, inject, OnInit } from '@angular/core';
+import { UserService } from '@service/user/user.service';
+import { UserModel } from '@model/user.model';
 
 @Component({
   selector: 'app-main-menu',
@@ -24,7 +26,15 @@ import { Component, OnInit } from '@angular/core';
   ],
 })
 export class MainMenuComponent implements OnInit {
-  constructor() {}
+  private userSerivce = inject(UserService);
 
-  ngOnInit() {}
+  user: UserModel.Full;
+
+  constructor() {
+    effect(() => {
+      this.user = this.userSerivce.me();
+    });
+  }
+
+  ngOnInit(): void {}
 }

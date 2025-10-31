@@ -1,69 +1,14 @@
 <app-main-header></app-main-header>
 <ion-content [fullscreen]="true">
-  <div class="mobile-welcome-card">
-    <div class="card-background"></div>
-    <div class="card-content">
-      <div class="header-section">
-        <div class="greeting">
-          <h1>سلام!</h1>
-          <p>به اپلیکیشن خوش آمدید</p>
-        </div>
-        <div class="profile-icon">
-          <span>👤</span>
-        </div>
-      </div>
-
-      <div class="time-section">
-        <div class="current-time" id="current-time">۱۷:۱۰</div>
-        <div class="time-label">ساعت به وقت تهران</div>
-      </div>
-
-      <div class="date-section">
-        <div class="today-badge">امروز</div>
-        <div class="persian-date" id="persian-date">جمعه ۱۱ آبان ۱۴۰۳</div>
-      </div>
-
-      <div class="stats-container">
-        <div class="stat-item">
-          <div class="stat-number">۱,۲۵۳</div>
-          <div class="stat-label">بازدید امروز</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">۱۱</div>
-          <div class="stat-label">کاربران آنلاین</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">۴۵۵</div>
-          <div class="stat-label">پیام جدید</div>
-        </div>
-      </div>
-
-      <div class="weather-section">
-        <div class="weather-info">
-          <div class="weather-icon">☀️</div>
-          <div class="weather-details">
-            <div class="temperature">۲۴°C</div>
-            <div class="condition">آفتابی</div>
-          </div>
-        </div>
-        <div class="location">
-          <span>📍</span>
-          <span>تهران</span>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- 
-  <div class="widget__information">
-    <img
-      class="widget__information-img"
-      src="/assets/image/intelli_vayor.png"
-    />
-  </div> -->
+  <app-card-date></app-card-date>
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+  <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <app-month-days class="mt-3"></app-month-days>
   <div class="ion-margin-vertical">
     <div class="ion-margin-vertical ion-display-flex ion-align-items-center">
       <ion-text class="me-auto" color="dark">
-        <h2 class="m-0">آخرین درخواست‌ها</h2>
+        <h3 class="m-0">آخرین درخواست‌ها</h3>
       </ion-text>
       <ion-text color="medium">
         <h6 class="m-0">مشاهده همه</h6>

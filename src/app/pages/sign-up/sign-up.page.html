@@ -1,13 +1,153 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>sign-up</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">sign-up</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div id="sign-main">
+    <div class="sign-header ion-text-end">
+      <ion-button fill="clear" shape="round" size="large">
+        <ion-icon name="settings-outline"></ion-icon>
+      </ion-button>
+    </div>
+    <div class="sign ion-display-grid ion-justify-content-center">
+      <div class="sign-title ion-text-center">
+        <ion-img
+          class="logo"
+          [src]="logo"
+          alt="The Wisconsin State Capitol building in Madison, WI at night"
+        ></ion-img>
+        <ion-text color="primary">
+          <h1 id="title">{{title}}</h1>
+        </ion-text>
+        <!-- <h4 class="marign-vertical ion-margin-horizontal">
+          برای ورود نام کاربری و گذرواژه را وارد کنید
+        </h4> -->
+      </div>
+      <div class="sign-form ion-margin-horizontal">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+         @if(!isSendCode) {
+           <ion-input
+            [formControl]="getControl('first_name')"
+            class="ion-margin-bottom"
+            label="نام"
+            fill="outline"
+          ></ion-input>
+          <ion-input
+           class="ion-margin-bottom"
+            [formControl]="getControl('last_name')"
+            label="نام خانوادگی"
+            fill="outline"
+          ></ion-input>
+           <ion-input
+            [formControl]="getControl('email')"
+            label="پست الکترونیک"
+            fill="outline"
+            class="ion-margin-bottom ion-text-left"
+          ></ion-input>
+          <ion-input
+            [formControl]="getControl('phone_number')"
+            class="ion-margin-bottom ion-text-left"
+            label="تلفن همراه"
+            fill="outline"
+          ></ion-input>
+          <ion-input
+            [formControl]="getControl('username')"
+            class="ion-margin-bottom"
+            label="نام کاربری"
+            fill="outline"
+            class="ion-text-left ion-margin-bottom"
+          ></ion-input>
+           <div class="block-password ion-margin-bottom">
+            <ion-input
+              [formControl]="getControl('password')"
+              [type]="showPassword ? 'text' : 'password'"
+              label="گذرواژه"
+              fill="outline"
+            >
+              <!-- <ion-input-password-toggle slot="end"></ion-input-password-toggle> -->
+            </ion-input>
+            <ion-button
+              shape="round"
+              fill="clear"
+              class="toggle-password"
+              (click)="togglePassword()"
+            >
+              @if (!showPassword) {
+              <ion-icon name="eye-outline"></ion-icon>
+              } @else {
+              <ion-icon name="eye-off-outline"></ion-icon>
+              }
+            </ion-button>
+          </div>
+          <div class="block-password ion-margin-bottom">
+            <ion-input
+              [formControl]="getControl('confirm_password')"
+              [type]="showPassword ? 'text' : 'password'"
+              label="تکرار گذرواژه"
+              fill="outline"
+            >
+              <!-- <ion-input-password-toggle slot="end"></ion-input-password-toggle> -->
+            </ion-input>
+            <ion-button
+              shape="round"
+              fill="clear"
+              class="toggle-password"
+              (click)="togglePassword()"
+            >
+              @if (!showPassword) {
+              <ion-icon name="eye-outline"></ion-icon>
+              } @else {
+              <ion-icon name="eye-off-outline"></ion-icon>
+              }
+            </ion-button>
+          </div>
+         }
+         @if( isSendCode) {
+          <div class="ion-margin-vertical">
+            <ion-text color="dark">
+            کد 5 رقمی ایمیل شده را وارد کنید.
+          </ion-text>
+            <ion-input-otp class="ltr" [formControl]="getControl('code')" length="5"></ion-input-otp>
+            <ion-text color="dark" class="ion-text-center ion-display-block">
+              {{timer}} مانده تا دریافت مجدد کد
+            </ion-text>
+          </div>
+         }
+         
+         @if(isSendCode) {
+            <ion-button
+            type="submit"
+            class="marign-vertical"
+            fill="solid"
+            size="large"
+            expand="block"
+            [disabled]="loginForm.invalid || loading"
+          >
+            ثبت نام 
+            @if (loading) {
+            <ion-spinner
+              class="ion-margin-start"
+              name="lines-sharp"
+            ></ion-spinner>
+            }
+          </ion-button>
+          }
+         @if(!isSendCode) {
+           <ion-button
+            type="submit"
+            class="marign-vertical"
+            fill="solid"
+            size="large"
+            expand="block"
+          >
+            ارسال کد یکبار مصرف 
+            @if (loading) {
+            <ion-spinner
+              class="ion-margin-start"
+              name="lines-sharp"
+            ></ion-spinner>
+            }
+          </ion-button>
+         }
+        </form>
+      </div>
+      
+    </div>
+  </div>
 </ion-content>

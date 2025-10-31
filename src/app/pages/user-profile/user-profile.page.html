@@ -1,260 +1,81 @@
-<div class="wizard-container">
-  <!-- Progress Steps -->
-  <div class="progress-steps">
-    <div class="step" [class]="getStepStatus(1)">
-      <div class="step-circle">
-        <span class="step-number">1</span>
-        <svg *ngIf="isStepCompleted(1)" class="check-icon" viewBox="0 0 24 24">
-          <path
-            fill="currentColor"
-            d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"
-          />
-        </svg>
+<ion-content>
+  <div class="profile-card">
+    <div class="profile-header">
+      <div class="avatar">
+        <ion-icon name="person-circle"></ion-icon>
+      </div>
+      <h2 class="user-name">{{ user ? user.full_name : '' }}</h2>
+      <p class="user-email">{{ user ? user.email : '' }}</p>
+      <div class="attendance-status">
+        <span class="status-present">●</span> حاضر در محیط کار
       </div>
     </div>
 
-    <div class="step-connector"></div>
-
-    <div class="step" [class]="getStepStatus(2)">
-      <div class="step-circle">
-        <span class="step-number">2</span>
-        <svg *ngIf="isStepCompleted(2)" class="check-icon" viewBox="0 0 24 24">
-          <path
-            fill="currentColor"
-            d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"
-          />
-        </svg>
+    <div class="profile-content ion-padding-vertical">
+      <div class="menu-item">
+        <ion-icon name="calendar" class="icon ion-margin-end"></ion-icon>
+        <span class="menu-text">گزارش حضور و غیاب</span>
+        <span class="badge">امروز: ۸:۱۵</span>
       </div>
-    </div>
 
-    <div class="step-connector"></div>
-
-    <div class="step" [class]="getStepStatus(3)">
-      <div class="step-circle">
-        <span class="step-number">3</span>
-        <svg *ngIf="isStepCompleted(3)" class="check-icon" viewBox="0 0 24 24">
-          <path
-            fill="currentColor"
-            d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"
-          />
-        </svg>
+      <div class="menu-item">
+        <ion-icon name="time" class="icon ion-margin-end"></ion-icon>
+        <span class="menu-text">درخواست مرخصی</span>
+        <span class="badge badge-success">۲ روز باقی</span>
       </div>
-    </div>
 
-    <div class="step-connector"></div>
+      <div class="menu-item">
+        <ion-icon name="business" class="icon ion-margin-end"></ion-icon>
+        <span class="menu-text">مدیریت شیفت‌ها</span>
+      </div>
 
-    <div class="step" [class]="getStepStatus(4)">
-      <div class="step-circle">
-        <span class="step-number">4</span>
-        <svg *ngIf="isStepCompleted(4)" class="check-icon" viewBox="0 0 24 24">
-          <path
-            fill="currentColor"
-            d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"
-          />
-        </svg>
+      <div class="menu-item">
+        <ion-icon name="stats-chart" class="icon ion-margin-end"></ion-icon>
+        <span class="menu-text">آمار و گزارشات</span>
+      </div>
+
+      <div class="menu-item">
+        <ion-icon name="document-text" class="icon ion-margin-end"></ion-icon>
+        <span class="menu-text">اسناد و مدارک</span>
+        <span class="badge badge-warning">۲ مورد جدید</span>
+      </div>
+
+      <div class="menu-item">
+        <ion-icon name="notifications" class="icon ion-margin-end"></ion-icon>
+        <span class="menu-text">اعلان‌ها</span>
+        <span class="badge">۳ جدید</span>
+      </div>
+
+      <div class="menu-item">
+        <ion-icon name="settings" class="icon ion-margin-end"></ion-icon>
+        <span class="menu-text">تنظیمات پروفایل</span>
+      </div>
+
+      <div class="menu-item logout" id="testModal">
+        <ion-icon name="log-out" class="icon ion-margin-end"></ion-icon>
+        <span class="menu-text" (click)="setOpen(true)">خروج از سیستم</span>
       </div>
     </div>
   </div>
+</ion-content>
 
-  <!-- Content -->
-  <div class="wizard-content">
-    <form [formGroup]="wizardForm">
-      <!-- Step 1 -->
-      <div class="step-content" [class.active]="isStepActive(1)">
-        <h3>اطلاعات پروژه</h3>
-        <div class="form-group" formGroupName="step1">
-          <div class="input-field">
-            <label>نام پروژه</label>
-            <input
-              type="text"
-              formControlName="projectName"
-              placeholder="نام پروژه خود را وارد کنید"
-            />
-            <div
-              class="error"
-              *ngIf="step1.get('projectName')?.invalid && step1.get('projectName')?.touched"
-            >
-              نام پروژه الزامی است
+<ion-modal class="custom-modal" [isOpen]="isModalOpen">
+  <ng-template>
+    <ion-content class="ion-padding">
+      <div class="modal-content">
+                <div>
+                    <ion-icon class="modal-icon" name="log-out-outline"></ion-icon>
+                    <h2 class="modal-title">خروج از حساب کاربری</h2>
+                    <p class="modal-message">آیا از خروج از حساب کاربری خود اطمینان دارید؟</p>
+                </div>
+                
+                <div class="modal-actions">
+                  <ion-button class="modal-button logout-button" id="logoutButton" (click)="logout()">خروج</ion-button>
+                  <ion-button class="modal-button cancel-button" id="cancelButton" (click)="setOpen(false)">بازگشت</ion-button>
+                </div>
             </div>
-          </div>
 
-          <div class="input-field">
-            <label>نوع پروژه</label>
-            <select formControlName="projectType">
-              <option value="">انتخاب کنید</option>
-              <option value="web">توسعه وب</option>
-              <option value="mobile">اپلیکیشن موبایل</option>
-              <option value="desktop">نرم افزار دسکتاپ</option>
-              <option value="other">سایر</option>
-            </select>
-            <div
-              class="error"
-              *ngIf="step1.get('projectType')?.invalid && step1.get('projectType')?.touched"
-            >
-              نوع پروژه الزامی است
-            </div>
-          </div>
-        </div>
-      </div>
+    </ion-content>
 
-      <!-- Step 2 -->
-      <div class="step-content" [class.active]="isStepActive(2)">
-        <h3>بودجه و زمان‌بندی</h3>
-        <div class="form-group" formGroupName="step2">
-          <div class="input-field">
-            <label>بودجه پروژه (تومان)</label>
-            <input
-              type="number"
-              formControlName="budget"
-              placeholder="مبلغ بودجه را وارد کنید"
-            />
-            <div
-              class="error"
-              *ngIf="step2.get('budget')?.invalid && step2.get('budget')?.touched"
-            >
-              بودجه الزامی است
-            </div>
-          </div>
-
-          <div class="input-field">
-            <label>زمان‌بندی تحویل (روز)</label>
-            <input
-              type="number"
-              formControlName="timeline"
-              placeholder="تعداد روز مورد نیاز"
-            />
-            <div
-              class="error"
-              *ngIf="step2.get('timeline')?.invalid && step2.get('timeline')?.touched"
-            >
-              زمان‌بندی الزامی است
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Step 3 -->
-      <div class="step-content" [class.active]="isStepActive(3)">
-        <h3>اطلاعات تماس</h3>
-        <div class="form-group" formGroupName="step3">
-          <div class="input-field">
-            <label>نام مسئول</label>
-            <input
-              type="text"
-              formControlName="contactName"
-              placeholder="نام کامل مسئول پروژه"
-            />
-            <div
-              class="error"
-              *ngIf="step3.get('contactName')?.invalid && step3.get('contactName')?.touched"
-            >
-              نام مسئول الزامی است
-            </div>
-          </div>
-
-          <div class="input-field">
-            <label>ایمیل</label>
-            <input
-              type="email"
-              formControlName="email"
-              placeholder="email@example.com"
-            />
-            <div
-              class="error"
-              *ngIf="step3.get('email')?.errors?.['required'] && step3.get('email')?.touched"
-            >
-              ایمیل الزامی است
-            </div>
-            <div
-              class="error"
-              *ngIf="step3.get('email')?.errors?.['email'] && step3.get('email')?.touched"
-            >
-              فرمت ایمیل نامعتبر است
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Step 4 -->
-      <div class="step-content" [class.active]="isStepActive(4)">
-        <h3>تأیید نهایی</h3>
-        <div class="summary" formGroupName="step4">
-          <div class="summary-item">
-            <strong>نام پروژه:</strong> {{ step1.get('projectName')?.value }}
-          </div>
-          <div class="summary-item">
-            <strong>نوع پروژه:</strong> {{ step1.get('projectType')?.value }}
-          </div>
-          <div class="summary-item">
-            <strong>بودجه:</strong> {{ step2.get('budget')?.value | number }}
-            تومان
-          </div>
-          <div class="summary-item">
-            <strong>زمان‌بندی:</strong> {{ step2.get('timeline')?.value }} روز
-          </div>
-          <div class="summary-item">
-            <strong>مسئول پروژه:</strong> {{ step3.get('contactName')?.value }}
-          </div>
-          <div class="summary-item">
-            <strong>ایمیل:</strong> {{ step3.get('email')?.value }}
-          </div>
-
-          <div class="agreement">
-            <label class="checkbox-label">
-              <input type="checkbox" formControlName="agreement" />
-              <span class="checkmark"></span>
-              با کلیه شرایط و قوانین موافقم
-            </label>
-            <div
-              class="error"
-              *ngIf="step4.get('agreement')?.invalid && step4.get('agreement')?.touched"
-            >
-              必须接受条款和条件
-            </div>
-          </div>
-        </div>
-      </div>
-    </form>
-  </div>
-
-  <!-- Navigation -->
-  <div class="wizard-actions">
-    <button
-      class="btn btn-secondary"
-      (click)="previousStep()"
-      [disabled]="currentStep === 1"
-    >
-      <svg viewBox="0 0 24 24" width="16" height="16">
-        <path
-          fill="currentColor"
-          d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"
-        />
-      </svg>
-      قبلی
-    </button>
-
-    <button
-      *ngIf="currentStep < totalSteps"
-      class="btn btn-primary"
-      (click)="nextStep()"
-      [disabled]="!wizardForm.get('step' + currentStep)?.valid"
-    >
-      بعدی
-      <svg viewBox="0 0 24 24" width="16" height="16">
-        <path
-          fill="currentColor"
-          d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
-        />
-      </svg>
-    </button>
-
-    <button
-      *ngIf="currentStep === totalSteps"
-      class="btn btn-primary"
-      (click)="onSubmit()"
-      [disabled]="!wizardForm.valid"
-    >
-      ایجاد پروژه
-    </button>
-  </div>
-</div>
+  </ng-template>
+    </ion-modal>

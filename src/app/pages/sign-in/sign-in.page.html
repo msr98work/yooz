@@ -15,24 +15,24 @@
         <ion-text color="primary">
           <h1 id="title">{{title}}</h1>
         </ion-text>
-        <h4 class="marign-vertical ion-margin-horizontal">
+        <!-- <h4 class="marign-vertical ion-margin-horizontal">
           برای ورود نام کاربری و گذرواژه را وارد کنید
-        </h4>
+        </h4> -->
       </div>
       <div class="sign-form ion-margin-horizontal">
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
           <ion-input
-            [formControl]="getControl('userna me')"
+            [formControl]="getControl('username')"
             label="نام کاربری"
-            label-placement="floating"
             fill="outline"
+            class="ion-text-left"
           ></ion-input>
-          <div class="block-password marign-vertical">
+         @if(mode == "password") {
+           <div class="block-password ion-margin-top">
             <ion-input
               [formControl]="getControl('password')"
               [type]="showPassword ? 'text' : 'password'"
               label="گذرواژه"
-              label-placement="floating"
               fill="outline"
             >
               <!-- <ion-input-password-toggle slot="end"></ion-input-password-toggle> -->
@@ -50,11 +50,26 @@
               }
             </ion-button>
           </div>
+         }
+         @if(mode =="otp" && isSendCode) {
+          <div class="ion-margin-vertical">
+            <ion-text color="dark">
+            کد 5 رقمی ایمیل شده را وارد کنید.
+          </ion-text>
+            <ion-input-otp class="ltr" [formControl]="getControl('otp')" length="5"></ion-input-otp>
+            <ion-text color="dark" class="ion-text-center ion-display-block">
+              {{timer}} مانده تا دریافت مجدد کد
+            </ion-text>
+          </div>
+         }
+         @if(mode == "password") {
           <ion-button type="button" fill="clear" size="small">
-            رمز عبور خود را فراموش کرده اید؟
-          </ion-button>
-
-          <ion-button
+           رمز عبور خود را فراموش کرده اید؟
+         </ion-button>
+         }
+         
+         @if(mode == "password" || (mode=="otp" && isSendCode)) {
+            <ion-button
             type="submit"
             class="marign-vertical"
             fill="solid"
@@ -62,20 +77,41 @@
             expand="block"
             [disabled]="loginForm.invalid || loading"
           >
-            ورود @if (loading) {
+            ورود 
+            @if (loading) {
             <ion-spinner
               class="ion-margin-start"
               name="lines-sharp"
             ></ion-spinner>
             }
           </ion-button>
+          }
+         @if(mode=="otp" && !isSendCode) {
+           <ion-button
+            type="submit"
+            class="marign-vertical"
+            fill="solid"
+            size="large"
+            expand="block"
+            (click)="getCode()"
+          >
+            ارسال کد یکبار مصرف 
+            @if (loading) {
+            <ion-spinner
+              class="ion-margin-start"
+              name="lines-sharp"
+            ></ion-spinner>
+            }
+          </ion-button>
+         }
         </form>
       </div>
       <div class="sign-social ion-text-center">
         <ion-text color="primary">
           <h4>یا ادامه دهید با</h4>
         </ion-text>
-        <ion-button fill="outline" color="light" shape="round">
+        @if(mode != 'password') {
+          <ion-button fill="outline" color="light" shape="round" (click)="changeMode('password')">
           <ion-icon
             color="dark"
             slot="icon-only"
@@ -83,6 +119,17 @@
             size="large"
           ></ion-icon>
         </ion-button>
+        }
+        @if(mode != "otp") {
+          <ion-button fill="outline" color="light" shape="round" (click)="changeMode('otp')">
+          <ion-icon
+            color="dark"
+            slot="icon-only"
+            name="finger-print"
+            size="large"
+          ></ion-icon>
+        </ion-button>
+        }
       </div>
     </div>
   </div>

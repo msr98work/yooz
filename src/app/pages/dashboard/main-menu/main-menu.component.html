@@ -4,8 +4,8 @@
     <div class="header-content ion-display-flex ion-align-items-center">
       <img [src]="'/assets/icon/avatar.svg'" alt="" />
       <ion-label>
-        <h2>مجتبی سجادفر</h2>
-        <p>مدیر سامانه</p>
+        <h2>{{user ? user.full_name : 'ناشناس'}}</h2>
+        <p>{{user?.position ? user.position : 'نامشخص'}}</p>
       </ion-label>
     </div>
     <ion-button

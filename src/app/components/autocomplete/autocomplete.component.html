@@ -1,55 +1,19 @@
-<ion-content [fullscreen]="true">
-  <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
-    <ion-list class="ion-padding">
-      <!-- فیلد جستجو -->
-      <ion-item>
-        <ion-searchbar
-          formControlName="search"
-          placeholder="جستجو کنید..."
-          debounce="300"
-          (ionClear)="clearResults()"
-        >
-        </ion-searchbar>
-      </ion-item>
-
-      <!-- نمایش لودینگ -->
-      <ion-item *ngIf="isLoading">
-        <ion-label color="medium">
-          <ion-spinner name="crescent"></ion-spinner>
-          در حال جستجو...
-        </ion-label>
-      </ion-item>
-
-      <!-- نتایج -->
-      <ion-list *ngIf="showResults && filteredItems.length > 0">
-        <ion-item
-          *ngFor="let item of filteredItems"
-          button
-          (click)="selectItem(item)"
-          detail="false"
-        >
-          <ion-label>
-            <h3>{{ item.name }}</h3>
-            <p>{{ item.category }}</p>
-          </ion-label>
-        </ion-item>
-      </ion-list>
-
-      <!-- پیام عدم وجود نتیجه -->
-      <ion-item *ngIf="showResults && filteredItems.length === 0 && !isLoading">
-        <ion-label color="medium">
-          <p>نتیجه‌ای یافت نشد</p>
-        </ion-label>
-      </ion-item>
-
-      <!-- نمایش آیتم انتخاب شده -->
-      <ion-item *ngIf="searchForm.get('selectedItem')?.value">
-        <ion-label>
-          <h2>آیتم انتخاب شده:</h2>
-          <p>{{ searchForm.get("selectedItem")?.value.name }}</p>
-          <p>دسته‌بندی: {{ searchForm.get("selectedItem")?.value.category }}</p>
-        </ion-label>
-      </ion-item>
-    </ion-list>
-  </form>
-</ion-content>
+<nz-select
+  nzMode="multiple"
+  nzPlaceHolder="Select users"
+  nzAllowClear
+  nzShowSearch
+  nzServerSearch
+  [(ngModel)]="selectedUser"
+  (nzOnSearch)="onSearch($event)"
+  class="w-100"
+>
+  @if (!loading) { @for (o of optionList; track o) {
+  <nz-option [nzValue]="o" [nzLabel]="o"></nz-option>
+  } } @else {
+  <nz-option nzDisabled nzCustomContent>
+    <nz-icon nzType="loading" class="loading-icon" />
+    Loading Data...
+  </nz-option>
+  }
+</nz-select>

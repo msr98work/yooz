@@ -58,8 +58,8 @@ export class SignInPage implements OnInit {
   });
   showPassword = false;
   loading = false;
-  logo = 'assets/icon/logo.png';
-  title = 'سامانه حضور و غیاب';
+  logo = 'assets/icon/logo1.png';
+  title = 'سامانه موبایل gis';
   mode: Mode = 'password';
   isSendCode = false;
   timer: string;

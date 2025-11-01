@@ -1,0 +1,19 @@
+<ng-persian-datepicker
+  [timeEnable]="timeEnable"
+  [uiTheme]="customTheme"
+  [dateFormat]="dateFormat"
+  [dateGregorianFormat]="dateGregorianFormat"
+  [dateInitValue]="initValue"
+  [uiHideAfterSelectDate]="hideOnSelect"
+  (dateOnSelect)="onSelect($event)"
+>
+  <div class="datepicker-input-wrapper">
+    <input
+      nz-input
+      type="text"
+      [formControl]="control"
+      [placeholder]="placeholder"
+    />
+    <img src="/assets/icons/calendar.svg" alt="calendar" />
+  </div>
+</ng-persian-datepicker>

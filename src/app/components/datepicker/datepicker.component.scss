@@ -1,0 +1,17 @@
+:host::ng-deep {
+  .datepicker-outer-container {
+    max-width: 250px;
+    position: absolute;
+    z-index: 5;
+  }
+}
+
+.datepicker-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  img {
+    position: absolute;
+    inset-inline-end: 0.875rem;
+  }
+}

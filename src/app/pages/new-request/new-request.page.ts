@@ -17,6 +17,7 @@ import { FormGroupType } from '@model/reactiveform.model';
 import { AutocompleteComponent } from 'src/app/components/autocomplete/autocomplete.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
+import { FormBuilderConfigComponent } from 'src/app/components/widgets/form-builder/form-builder-config/form-builder-config.component';
 @Component({
   selector: 'app-new-request',
   templateUrl: './new-request.page.html',
@@ -33,6 +34,7 @@ import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
     AutocompleteComponent,
     NzButtonModule,
     NzAutocompleteModule,
+    FormBuilderConfigComponent,
   ],
 })
 export class NewRequestPage implements OnInit {

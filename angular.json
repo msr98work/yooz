@@ -34,6 +34,7 @@
               }
             ],
             "styles": [
+              "node_modules/ionicons/dist/collection/components/icon/icon.css",
               "src/assets/theme/base.scss",
               "src/assets/theme/variables.scss",
               "node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
@@ -132,7 +133,10 @@
     }
   },
   "cli": {
-    "schematicCollections": ["@ionic/angular-toolkit"]
+    "schematicCollections": [
+      "@ionic/angular-toolkit"
+    ],
+    "analytics": false
   },
   "schematics": {
     "@ionic/angular-toolkit:component": {

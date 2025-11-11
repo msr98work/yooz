@@ -1,0 +1,93 @@
+<div class="ngzorro-autocomplete" [class]="'size-' + size()">
+  <!-- Input Container -->
+  <div class="autocomplete-input-container">
+    <ion-input
+      #inputRef
+      [formControl]="control()"
+      [placeholder]="placeholder()"
+      [disabled]="disabled()"
+      (ionFocus)="onInputFocus()"
+      (ionBlur)="onInputBlur()"
+      (keydown)="onInputKeydown($event)"
+      class="autocomplete-input"
+    >
+    </ion-input>
+
+    <!-- Loading Indicator -->
+    <ion-spinner *ngIf="loading()" class="loading-indicator"> </ion-spinner>
+
+    <!-- Clear Button -->
+    <ion-icon
+      *ngIf="control().value && !disabled() && !loading()"
+      name="close-circle"
+      class="clear-icon"
+      (click)="control().setValue(''); control().markAsDirty()"
+    >
+    </ion-icon>
+  </div>
+
+  <!-- Dropdown Overlay -->
+  <div
+    *ngIf="isOpen()"
+    class="autocomplete-overlay"
+    [class]="overlayClassName()"
+  >
+    <!-- No Options -->
+    <div *ngIf="filteredOptions().length === 0" class="no-option">
+      <div class="no-data">No data</div>
+    </div>
+
+    <!-- Grouped Options -->
+    <div *ngIf="hasGroups() && filteredOptions().length > 0">
+      <div *ngFor="let groupName of objectKeys(groups())" class="option-group">
+        <div class="group-label">{{ groupName }}</div>
+        <ion-list lines="none" class="options-list">
+          <ion-item
+            *ngFor="let option of groups()[groupName]; let i = index"
+            [class.active]="isOptionActive(option, i)"
+            [class.disabled]="option.disabled"
+            button
+            detail="false"
+            (click)="selectOption(option)"
+            class="option-item"
+          >
+            <ion-icon
+              *ngIf="option.icon"
+              [name]="option.icon"
+              slot="start"
+              class="option-icon"
+            >
+            </ion-icon>
+
+            <ion-label class="option-label">{{ option.label }}</ion-label>
+          </ion-item>
+        </ion-list>
+      </div>
+    </div>
+
+    <!-- Ungrouped Options -->
+    <div *ngIf="!hasGroups() && filteredOptions().length > 0">
+      <ion-list lines="none" class="options-list">
+        <ion-item
+          *ngFor="let option of filteredOptions(); let i = index"
+          [class.active]="activeIndex() === i"
+          [class.disabled]="option.disabled"
+          button
+          detail="false"
+          (click)="selectOption(option)"
+          class="option-item"
+        >
+          <ion-icon
+            *ngIf="option.icon"
+            [name]="option.icon"
+            slot="start"
+            class="option-icon"
+          >
+          </ion-icon>
+
+          <ion-label class="option-label">{{ option.label }}</ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+</div>

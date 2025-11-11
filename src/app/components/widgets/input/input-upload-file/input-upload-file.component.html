@@ -1,0 +1,189 @@
+<div class="upload-file">
+  <!-- فایل اینپوت مخفی -->
+  <input
+    #fileInput
+    type="file"
+    [accept]="accept()"
+    [multiple]="multiple()"
+    (change)="onFileSelected($event)"
+    style="display: none"
+    [disabled]="disabled()"
+  />
+
+  <!-- دکمه آپلود اصلی -->
+  <ion-button
+    [disabled]="disabled() || fileList().length >= maxCount()"
+    (click)="openUploadOptions()"
+    expand="block"
+    fill="outline"
+    class="upload-button"
+  >
+    <ion-icon name="cloud-upload" slot="start"></ion-icon>
+    {{ buttonText() }}
+    <ion-text *ngIf="maxCount() > 1" class="file-count">
+      ({{ fileList().length }}/{{ maxCount() }})
+    </ion-text>
+  </ion-button>
+
+  <!-- لیست فایل‌ها -->
+  <div *ngIf="showUploadList() && fileList().length > 0" class="file-list">
+    <ion-list lines="none">
+      <ion-item
+        *ngFor="let file of fileList()"
+        class="file-item"
+        [class.error]="file.status === 'error'"
+      >
+        <!-- آیکون فایل -->
+        <ion-icon
+          [name]="getFileIcon(file.type)"
+          slot="start"
+          class="file-icon"
+        >
+        </ion-icon>
+
+        <!-- اطلاعات فایل -->
+        <ion-label class="file-info">
+          <h3 class="file-name">{{ file.name }}</h3>
+          <p class="file-details">
+            {{ formatFileSize(file.size) }}
+            <span *ngIf="file.status === 'error'" class="error-message">
+              - خطا در آپلود
+            </span>
+          </p>
+
+          <!-- نوار پیشرفت -->
+          <ion-progress-bar
+            *ngIf="file.status === 'uploading'"
+            [value]="file.percent ? file.percent / 100 : 0"
+            class="upload-progress"
+          >
+          </ion-progress-bar>
+        </ion-label>
+
+        <!-- وضعیت و اقدامات -->
+        <div slot="end" class="file-actions">
+          <!-- حالت آپلود -->
+          <ion-spinner
+            *ngIf="file.status === 'uploading'"
+            name="crescent"
+            class="upload-spinner"
+          >
+          </ion-spinner>
+
+          <!-- حالت موفق -->
+          <ion-icon
+            *ngIf="file.status === 'done'"
+            name="checkmark-circle"
+            class="status-icon"
+          >
+          </ion-icon>
+
+          <!-- حالت خطا -->
+          <ion-icon
+            *ngIf="file.status === 'error'"
+            name="warning"
+            class="status-icon"
+          >
+          </ion-icon>
+
+          <!-- دکمه حذف -->
+          <ion-button
+            fill="clear"
+            size="small"
+            (click)="removeFile(file)"
+            class="remove-btn"
+          >
+            <ion-icon name="close" slot="icon-only"></ion-icon>
+          </ion-button>
+
+          <!-- دکمه تلاش مجدد -->
+          <ion-button
+            *ngIf="file.status === 'error'"
+            fill="clear"
+            size="small"
+            (click)="retryUpload(file)"
+            class="retry-btn"
+          >
+            <ion-icon name="refresh" slot="icon-only"></ion-icon>
+          </ion-button>
+        </div>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <!-- نمایش تصاویر به صورت گرید -->
+  <div
+    *ngIf="listType() === 'picture' && fileList().length > 0"
+    class="picture-grid"
+  >
+    <ion-grid>
+      <ion-row>
+        <ion-col *ngFor="let file of fileList()" size="6" class="picture-col">
+          <ion-card class="picture-card">
+            <div class="picture-container">
+              <img
+                *ngIf="file.thumbUrl && file.type.startsWith('image/')"
+                [src]="file.thumbUrl"
+                [alt]="file.name"
+                class="picture-thumbnail"
+              />
+
+              <div
+                *ngIf="!file.type.startsWith('image/')"
+                class="file-placeholder"
+              >
+                <ion-icon [name]="getFileIcon(file.type)"></ion-icon>
+              </div>
+
+              <!-- overlay اقدامات -->
+              <div class="picture-overlay">
+                <ion-button
+                  fill="clear"
+                  size="small"
+                  (click)="removeFile(file)"
+                  class="overlay-btn"
+                >
+                  <ion-icon name="trash" color="danger"></ion-icon>
+                </ion-button>
+
+                <ion-button
+                  *ngIf="file.status === 'error'"
+                  fill="clear"
+                  size="small"
+                  (click)="retryUpload(file)"
+                  class="overlay-btn"
+                >
+                  <ion-icon name="refresh" color="light"></ion-icon>
+                </ion-button>
+              </div>
+
+              <!-- وضعیت آپلود -->
+              <div *ngIf="file.status === 'uploading'" class="upload-status">
+                <ion-spinner name="crescent"></ion-spinner>
+                <ion-text>{{ file.percent }}%</ion-text>
+              </div>
+            </div>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <!-- Action Sheet برای انتخاب منبع -->
+  <ion-action-sheet
+    [isOpen]="isActionSheetOpen()"
+    (didDismiss)="isActionSheetOpen.set(false)"
+    header="انتخاب منبع"
+    [buttons]="buttons"
+  >
+  </ion-action-sheet>
+
+  <!-- Alert برای نمایش خطا -->
+  <ion-alert
+    [isOpen]="isAlertOpen()"
+    [message]="alertMessage()"
+    [buttons]="['متوجه شدم']"
+    (didDismiss)="isAlertOpen.set(false)"
+  >
+  </ion-alert>
+</div>

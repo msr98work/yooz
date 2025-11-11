@@ -28,6 +28,20 @@ import {
   logOut,
   personCircle,
   logOutOutline,
+  closeCircle,
+  logoAngular,
+  logoReact,
+  logoVue,
+  cloudUpload,
+  checkmarkCircle,
+  warning,
+  close,
+  refresh,
+  camera,
+  images,
+  folder,
+  image,
+  trash,
 } from 'ionicons/icons';
 
 @Component({
@@ -64,6 +78,20 @@ export class AppComponent {
       logOut,
       personCircle,
       logOutOutline,
+      closeCircle,
+      logoAngular,
+      logoReact,
+      logoVue,
+      cloudUpload,
+      checkmarkCircle,
+      warning,
+      close,
+      refresh,
+      camera,
+      images,
+      folder,
+      image,
+      trash,
     });
   }
 }

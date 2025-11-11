@@ -1,4 +1,42 @@
 <form class="dialog" [formGroup]="form">
   <input-text [control]="getControl('name')" [label]="'Name'"> </input-text>
   <input-text [control]="getControl('title')" [label]="'Title'"> </input-text>
+  <!-- Input Textarea -->
+  <input-textarea
+    [control]="getControl('title')"
+    [label]="'description'"
+    [placeholder]="'enter_description'"
+    [rows]="5"
+  >
+  </input-textarea>
+
+  <!-- Input Select -->
+  <input-select
+    [control]="getControl('title')"
+    [label]="'category'"
+    [options]="categories"
+    [placeholder]="'select_category'"
+  >
+  </input-select>
+
+  <!-- Input Autocomplete -->
+  <input-autocomplete
+    [control]="getControl('title')"
+    [placeholder]="'Please input'"
+    [options]="options"
+    [size]="'medium'"
+    [backfill]="true"
+  >
+  </input-autocomplete>
+
+  <input-upload-file
+    [accept]="'image/*,video/*,.pdf'"
+    [multiple]="true"
+    [maxCount]="5"
+    [maxSize]="5 * 1024 * 1024"
+    [buttonText]="'آپلود فایل'"
+    [listType]="'picture'"
+    [capture]="'both'"
+  >
+  </input-upload-file>
 </form>

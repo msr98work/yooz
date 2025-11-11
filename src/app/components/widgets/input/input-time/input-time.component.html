@@ -1,0 +1,11 @@
+<div class="mb-1 ms-1">
+  <ion-text>{{ label() | translate }}</ion-text>
+</div>
+<ion-input
+  type="time"
+  [formControl]="control()"
+  [class]="class()"
+  [placeholder]="placeholder() | translate"
+  [fill]="fill()"
+>
+</ion-input>

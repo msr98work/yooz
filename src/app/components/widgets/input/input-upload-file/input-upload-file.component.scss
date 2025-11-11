@@ -1,0 +1,190 @@
+.upload-file {
+  width: 100%;
+
+  .upload-button {
+    margin-bottom: 16px;
+
+    .file-count {
+      font-size: 12px;
+      margin-right: 8px;
+      opacity: 0.7;
+    }
+  }
+
+  .file-list {
+    .file-item {
+      --padding-start: 12px;
+      --padding-end: 8px;
+      --inner-padding-end: 8px;
+      --min-height: 64px;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      border: 1px solid var(--ion-color-light-shade);
+
+      &.error {
+        border-color: var(--ion-color-danger);
+        background: rgba(var(--ion-color-danger-rgb), 0.05);
+      }
+
+      .file-icon {
+        font-size: 24px;
+        color: var(--ion-color-medium);
+
+        &.success {
+          color: var(--ion-color-success);
+        }
+
+        &.error {
+          color: var(--ion-color-danger);
+        }
+      }
+
+      .file-info {
+        margin: 4px 0;
+
+        .file-name {
+          font-size: 14px;
+          font-weight: 500;
+          margin-bottom: 2px;
+          word-break: break-all;
+        }
+
+        .file-details {
+          font-size: 12px;
+          color: var(--ion-color-medium);
+          margin: 0;
+
+          .error-message {
+            color: var(--ion-color-danger);
+          }
+        }
+
+        .upload-progress {
+          margin-top: 4px;
+        }
+      }
+
+      .file-actions {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+
+        .upload-spinner {
+          width: 16px;
+          height: 16px;
+        }
+
+        .status-icon {
+          font-size: 20px;
+
+          &.success {
+            color: var(--ion-color-success);
+          }
+
+          &.error {
+            color: var(--ion-color-danger);
+          }
+        }
+
+        .remove-btn,
+        .retry-btn {
+          --padding-start: 4px;
+          --padding-end: 4px;
+          --min-height: 32px;
+          --min-width: 32px;
+        }
+      }
+    }
+  }
+
+  .picture-grid {
+    .picture-col {
+      padding: 4px;
+    }
+
+    .picture-card {
+      margin: 0;
+      border-radius: 12px;
+      overflow: hidden;
+
+      .picture-container {
+        position: relative;
+        width: 100%;
+        height: 120px;
+        background: var(--ion-color-light);
+
+        .picture-thumbnail {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .file-placeholder {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 100%;
+          height: 100%;
+          color: var(--ion-color-medium);
+
+          ion-icon {
+            font-size: 32px;
+          }
+        }
+
+        .picture-overlay {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(0, 0, 0, 0.5);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          opacity: 0;
+          transition: opacity 0.3s ease;
+
+          .overlay-btn {
+            --color: white;
+          }
+        }
+
+        .upload-status {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(0, 0, 0, 0.7);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          font-size: 12px;
+
+          ion-spinner {
+            color: white;
+            margin-bottom: 4px;
+          }
+        }
+
+        &:hover .picture-overlay {
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
+
+// responsive
+@media (max-width: 480px) {
+  .upload-file {
+    .picture-grid {
+      .picture-card .picture-container {
+        height: 100px;
+      }
+    }
+  }
+}

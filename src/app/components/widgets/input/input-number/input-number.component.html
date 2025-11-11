@@ -1,0 +1,14 @@
+<div class="mb-1 ms-1">
+  <ion-text>{{ label() | translate }}</ion-text>
+</div>
+<ion-input
+  type="number"
+  [formControl]="control()"
+  [class]="class()"
+  [placeholder]="placeholder() | translate"
+  [fill]="fill()"
+  [min]="min()"
+  [max]="max()"
+  [step]="step()"
+>
+</ion-input>

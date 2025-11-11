@@ -25,6 +25,8 @@ import { NavController } from '@ionic/angular';
 import { AuthModel } from '@model/auth.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { LocalStorage } from '@db/local-storage.database';
+import { InputPasswordComponent } from 'src/app/components/widgets/input/input-password/input-password.component';
+import { InputTextComponent } from 'src/app/components/widgets/input/input-text/input-text.component';
 
 type Mode = 'otp' | 'password';
 @Component({
@@ -37,13 +39,14 @@ type Mode = 'otp' | 'password';
     IonSpinner,
     IonIcon,
     IonButton,
-    IonInput,
     IonText,
     IonContent,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
     IonInputOtp,
+    InputPasswordComponent,
+    InputTextComponent,
   ],
 })
 export class SignInPage implements OnInit {
@@ -72,10 +75,6 @@ export class SignInPage implements OnInit {
 
   getControl(key: keyof AuthModel.SignIn) {
     return this.loginForm.get(key) as FormControl;
-  }
-
-  togglePassword() {
-    this.showPassword = !this.showPassword;
   }
 
   changeMode(mode: Mode = 'password') {

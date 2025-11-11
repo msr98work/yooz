@@ -1,0 +1,15 @@
+<div class="mb-1 ms-1">
+  <ion-text>{{ label() | translate }}</ion-text>
+</div>
+<ion-select
+  [formControl]="control()"
+  [class]="class()"
+  [placeholder]="placeholder() | translate"
+  [fill]="fill()"
+  [multiple]="multiple()"
+  [interface]="interface()"
+>
+  <ion-select-option *ngFor="let option of options()" [value]="option.value">
+    {{ option.label | translate }}
+  </ion-select-option>
+</ion-select>

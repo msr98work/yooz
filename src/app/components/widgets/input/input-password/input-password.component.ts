@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, input, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { IonInput, IonButton, IonIcon } from '@ionic/angular/standalone';
+import { IonInput, IonButton, IonIcon, IonText } from '@ionic/angular/standalone';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
@@ -15,12 +15,14 @@ import { TranslateModule } from '@ngx-translate/core';
     IonButton,
     IonIcon,
     TranslateModule,
-  ],
+    IonText
+],
 })
 export class InputPasswordComponent implements OnInit {
   control = input<FormControl>(null);
   class = input<string>('');
   label = input<string>('');
+  placeHolder = input<string>('');
   fill = input<string>('outline');
 
   showPassword = false;

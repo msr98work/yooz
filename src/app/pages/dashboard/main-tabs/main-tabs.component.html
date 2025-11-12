@@ -9,7 +9,7 @@
       خانه
     </ion-tab-button>
 
-    <ion-tab-button class="chart">
+    <ion-tab-button [tab]="'form'" class="chart">
       <ion-icon name="pie-chart"></ion-icon>
       گزارشات
     </ion-tab-button>
@@ -31,7 +31,7 @@
       ></path>
     </svg> -->
 
-    <ion-tab-button class="notifs">
+    <ion-tab-button [tab]="'request-list'" class="notifs">
       <ion-icon name="file-tray-full"></ion-icon>
       <!-- <ion-badge>3</ion-badge> -->
       درخواست‌ها
@@ -45,4 +45,3 @@
     </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>
-

@@ -1,0 +1,61 @@
+.wishlist-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: #fcebef;
+  padding: 24px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 16px 20px;
+  overflow: hidden;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-header .left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.icon {
+  width: 36px;
+  height: 36px;
+}
+
+.progress {
+  height: 8px;
+  background: #f0f0f0;
+  border-radius: 4px;
+  margin: 12px 0;
+  position: relative;
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(to right, #ff91a4, #ffc3a0);
+  border-radius: 4px;
+}
+
+.view-more {
+  background: none;
+  color: #ff6f91;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  padding: 8px 0;
+}
+
+.details {
+  font-size: 0.9rem;
+  color: #555;
+  padding-top: 8px;
+}

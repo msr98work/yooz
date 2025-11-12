@@ -42,6 +42,12 @@ import {
   folder,
   image,
   trash,
+  help,
+  mail,
+  personOutline,
+  statsChartOutline,
+  timeOutline,
+  alertCircleOutline,
 } from 'ionicons/icons';
 
 @Component({
@@ -92,6 +98,12 @@ export class AppComponent {
       folder,
       image,
       trash,
+      help,
+      mail,
+      personOutline,
+      statsChartOutline,
+      timeOutline,
+      alertCircleOutline,
     });
   }
 }

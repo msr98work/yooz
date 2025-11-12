@@ -6,6 +6,9 @@ import {
   IonIcon,
   IonFooter,
   IonToolbar,
+  IonItem,
+  IonList,
+  IonText,
 } from '@ionic/angular/standalone';
 import { Component, effect, inject, OnInit } from '@angular/core';
 import { UserService } from '@service/user/user.service';
@@ -23,6 +26,9 @@ import { UserModel } from '@model/user.model';
     IonButton,
     IonMenu,
     IonContent,
+    IonItem,
+    IonList,
+    IonText,
   ],
 })
 export class MainMenuComponent implements OnInit {
@@ -37,4 +43,6 @@ export class MainMenuComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  logout() {}
 }

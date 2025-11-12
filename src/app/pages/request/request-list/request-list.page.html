@@ -1,0 +1,153 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Projects</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-toolbar class="ion-margin-vertical">
+    <ion-searchbar placeholder="Search projects"></ion-searchbar>
+  </ion-toolbar>
+
+  <nz-segmented
+    class="mx-1"
+    [nzBlock]="true"
+    [nzOptions]="options"
+    (nzValueChange)="handleValueChange($event)"
+  ></nz-segmented>
+
+  <ion-grid class="ion-margin-vertical mx-1">
+    <ion-list lines="none">
+      @for (item of projects; track item.name) {
+
+      <div class="ion-margin-bottom">
+        <ion-card>
+          <ion-card-content>
+            <div class="ion-display-flex ion-margin-bottom">
+              <ion-avatar slot="start" class="me-1">
+                <img [src]="'assets/icon/success.svg'" alt="request" />
+              </ion-avatar>
+              <ion-text
+                class="ion-display-flex ion-flex-column ion-justify-content-center"
+              >
+                <ion-text class="request-title" color="dark"
+                  >{{ 'درخواست 1' }}</ion-text
+                >
+                <ion-text class="request-sub">{{ 'مجتبی سجادفر' }}</ion-text>
+              </ion-text>
+
+              <ion-icon
+                class="ms-auto mt-1"
+                color="dark"
+                slot="icon-only"
+                name="finger-print"
+                size="small"
+              ></ion-icon>
+            </div>
+            <div class="ion-display-flex">
+              <ion-text>{{"وضعیت"}}</ion-text>
+              <ion-text class="mx-3" color="success">
+                {{ 'تایید شده' }}
+              </ion-text>
+              <ion-text class="ms-auto">{{ '1404/08/01' }}</ion-text>
+            </div>
+          </ion-card-content>
+        </ion-card>
+        <div class="ion-text-center mx-auto view-more">
+          <div [@detailExpand]="isExpanded(item) ? 'expanded' : 'collapsed'">
+            <nz-steps
+              class="p-3"
+              [nzCurrent]="2"
+              nzDirection="vertical"
+              nzSize="small"
+              nzStatus="finish"
+            >
+              <nz-step
+                nzTitle="Finished"
+                nzDescription="This is a description."
+              ></nz-step>
+              <nz-step
+                nzTitle="In Progress"
+                nzDescription="This is a description."
+              ></nz-step>
+              <nz-step nzTitle="Waiting" nzDescription="This is a description."
+                >test</nz-step
+              >
+            </nz-steps>
+          </div>
+          <ion-text
+            (click)="toggleDetails(item)"
+            color="medium"
+            style="font-size: small"
+          >
+            <nz-divider class="m-0"></nz-divider>
+            {{ isExpanded(item) ? 'Hide details' : 'تاریخچه' }}
+          </ion-text>
+        </div>
+      </div>
+      }
+      <!-- <ion-card class="ion-margin-bottom">
+        <ion-card-content>
+          <div class="ion-display-flex ion-margin-bottom">
+            <ion-avatar slot="start" class="me-1">
+              <img [src]="'assets/icon/reject.svg'" alt="request" />
+            </ion-avatar>
+            <div
+              class="ion-display-flex ion-flex-column ion-justify-content-center"
+            >
+              <ion-text class="request-title" color="dark"
+                >{{ 'درخواست 1' }}</ion-text
+              >
+              <ion-text class="request-sub">{{ 'مجتبی سجادفر' }}</ion-text>
+            </div>
+
+            <ion-icon
+              class="ms-auto mt-1"
+              color="dark"
+              slot="icon-only"
+              name="finger-print"
+              size="small"
+            ></ion-icon>
+          </div>
+          <div class="ion-display-flex">
+            <ion-text>{{"وضعیت"}}</ion-text>
+            <ion-text class="mx-3" color="danger"> {{ 'رد شده' }} </ion-text>
+            <ion-text class="ms-auto">{{ '1404/08/01' }}</ion-text>
+          </div>
+        </ion-card-content>
+      </ion-card>
+      <ion-card class="ion-margin-bottom">
+        <ion-card-content>
+          <div class="ion-display-flex ion-margin-bottom">
+            <ion-avatar slot="start" class="me-1">
+              <img [src]="'assets/icon/in_progress.png'" alt="request" />
+            </ion-avatar>
+            <div
+              class="ion-display-flex ion-flex-column ion-justify-content-center"
+            >
+              <ion-text class="request-title" color="dark"
+                >{{ 'درخواست 1' }}</ion-text
+              >
+              <ion-text class="request-sub">{{ 'مجتبی سجادفر' }}</ion-text>
+            </div>
+
+            <ion-icon
+              class="ms-auto mt-1"
+              color="dark"
+              slot="icon-only"
+              name="finger-print"
+              size="small"
+            ></ion-icon>
+          </div>
+          <div class="ion-display-flex">
+            <ion-text>{{"وضعیت"}}</ion-text>
+            <ion-text class="mx-3" color="secondary">
+              {{ 'درحال بررسی' }}
+            </ion-text>
+            <ion-text class="ms-auto">{{ '1404/08/01' }}</ion-text>
+          </div>
+        </ion-card-content>
+      </ion-card> -->
+    </ion-list>
+  </ion-grid>
+</ion-content>

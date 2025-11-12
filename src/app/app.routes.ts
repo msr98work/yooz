@@ -44,10 +44,32 @@ export const routes: Routes = [
             (m) => m.UserProfilePage
           ),
       },
+      {
+        path: 'request-types',
+        loadComponent: () =>
+          import('./pages/request/request-types/request-types.page').then(
+            (m) => m.RequestTypesPage
+          ),
+      },
+      {
+        path: 'form',
+        loadComponent: () =>
+          import('./pages/form/form.page').then((m) => m.FormPage),
+      },
+      {
+        path: 'request-list',
+        loadComponent: () =>
+          import('./pages/request/request-list/request-list.page').then(
+            (m) => m.RequestListPage
+          ),
+      },
     ],
   },
   {
     path: 'new-request',
-    loadComponent: () => import('./pages/new-request/new-request.page').then( m => m.NewRequestPage)
+    loadComponent: () =>
+      import('./pages/request/new-request/new-request.page').then(
+        (m) => m.NewRequestPage
+      ),
   },
 ];

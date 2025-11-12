@@ -4,8 +4,8 @@
     <div class="header-content ion-display-flex ion-align-items-center">
       <img [src]="'/assets/icon/avatar.svg'" alt="" />
       <ion-label>
-        <h2>{{user ? user.full_name : 'ناشناس'}}</h2>
-        <p>{{user?.position ? user.position : 'نامشخص'}}</p>
+        <h2>{{ user ? user.full_name : "ناشناس" }}</h2>
+        <p>{{ user?.position ? user.position : "نامشخص" }}</p>
       </ion-label>
     </div>
     <ion-button
@@ -14,6 +14,118 @@
     >
       پروفایل کاربری
     </ion-button>
+
+    <ion-list lines="none" class="menu-list">
+      <!-- آیتم‌های منو -->
+      <ion-item
+        button
+        detail="false"
+        class="menu-item"
+        routerLink="/home"
+        routerDirection="root"
+      >
+        <ion-icon
+          slot="start"
+          name="home"
+          class="menu-icon ion-margin-end"
+        ></ion-icon>
+        <ion-text class="menu-label">خانه</ion-text>
+      </ion-item>
+
+      <ion-item
+        button
+        detail="false"
+        class="menu-item"
+        routerLink="/profile"
+        routerDirection="root"
+      >
+        <ion-icon
+          slot="start"
+          name="person"
+          class="menu-icon ion-margin-end"
+        ></ion-icon>
+        <ion-text class="menu-label">پروفایل</ion-text>
+      </ion-item>
+
+      <ion-item
+        button
+        detail="false"
+        class="menu-item"
+        routerLink="/notifications"
+        routerDirection="root"
+      >
+        <ion-icon
+          slot="start"
+          name="notifications"
+          class="menu-icon ion-margin-end"
+        ></ion-icon>
+        <ion-text class="menu-label">اعلان‌ها</ion-text>
+        <div slot="end" class="notification-badge">3</div>
+      </ion-item>
+
+      <ion-item
+        button
+        detail="false"
+        class="menu-item"
+        routerLink="/messages"
+        routerDirection="root"
+      >
+        <ion-icon
+          slot="start"
+          name="mail"
+          class="menu-icon ion-margin-end"
+        ></ion-icon>
+        <ion-text class="menu-label">پیام‌ها</ion-text>
+      </ion-item>
+
+      <!-- جداکننده -->
+      <div class="menu-divider"></div>
+
+      <ion-item
+        button
+        detail="false"
+        class="menu-item"
+        routerLink="/settings"
+        routerDirection="root"
+      >
+        <ion-icon
+          slot="start"
+          name="settings"
+          class="menu-icon ion-margin-end"
+        ></ion-icon>
+        <ion-text class="menu-label">تنظیمات</ion-text>
+      </ion-item>
+
+      <ion-item
+        button
+        detail="false"
+        class="menu-item"
+        routerLink="/help"
+        routerDirection="root"
+      >
+        <ion-icon
+          slot="start"
+          name="help"
+          class="menu-icon ion-margin-end"
+        ></ion-icon>
+        <ion-text class="menu-label">راهنما</ion-text>
+      </ion-item>
+
+      <!-- خروج -->
+      <ion-item
+        button
+        detail="false"
+        class="menu-item logout-item"
+        (click)="logout()"
+      >
+        <ion-icon
+          slot="start"
+          name="log-out"
+          class="menu-icon ion-margin-end"
+        ></ion-icon>
+        <ion-text class="menu-label">خروج</ion-text>
+      </ion-item>
+    </ion-list>
   </ion-content>
   <ion-footer>
     <ion-toolbar class="ion-text-center">

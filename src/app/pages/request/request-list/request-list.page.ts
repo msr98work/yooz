@@ -25,6 +25,7 @@ import {
 } from '@angular/animations';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzStepsModule } from 'ng-zorro-antd/steps';
+import { MainHeaderComponent } from '@pages/dashboard/main-header/main-header.component';
 @Component({
   selector: 'app-request-list',
   templateUrl: './request-list.page.html',
@@ -48,6 +49,7 @@ import { NzStepsModule } from 'ng-zorro-antd/steps';
     IonCardContent,
     NzDividerModule,
     NzStepsModule,
+    MainHeaderComponent,
   ],
   animations: [
     trigger('detailExpand', [

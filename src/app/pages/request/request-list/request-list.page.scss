@@ -4,6 +4,11 @@
   .ant-segmented-item-selected {
     border-radius: 8px !important;
   }
+  ion-card{
+    border-radius: 0px;
+    width: 99%;
+    margin: 0 auto;
+  }
 }
 .project-header {
   display: flex;
@@ -114,6 +119,6 @@ ion-avatar {
 
 .view-more {
   background: #f7f7f7;
-  width: 96%;
+  width: 95%;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }

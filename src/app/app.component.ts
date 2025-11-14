@@ -48,6 +48,9 @@ import {
   statsChartOutline,
   timeOutline,
   alertCircleOutline,
+  funnelOutline,
+  ellipsisVerticalOutline,
+  ellipsisVertical,
 } from 'ionicons/icons';
 
 @Component({
@@ -104,6 +107,9 @@ export class AppComponent {
       statsChartOutline,
       timeOutline,
       alertCircleOutline,
+      funnelOutline,
+      ellipsisVerticalOutline,
+      ellipsisVertical,
     });
   }
 }

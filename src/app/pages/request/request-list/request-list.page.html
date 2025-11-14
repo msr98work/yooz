@@ -1,22 +1,17 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Projects</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-main-header></app-main-header>
 
 <ion-content [fullscreen]="true">
-  <ion-toolbar class="ion-margin-vertical">
+  <!-- <ion-toolbar class="ion-margin-bottom">
     <ion-searchbar placeholder="Search projects"></ion-searchbar>
-  </ion-toolbar>
+  </ion-toolbar> -->
 
   <nz-segmented
-    class="mx-1"
     [nzBlock]="true"
     [nzOptions]="options"
     (nzValueChange)="handleValueChange($event)"
   ></nz-segmented>
 
-  <ion-grid class="ion-margin-vertical mx-1">
+  <ion-grid class="ion-margin-vertical">
     <ion-list lines="none">
       @for (item of projects; track item.name) {
 
@@ -40,7 +35,7 @@
                 class="ms-auto mt-1"
                 color="dark"
                 slot="icon-only"
-                name="finger-print"
+                name="ellipsis-vertical"
                 size="small"
               ></ion-icon>
             </div>
@@ -105,7 +100,7 @@
               class="ms-auto mt-1"
               color="dark"
               slot="icon-only"
-              name="finger-print"
+              name="ellipsis-vertical"
               size="small"
             ></ion-icon>
           </div>
@@ -135,7 +130,7 @@
               class="ms-auto mt-1"
               color="dark"
               slot="icon-only"
-              name="finger-print"
+              name="ellipsis-vertical"
               size="small"
             ></ion-icon>
           </div>

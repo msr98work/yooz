@@ -1,4 +1,4 @@
-<app-main-header></app-main-header>
+<app-main-header [isSearch]="false"></app-main-header>
 <ion-content [fullscreen]="true">
   <app-card-date></app-card-date>
   <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">

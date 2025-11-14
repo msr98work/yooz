@@ -1,35 +1,31 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>form</ion-title>
-  </ion-toolbar>
-</ion-header>
-
+<app-main-header></app-main-header>
 <ion-content [fullscreen]="true">
-  <div class="wishlist-container">
-    <div class="card" *ngFor="let item of wishList">
-      <div class="card-header">
-        <div class="left">
-          <img [src]="item.icon" alt="icon" class="icon" />
-          <h3>{{ item.title }}</h3>
-        </div>
-        <span class="price">{{ item.price }}$</span>
-      </div>
+    <ion-list [inset]="true" class="m-0">
+    <ion-item-sliding>
+      <ion-item [button]="true" detail="true" style="--padding-start: 0;">
+        <ion-avatar aria-hidden="true" slot="start">
+          <img alt="" src="assets/icon/form.png" />
+        </ion-avatar>
+        <ion-text class="ms-3">Rick Astley</ion-text>
+      </ion-item>
+      <ion-item-options slot="end">
+        <ion-item-option color="danger" expandable="true">
+          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+    <ion-item-sliding>
+      <ion-item [button]="true" detail="true" style="--padding-start: 0;">
+        <ion-avatar aria-hidden="true" slot="start">
+          <img alt="" src="assets/icon/form.png" />
+        </ion-avatar>
+        <ion-text class="ms-3">Rick Astley</ion-text>
+      </ion-item>
+      <ion-item-options slot="end">
+        <ion-item-option color="danger" expandable="true">
+          <ion-icon slot="icon-only" name="trash"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+</ion-list>
 
-      <div class="progress">
-        <div class="progress-bar" [style.width.%]="item.progress"></div>
-        <span>{{ item.progress }}%</span>
-      </div>
-
-      <button class="view-more" (click)="toggleDetails(item)">
-        {{ isExpanded(item) ? 'Hide details' : 'View more' }}
-      </button>
-
-      <div
-        [@detailExpand]="isExpanded(item) ? 'expanded' : 'collapsed'"
-        class="details"
-      >
-        <p *ngFor="let d of item.details">{{ d }}</p>
-      </div>
-    </div>
-  </div>
-</ion-content>

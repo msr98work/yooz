@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, input, OnInit } from '@angular/core';
 import {
   IonHeader,
   IonToolbar,
@@ -8,6 +8,7 @@ import {
   IonBadge,
   IonImg,
   IonText,
+  IonSearchbar,
 } from '@ionic/angular/standalone';
 
 @Component({
@@ -15,6 +16,7 @@ import {
   templateUrl: './main-header.component.html',
   styleUrls: ['./main-header.component.scss'],
   imports: [
+    IonSearchbar,
     IonText,
     IonImg,
     IonBadge,
@@ -26,7 +28,12 @@ import {
   ],
 })
 export class MainHeaderComponent implements OnInit {
+  isSearch = input<boolean>(true);
+  // he = window.innerHeight;
+  // wi = window.innerWidth;
   constructor() {}
 
   ngOnInit() {}
+
+  onSearch() {}
 }

@@ -17,7 +17,7 @@ import { TranslateModule } from '@ngx-translate/core';
   ],
 })
 export class InputTextComponent implements OnInit {
-  control = input<FormControl>(null);
+  control = input.required<FormControl>();
   class = input<string>('');
   label = input<string>('');
   placeHolder = input<string>('');

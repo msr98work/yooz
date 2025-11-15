@@ -1,3 +1,4 @@
+import { TranslateModule } from '@ngx-translate/core';
 import {
   IonButton,
   IonMenu,
@@ -13,6 +14,7 @@ import {
 import { Component, effect, inject, OnInit } from '@angular/core';
 import { UserService } from '@service/user/user.service';
 import { UserModel } from '@model/user.model';
+import { RouterLinkActive, RouterLinkWithHref } from '@angular/router';
 
 @Component({
   selector: 'app-main-menu',
@@ -29,6 +31,9 @@ import { UserModel } from '@model/user.model';
     IonItem,
     IonList,
     IonText,
+    TranslateModule,
+    RouterLinkWithHref,
+    RouterLinkActive,
   ],
 })
 export class MainMenuComponent implements OnInit {

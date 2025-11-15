@@ -6,11 +6,3 @@ export type FormGroupType<Model> = {
     ? FormGroup<FormGroupType<FieldType<Model, x>>>
     : FormControl<FieldType<Model, x>>;
 };
-
-// export type FormGroupArrayType<T> = {
-//   [K in keyof T]: T[K] extends Array<any>
-//     ? FormArray<
-//         FormGroup<{ key: FormControl<string>; value: FormControl<string> }>
-//       >
-//     : FormControl<T[K]>;
-// };

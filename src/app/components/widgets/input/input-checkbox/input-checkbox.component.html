@@ -1,3 +1,6 @@
-<p>
-  input-checkbox works!
-</p>
+<ion-checkbox
+  [formControl]="control()"
+  [class]="class()"
+  labelPlacement="end"
+  >{{ label() | translate }}</ion-checkbox
+>

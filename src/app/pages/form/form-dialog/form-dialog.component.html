@@ -1,3 +1,67 @@
-<p>
-  form-dialog works!
-</p>
+<div class="ion-page">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button (click)="close()">
+          <ion-icon name="chevron-back-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title>{{ "AddForm" | translate }}</ion-title>
+      <ion-buttons slot="end">
+        <ion-button [disabled]="form.invalid" (click)="onSubmit()">
+          <ion-icon name="checkmark-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <div class="ion-margin-vertical">
+      <form [formGroup]="form">
+        <input-text [control]="getControl('title')" label="Title"></input-text>
+      </form>
+      <ion-grid fixed class="ion-margin-vertical">
+        <ion-row class="ion-align-items-center">
+          <ion-col size="6">
+            <ion-text color="dark">
+              <h4 class="m-0">فیلدها</h4>
+            </ion-text>
+          </ion-col>
+          <ion-col size="6" class="ion-text-end">
+            <ion-button id="open-form-field-dialog">
+              <ion-icon name="add"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-list>
+        <ion-reorder-group
+          [disabled]="false"
+          (ionReorderEnd)="handleReorderEnd($any($event))"
+        >
+          @for (item of listField; track $index) {
+          <ion-item>
+            <ion-icon
+              aria-hidden="true"
+              [src]="'assets/icon/' + item.type + '.svg'"
+              slot="start"
+              class="me-2"
+            ></ion-icon>
+            <ion-text>{{ item.title }}</ion-text>
+            <ion-text color="medium">({{ item.name }})</ion-text>
+            <ion-reorder slot="end"></ion-reorder>
+          </ion-item>
+
+          }
+        </ion-reorder-group>
+      </ion-list>
+    </div>
+    <ion-modal #modalField trigger="open-form-field-dialog">
+      <ng-template>
+        <app-form-field-dialog
+          [modal]="modalField"
+          (submit)="saveField($event)"
+        ></app-form-field-dialog>
+      </ng-template>
+    </ion-modal>
+  </ion-content>
+</div>

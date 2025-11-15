@@ -51,6 +51,12 @@ import {
   funnelOutline,
   ellipsisVerticalOutline,
   ellipsisVertical,
+  add,
+  logoIonic,
+  person,
+  fileTrayFull,
+  pieChart,
+  home,
 } from 'ionicons/icons';
 
 @Component({
@@ -110,6 +116,12 @@ export class AppComponent {
       funnelOutline,
       ellipsisVerticalOutline,
       ellipsisVertical,
+      add,
+      logoIonic,
+      person,
+      fileTrayFull,
+      pieChart,
+      home,
     });
   }
 }

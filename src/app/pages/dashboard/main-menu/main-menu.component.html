@@ -21,8 +21,8 @@
         button
         detail="false"
         class="menu-item"
-        routerLink="/home"
-        routerDirection="root"
+        routerLink="/dashboard/home"
+        routerLinkActive="menu-item-active"
       >
         <ion-icon
           slot="start"
@@ -32,13 +32,7 @@
         <ion-text class="menu-label">خانه</ion-text>
       </ion-item>
 
-      <ion-item
-        button
-        detail="false"
-        class="menu-item"
-        routerLink="/profile"
-        routerDirection="root"
-      >
+      <ion-item button detail="false" class="menu-item" routerLink="/profile">
         <ion-icon
           slot="start"
           name="person"
@@ -67,15 +61,15 @@
         button
         detail="false"
         class="menu-item"
-        routerLink="/messages"
-        routerDirection="root"
+        routerLink="/dashboard/form"
+        routerLinkActive="menu-item-active"
       >
         <ion-icon
           slot="start"
-          name="mail"
+          name="list"
           class="menu-icon ion-margin-end"
         ></ion-icon>
-        <ion-text class="menu-label">پیام‌ها</ion-text>
+        <ion-text class="menu-label">{{ "Forms" | translate }}</ion-text>
       </ion-item>
 
       <!-- جداکننده -->
@@ -123,7 +117,7 @@
           name="log-out"
           class="menu-icon ion-margin-end"
         ></ion-icon>
-        <ion-text class="menu-label">خروج</ion-text>
+        <ion-text class="menu-label">{{ "SignOut" | translate }}</ion-text>
       </ion-item>
     </ion-list>
   </ion-content>

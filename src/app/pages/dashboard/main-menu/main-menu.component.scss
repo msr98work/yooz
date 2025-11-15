@@ -113,11 +113,6 @@ ion-button {
   border-radius: 12px;
   transition: all 0.3s ease;
 
-  &:hover {
-    --background: rgba(var(--ion-color-primary-rgb), 0.1);
-    transform: translateX(5px);
-  }
-
   &.item-activated {
     --background: var(--ion-color-primary);
     --color: white;
@@ -126,6 +121,11 @@ ion-button {
       color: white;
     }
   }
+}
+
+.menu-item-active {
+  --background: rgba(var(--ion-color-primary-rgb), 0.1);
+  transform: translateX(5px);
 }
 
 .menu-icon {

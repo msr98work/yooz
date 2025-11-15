@@ -33,12 +33,8 @@ import { MainHeaderComponent } from '@pages/dashboard/main-header/main-header.co
   standalone: true,
   imports: [
     IonContent,
-    IonHeader,
-    IonTitle,
-    IonToolbar,
     CommonModule,
     FormsModule,
-    IonSearchbar,
     IonText,
     IonList,
     IonIcon,

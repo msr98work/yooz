@@ -1,0 +1,97 @@
+<div class="ion-page">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button (click)="close()">
+          <ion-icon name="chevron-back-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title>{{ "AddField" | translate }}</ion-title>
+      <ion-buttons slot="end">
+        <ion-button
+          [disabled]="form.invalid"
+          color="success"
+          (click)="onSubmit()"
+        >
+          <ion-icon name="checkmark-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <div class="ion-margin-vertical">
+      <form [formGroup]="form">
+        <input-text
+          [control]="getControl('title')"
+          label="Title"
+          class="ion-margin-bottom"
+        ></input-text>
+        <input-text
+          [control]="getControl('name')"
+          label="Name"
+          class="ion-margin-bottom"
+        ></input-text>
+        <input-select
+          label="Type"
+          [control]="getControl('type')"
+          [options]="types"
+          class="ion-margin-bottom"
+        ></input-select>
+        <input-select
+          label="Widget"
+          [control]="getControl('widget')"
+          [options]="widgets"
+          class="ion-margin-bottom"
+        ></input-select>
+        <input-checkbox
+          [control]="getControl('required')"
+          label="Required"
+          class="ion-margin-bottom me-5"
+        ></input-checkbox>
+        <input-checkbox
+          [control]="getControl('readonly')"
+          label="Readonly"
+          class="ion-margin-bottom"
+        ></input-checkbox>
+        <input-text
+          [control]="getControl('placeHolder')"
+          label="PlaceHolder"
+          class="ion-margin-bottom"
+        ></input-text>
+        <input-text
+          [control]="getControl('default')"
+          label="Default"
+          class="ion-margin-bottom"
+        ></input-text>
+        <input-textarea
+          [control]="getControl('description')"
+          label="Description"
+        ></input-textarea>
+        <div formGroupName="visible">
+          <nz-divider
+            [nzText]="'DisplayConditionBasedOn' | translate"
+          ></nz-divider>
+          <input-select
+            label="Field"
+            [control]="getVisibleControl('field')"
+            [options]="[]"
+            class="ion-margin-bottom"
+          ></input-select>
+          @if (getVisibleControl('field').value) {
+          <input-select
+            label="Condition"
+            [control]="getVisibleControl('condition')"
+            [options]="[]"
+            class="ion-margin-bottom"
+          ></input-select>
+          <input-text
+            [control]="getVisibleControl('value')"
+            label="Value"
+            class="ion-margin-bottom"
+          ></input-text>
+          }
+        </div>
+      </form>
+    </div>
+  </ion-content>
+</div>

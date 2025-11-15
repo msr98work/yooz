@@ -12,15 +12,6 @@ import {
   IonTabButton,
   IonIcon,
 } from '@ionic/angular/standalone';
-import { addIcons } from 'ionicons';
-import {
-  logoIonic,
-  person,
-  fileTrayFull,
-  add,
-  pieChart,
-  home,
-} from 'ionicons/icons';
 import { CommonModule } from '@angular/common';
 import { NavController } from '@ionic/angular';
 
@@ -53,9 +44,7 @@ export class MainTabsComponent implements OnInit {
     return role !== 'gesture';
   }
 
-  constructor() {
-    addIcons({ logoIonic, person, fileTrayFull, add, pieChart, home });
-  }
+  constructor() {}
 
   ngOnInit() {
     this.presentingElement = document.querySelector('.ion-page');

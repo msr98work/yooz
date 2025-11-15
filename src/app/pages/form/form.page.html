@@ -1,8 +1,8 @@
 <app-main-header></app-main-header>
 <ion-content [fullscreen]="true">
-    <ion-list [inset]="true" class="m-0">
+  <ion-list [inset]="true" class="m-0">
     <ion-item-sliding>
-      <ion-item [button]="true" detail="true" style="--padding-start: 0;">
+      <ion-item [button]="true" detail="true" style="--padding-start: 0">
         <ion-avatar aria-hidden="true" slot="start">
           <img alt="" src="assets/icon/form.png" />
         </ion-avatar>
@@ -15,7 +15,7 @@
       </ion-item-options>
     </ion-item-sliding>
     <ion-item-sliding>
-      <ion-item [button]="true" detail="true" style="--padding-start: 0;">
+      <ion-item [button]="true" detail="true" style="--padding-start: 0">
         <ion-avatar aria-hidden="true" slot="start">
           <img alt="" src="assets/icon/form.png" />
         </ion-avatar>
@@ -27,5 +27,24 @@
         </ion-item-option>
       </ion-item-options>
     </ion-item-sliding>
-</ion-list>
-
+  </ion-list>
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button color="medium" size="small" id="open-form-dialog">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-modal
+    #modal
+    trigger="open-form-dialog"
+    [canDismiss]="canDismiss"
+    [presentingElement]="presentingElement"
+    (willPresent)="onWillPresent()"
+  >
+    <ng-template>
+      <app-form-dialog
+        [modal]="modal"
+        (dismissChange)="onDismissChange($event)"
+      ></app-form-dialog>
+    </ng-template>
+  </ion-modal>
+</ion-content>

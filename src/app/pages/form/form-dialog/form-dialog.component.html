@@ -47,10 +47,9 @@
               class="me-2"
             ></ion-icon>
             <ion-text>{{ item.title }}</ion-text>
-            <ion-text color="medium">({{ item.name }})</ion-text>
+            <ion-text color="medium" class="ms-2">({{ item.name }})</ion-text>
             <ion-reorder slot="end"></ion-reorder>
           </ion-item>
-
           }
         </ion-reorder-group>
       </ion-list>
@@ -59,6 +58,7 @@
       <ng-template>
         <app-form-field-dialog
           [modal]="modalField"
+          [fields]="fields"
           (submit)="saveField($event)"
         ></app-form-field-dialog>
       </ng-template>

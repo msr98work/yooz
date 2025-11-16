@@ -19,7 +19,6 @@ import {
   IonImg,
   IonInputOtp,
 } from '@ionic/angular/standalone';
-import { FormGroupType } from '@model/reactiveform.model';
 import { AuthService } from '@service/auth/auth.service';
 import { NavController } from '@ionic/angular';
 import { AuthModel } from '@model/auth.model';
@@ -27,6 +26,7 @@ import { PasswordValidators } from '@util/password-validators';
 import { UserService } from '@service/user/user.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MessageService } from '@service/message/message.service';
+import { FormBuilderUtil } from 'src/app/components/widgets/form-builder/form-builder.util';
 
 @Component({
   selector: 'app-sign-up',
@@ -53,7 +53,7 @@ export class SignUpPage implements OnInit {
   private destroyRef = inject(DestroyRef);
   private messageService = inject(MessageService);
   private navController = inject(NavController);
-  loginForm = new FormGroup<FormGroupType<AuthModel.SignUp>>(
+  loginForm = new FormGroup<FormBuilderUtil.FormGroupType<AuthModel.SignUp>>(
     {
       username: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required),

@@ -12,14 +12,12 @@ import {
 import {
   IonContent,
   IonText,
-  IonInput,
   IonButton,
   IonIcon,
   IonSpinner,
   IonImg,
   IonInputOtp,
 } from '@ionic/angular/standalone';
-import { FormGroupType } from '@model/reactiveform.model';
 import { AuthService } from '@service/auth/auth.service';
 import { NavController } from '@ionic/angular';
 import { AuthModel } from '@model/auth.model';
@@ -27,6 +25,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { LocalStorage } from '@db/local-storage.database';
 import { InputPasswordComponent } from 'src/app/components/widgets/input/input-password/input-password.component';
 import { InputTextComponent } from 'src/app/components/widgets/input/input-text/input-text.component';
+import { FormBuilderUtil } from 'src/app/components/widgets/form-builder/form-builder.util';
 
 type Mode = 'otp' | 'password';
 @Component({
@@ -54,7 +53,7 @@ export class SignInPage implements OnInit {
   private destroyRef = inject(DestroyRef);
   // private settingsService = inject(SettingsService);
   private navController = inject(NavController);
-  loginForm = new FormGroup<FormGroupType<AuthModel.SignIn>>({
+  loginForm = new FormGroup<FormBuilderUtil.FormGroupType<AuthModel.SignIn>>({
     username: new FormControl('', Validators.required),
     password: new FormControl(''),
     otp: new FormControl(''),

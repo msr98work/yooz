@@ -15,7 +15,6 @@ import {
 } from '@ionic/angular/standalone';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
-import { FormBuilderConfigComponent } from 'src/app/components/widgets/form-builder/form-builder-config/form-builder-config.component';
 @Component({
   selector: 'app-new-request',
   templateUrl: './new-request.page.html',
@@ -31,7 +30,6 @@ import { FormBuilderConfigComponent } from 'src/app/components/widgets/form-buil
     ReactiveFormsModule,
     NzButtonModule,
     NzAutocompleteModule,
-    FormBuilderConfigComponent,
   ],
 })
 export class NewRequestPage implements OnInit {

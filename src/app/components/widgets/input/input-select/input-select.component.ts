@@ -3,11 +3,7 @@ import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { IonText, IonSelect, IonSelectOption } from '@ionic/angular/standalone';
-
-interface SelectOption {
-  value: any;
-  label: string;
-}
+import { InputSelectModel } from './input-select.model';
 
 @Component({
   selector: 'input-select',
@@ -29,7 +25,7 @@ export class InputSelectComponent implements OnInit {
   label = input<string>('');
   placeholder = input<string>('');
   fill = input<string>('outline');
-  options = input.required<SelectOption[]>();
+  options = input.required<InputSelectModel[]>();
   multiple = input<boolean>(false);
   interface = input<string>('action-sheet');
 

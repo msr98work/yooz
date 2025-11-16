@@ -27,10 +27,11 @@ import {
   IonReorder,
 } from '@ionic/angular/standalone';
 import { FormsModel } from '@model/forms.model';
-import { FormGroupType } from '@model/reactiveform.model';
 import { TranslateModule } from '@ngx-translate/core';
 import { InputTextComponent } from 'src/app/components/widgets/input/input-text/input-text.component';
 import { FormFieldDialogComponent } from '../form-field-dialog/form-field-dialog.component';
+import { InputSelectModel } from 'src/app/components/widgets/input/input-select/input-select.model';
+import { FormBuilderUtil } from 'src/app/components/widgets/form-builder/form-builder.util';
 
 type Form = { title: string };
 @Component({
@@ -66,10 +67,11 @@ export class FormDialogComponent implements OnInit {
   modal = input<IonModal>();
   dismissChange = output<boolean>();
 
-  form = new FormGroup<FormGroupType<Form>>({
+  form = new FormGroup<FormBuilderUtil.FormGroupType<Form>>({
     title: new FormControl('', Validators.required),
   });
   listField: FormsModel.FormField[] = [];
+  fields: InputSelectModel[] = [];
   constructor() {}
 
   ngOnInit() {}
@@ -93,5 +95,11 @@ export class FormDialogComponent implements OnInit {
 
   saveField(value: FormsModel.FormField) {
     this.listField.push(value);
+    this.fields = this.listField.map((field) => {
+      return {
+        value: field.name,
+        label: field.title,
+      };
+    });
   }
 }

@@ -1,106 +1,92 @@
-import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { Component, input, OnInit, output } from '@angular/core';
 import { FormBuilderUtil } from '../form-builder.util';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { InputTextComponent } from '../../input/input-text/input-text.component';
-import { InputTextareaComponent } from '../../input/input-textarea/input-textarea.component';
 import { InputSelectComponent } from '../../input/input-select/input-select.component';
-import { InputAutocompleteComponent } from '../../input/input-autocomplete/input-autocomplete.component';
-import { UploadFileComponent } from '../../input/input-upload-file/input-upload-file.component';
+import { InputCheckboxComponent } from '../../input/input-checkbox/input-checkbox.component';
+import { InputTextareaComponent } from '../../input/input-textarea/input-textarea.component';
 
 @Component({
-  selector: 'form-builder-config',
+  selector: 'app-form-builder-config',
   templateUrl: './form-builder-config.component.html',
   styleUrls: ['./form-builder-config.component.scss'],
   imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
     InputTextComponent,
-    InputTextareaComponent,
     InputSelectComponent,
-    InputAutocompleteComponent,
-    UploadFileComponent,
+    InputCheckboxComponent,
+    InputTextareaComponent,
   ],
 })
 export class FormBuilderConfigComponent implements OnInit {
+  fields = input<FormBuilderUtil.InputSelectModel[]>([]);
+  submit = output<FormBuilderUtil.FormField>();
   form = new FormGroup<
-    FormBuilderUtil.FormGroupType<FormBuilderUtil.FormBuilderModel>
+    FormBuilderUtil.FormGroupType<FormBuilderUtil.FormField>
   >({
-    name: new FormControl('', [Validators.required]),
-    title: new FormControl('', [Validators.required]),
-    type: new FormControl('string', [Validators.required]),
-    widget: new FormControl('string'),
-    readonly: new FormControl(false),
+    title: new FormControl('', Validators.required),
+    name: new FormControl('', Validators.required),
+    type: new FormControl(null, Validators.required),
+    widget: new FormControl('', Validators.required),
     required: new FormControl(false),
+    readonly: new FormControl(false),
     placeHolder: new FormControl(''),
     default: new FormControl(''),
     description: new FormControl(''),
-    visible: new FormGroup({
+    visible: new FormGroup<
+      FormBuilderUtil.FormGroupType<FormBuilderUtil.Visible>
+    >({
       field: new FormControl(''),
-      operator: new FormControl(''),
+      condition: new FormControl('equal'),
       value: new FormControl(''),
     }),
-    order: new FormControl(1),
-    maxlength: new FormControl(null),
-    minlength: new FormControl(null),
   });
-
-  categories = [
+  types = FormBuilderUtil.FORMBUILDERTYPE;
+  widgets: FormBuilderUtil.InputSelectModel[] = [];
+  conditions: FormBuilderUtil.InputSelectModel[] = [
     {
-      value: 'value',
-      label: 'label',
+      value: 'equal',
+      label: 'Equal',
     },
     {
-      value: 'value1',
-      label: 'label',
-    },
-    {
-      value: 'value2',
-      label: 'label',
-    },
-    {
-      value: 'value3',
-      label: 'label',
-    },
-    {
-      value: 'value4',
-      label: 'label',
-    },
-    {
-      value: 'value',
-      label: 'label',
+      value: 'not_empty',
+      label: 'NotEmpty',
     },
   ];
-
-  options: any[] = [
-    { value: '1', label: 'AntDesign', group: 'Topics' },
-    { value: '2', label: 'AntDesign UI', group: 'Topics' },
-    { value: '3', label: 'AntDesign UI 有多好', group: 'Questions' },
-    { value: '4', label: 'AntDesign 是啥', group: 'Questions' },
-    { value: '5', label: 'AntDesign 是一个设计语言', group: 'Articles' },
-    { value: '6', label: 'Angular', icon: 'logo-angular', group: 'Articles' },
-    { value: '7', label: 'React', icon: 'logo-react', group: 'Articles' },
-    {
-      value: '8',
-      label: 'Vue',
-      icon: 'logo-vue',
-      disabled: true,
-      group: 'Articles',
-    },
-  ];
-
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getVisibleControl('field').valueChanges.subscribe((value) => {
+      if (!value) {
+        this.getVisibleControl('field').clearValidators();
+        this.getVisibleControl('condition').clearValidators();
+        this.getVisibleControl('value').clearValidators();
+        this.getControl('visible').patchValue({
+          field: null,
+          condition: 'equal',
+          value: '',
+        } as any);
+      } else {
+        this.getVisibleControl('field').addValidators([Validators.required]);
+        this.getVisibleControl('value').addValidators([Validators.required]);
+        this.getVisibleControl('condition').addValidators([
+          Validators.required,
+        ]);
+      }
+    });
+    this.getControl('type').valueChanges.subscribe((value) => {
+      this.widgets = value
+        ? this.types.find((type) => type.value == value).widgets
+        : [];
+      this.getControl('widget').setValue('');
+      this.getControl('widget').updateValueAndValidity();
+    });
+  }
 
-  getControl(key: keyof FormBuilderUtil.FormBuilderModel) {
+  getControl(key: keyof FormBuilderUtil.FormField) {
     return this.form.get(key) as FormControl;
+  }
+
+  getVisibleControl(key: keyof FormBuilderUtil.Visible) {
+    return this.getControl('visible').get(key) as FormControl;
   }
 }

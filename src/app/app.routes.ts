@@ -45,13 +45,6 @@ export const routes: Routes = [
           ),
       },
       {
-        path: 'request-types',
-        loadComponent: () =>
-          import('./pages/request/request-types/request-types.page').then(
-            (m) => m.RequestTypesPage
-          ),
-      },
-      {
         path: 'form',
         loadComponent: () =>
           import('./pages/form/form.page').then((m) => m.FormPage),
@@ -70,6 +63,13 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/request/new-request/new-request.page').then(
         (m) => m.NewRequestPage
+      ),
+  },
+  {
+    path: 'request-type',
+    loadComponent: () =>
+      import('./pages/request-type/request-type.page').then(
+        (m) => m.RequestTypePage
       ),
   },
 ];

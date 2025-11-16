@@ -1,7 +1,7 @@
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 
 export namespace FormBuilderUtil {
-  function convertFormBuilderToJson(data: FormBuilderModel) {
+  function convertFormBuilderToJson(data: FormField) {
     return {
       name: data.name,
       title: data.title,
@@ -13,45 +13,133 @@ export namespace FormBuilderUtil {
       place_holder: data.placeHolder,
       description: data.description,
       order: data.order,
-      ...(['number', 'string'].includes(data.widget) && {
-        ...(typeof data.maxlength == 'number' && {
-          maxlength: data.maxlength,
-        }),
-        ...(typeof data.minlength == 'number' && {
-          minlength: data.minlength,
-        }),
-      }),
+      // ...(['number', 'string'].includes(data.widget) && {
+      //   ...(typeof data.maxlength == 'number' && {
+      //     maxlength: data.maxlength,
+      //   }),
+      //   ...(typeof data.minlength == 'number' && {
+      //     minlength: data.minlength,
+      //   }),
+      // }),
       visible: data.visible?.field
         ? {
             field: data.visible.field,
-            condition: data.visible.operator,
+            condition: data.visible.condition,
             value: data.visible.value,
           }
         : {},
     };
   }
 
-  export interface FormBuilderModel {
-    name: string;
+  export interface FormField {
     title: string;
+    name: string;
     type: FormBuilderTypes;
     widget: string;
-    readonly: boolean;
-    required: boolean;
-    default: string;
     placeHolder: string;
+    default: string;
     description: string;
-    order: number;
-    maxlength: number;
-    minlength: number;
-    visible: FormBuilderVisibleModel;
+    required: boolean;
+    readonly: boolean;
+    order?: number;
+    visible: Visible;
   }
-  export type FormBuilderTypes = 'string' | 'number' | 'boolean';
-  export type FormBuilderOperator = 'equal' | 'empty' | 'not_empty';
-  export interface FormBuilderVisibleModel {
+
+  export type FieldCondition = 'equal' | 'not_empty';
+  export interface Visible {
     field: string;
-    operator: string;
+    condition: FieldCondition;
     value: string;
+  }
+
+  export type FormBuilderTypes = 'string' | 'number' | 'boolean' | 'datetime';
+  export interface FormBuilder {
+    label: string;
+    value: FormBuilderTypes;
+    widgets: {
+      label: string;
+      value: string;
+    }[];
+  }
+
+  export const FORMBUILDERTYPE: FormBuilder[] = [
+    {
+      label: 'String',
+      value: 'string',
+      widgets: [
+        {
+          value: 'string',
+          label: 'String',
+        },
+        {
+          value: 'textarea',
+          label: 'Textarea',
+        },
+        {
+          value: 'select',
+          label: 'Select',
+        },
+        {
+          value: 'Computational',
+          label: 'ComputationalField',
+        },
+        {
+          value: 'file',
+          label: 'File',
+        },
+      ],
+    },
+    {
+      label: 'Number',
+      value: 'number',
+      widgets: [
+        {
+          value: 'number',
+          label: 'Number',
+        },
+        {
+          value: 'select',
+          label: 'Select',
+        },
+        {
+          value: 'Computational',
+          label: 'ComputationalField',
+        },
+      ],
+    },
+    {
+      label: 'Datetime',
+      value: 'datetime',
+      widgets: [
+        {
+          value: 'datetime',
+          label: 'Datetime',
+        },
+        {
+          value: 'date',
+          label: 'Date',
+        },
+        {
+          value: 'time',
+          label: 'Time',
+        },
+      ],
+    },
+    {
+      label: 'Boolean',
+      value: 'boolean',
+      widgets: [
+        {
+          value: 'checkbox',
+          label: 'Checkbox',
+        },
+      ],
+    },
+  ];
+
+  export interface InputSelectModel {
+    value: any;
+    label: string;
   }
 
   type FieldType<T, K extends keyof T> = T[K];

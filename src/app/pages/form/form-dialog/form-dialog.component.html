@@ -8,7 +8,10 @@
       </ion-buttons>
       <ion-title>{{ "AddForm" | translate }}</ion-title>
       <ion-buttons slot="end">
-        <ion-button [disabled]="form.invalid" (click)="onSubmit()">
+        <ion-button
+          [disabled]="form.invalid || !listField.length"
+          (click)="onSubmit()"
+        >
           <ion-icon name="checkmark-outline"></ion-icon>
         </ion-button>
       </ion-buttons>
@@ -27,7 +30,7 @@
             </ion-text>
           </ion-col>
           <ion-col size="6" class="ion-text-end">
-            <ion-button id="open-form-field-dialog">
+            <ion-button (click)="openForm()" id="open-form-field-dialog">
               <ion-icon name="add"></ion-icon>
             </ion-button>
           </ion-col>
@@ -56,11 +59,35 @@
     </div>
     <ion-modal #modalField trigger="open-form-field-dialog">
       <ng-template>
-        <app-form-field-dialog
-          [modal]="modalField"
-          [fields]="fields"
-          (submit)="saveField($event)"
-        ></app-form-field-dialog>
+        <div class="ion-page">
+          <ion-header>
+            <ion-toolbar>
+              <ion-buttons slot="start">
+                <ion-button (click)="closeFieldFormModal(modalField)">
+                  <ion-icon name="chevron-back-outline"></ion-icon>
+                </ion-button>
+              </ion-buttons>
+              <ion-title>{{ "AddField" | translate }}</ion-title>
+              <ion-buttons slot="end">
+                <ion-button
+                  [disabled]="!inValidFieldForm"
+                  color="success"
+                  (click)="onSubmitFieldForm(modalField)"
+                >
+                  <ion-icon name="checkmark-outline"></ion-icon>
+                </ion-button>
+              </ion-buttons>
+            </ion-toolbar>
+          </ion-header>
+          <ion-content>
+            <div class="ion-margin-vertical">
+              <form-builder-config
+                [fields]="fields"
+                (submit)="saveField($event)"
+              ></form-builder-config>
+            </div>
+          </ion-content>
+        </div>
       </ng-template>
     </ion-modal>
   </ion-content>

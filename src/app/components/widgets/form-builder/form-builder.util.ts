@@ -137,11 +137,6 @@ export namespace FormBuilderUtil {
     },
   ];
 
-  export interface InputSelectModel {
-    value: any;
-    label: string;
-  }
-
   type FieldType<T, K extends keyof T> = T[K];
   type ArrayToObject<Model> = Model extends Array<infer U> ? U : never;
   export type FormGroupType<Model> = {
@@ -151,4 +146,9 @@ export namespace FormBuilderUtil {
       ? FormGroup<FormGroupType<FieldType<Model, x>>>
       : FormControl<FieldType<Model, x>>;
   };
+
+  export interface FormDataConfig {
+    formData: FormField;
+    isValid: boolean;
+  }
 }

@@ -1,13 +1,23 @@
 import { Component, input, OnInit, output } from '@angular/core';
 import { FormBuilderUtil } from '../form-builder.util';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { InputTextComponent } from '../../input/input-text/input-text.component';
 import { InputSelectComponent } from '../../input/input-select/input-select.component';
 import { InputCheckboxComponent } from '../../input/input-checkbox/input-checkbox.component';
 import { InputTextareaComponent } from '../../input/input-textarea/input-textarea.component';
+import { InputUtil } from '../../input/input.util';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { TranslateModule } from '@ngx-translate/core';
+import { debounceTime } from 'rxjs';
 
 @Component({
-  selector: 'app-form-builder-config',
+  selector: 'form-builder-config',
   templateUrl: './form-builder-config.component.html',
   styleUrls: ['./form-builder-config.component.scss'],
   imports: [
@@ -15,11 +25,16 @@ import { InputTextareaComponent } from '../../input/input-textarea/input-textare
     InputSelectComponent,
     InputCheckboxComponent,
     InputTextareaComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    NzDividerModule,
+    TranslateModule,
   ],
 })
 export class FormBuilderConfigComponent implements OnInit {
-  fields = input<FormBuilderUtil.InputSelectModel[]>([]);
-  submit = output<FormBuilderUtil.FormField>();
+  fields = input<InputUtil.InputSelectModel[]>([]);
+  submit = output<FormBuilderUtil.FormDataConfig>();
+
   form = new FormGroup<
     FormBuilderUtil.FormGroupType<FormBuilderUtil.FormField>
   >({
@@ -41,8 +56,8 @@ export class FormBuilderConfigComponent implements OnInit {
     }),
   });
   types = FormBuilderUtil.FORMBUILDERTYPE;
-  widgets: FormBuilderUtil.InputSelectModel[] = [];
-  conditions: FormBuilderUtil.InputSelectModel[] = [
+  widgets: InputUtil.InputSelectModel[] = [];
+  conditions: InputUtil.InputSelectModel[] = [
     {
       value: 'equal',
       label: 'Equal',
@@ -52,6 +67,7 @@ export class FormBuilderConfigComponent implements OnInit {
       label: 'NotEmpty',
     },
   ];
+
   constructor() {}
 
   ngOnInit() {
@@ -79,6 +95,14 @@ export class FormBuilderConfigComponent implements OnInit {
         : [];
       this.getControl('widget').setValue('');
       this.getControl('widget').updateValueAndValidity();
+    });
+
+    // debounceTime(400)
+    this.form.valueChanges.pipe().subscribe((data) => {
+      this.submit.emit({
+        formData: data as FormBuilderUtil.FormField,
+        isValid: this.form.valid,
+      });
     });
   }
 

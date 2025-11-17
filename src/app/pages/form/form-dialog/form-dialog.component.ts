@@ -29,9 +29,9 @@ import {
 import { FormsModel } from '@model/forms.model';
 import { TranslateModule } from '@ngx-translate/core';
 import { InputTextComponent } from 'src/app/components/widgets/input/input-text/input-text.component';
-import { FormFieldDialogComponent } from '../form-field-dialog/form-field-dialog.component';
-import { InputSelectModel } from 'src/app/components/widgets/input/input-select/input-select.model';
 import { FormBuilderUtil } from 'src/app/components/widgets/form-builder/form-builder.util';
+import { InputUtil } from 'src/app/components/widgets/input/input.util';
+import { FormBuilderConfigComponent } from 'src/app/components/widgets/form-builder/form-builder-config/form-builder-config.component';
 
 type Form = { title: string };
 @Component({
@@ -60,7 +60,7 @@ type Form = { title: string };
     IonReorder,
     IonModal,
     TranslateModule,
-    FormFieldDialogComponent,
+    FormBuilderConfigComponent,
   ],
 })
 export class FormDialogComponent implements OnInit {
@@ -70,8 +70,11 @@ export class FormDialogComponent implements OnInit {
   form = new FormGroup<FormBuilderUtil.FormGroupType<Form>>({
     title: new FormControl('', Validators.required),
   });
-  listField: FormsModel.FormField[] = [];
-  fields: InputSelectModel[] = [];
+  listField: FormBuilderUtil.FormField[] = [];
+  fields: InputUtil.InputSelectModel[] = [];
+  inValidFieldForm = false;
+  activeFieldForm: FormBuilderUtil.FormField;
+
   constructor() {}
 
   ngOnInit() {}
@@ -80,7 +83,10 @@ export class FormDialogComponent implements OnInit {
     return this.form.get(key) as FormControl;
   }
 
-  onSubmit() {}
+  openForm() {
+    this.inValidFieldForm = false;
+    this.activeFieldForm = null;
+  }
 
   close() {
     const checked = !this.form.dirty;
@@ -88,18 +94,30 @@ export class FormDialogComponent implements OnInit {
     this.modal().dismiss();
   }
 
+  closeFieldFormModal(modal: IonModal) {
+    modal.dismiss();
+  }
+
   handleReorderEnd(event: ReorderEndCustomEvent) {
     console.log('Dragged from index', event.detail.from, 'to', event.detail.to);
     event.detail.complete();
   }
 
-  saveField(value: FormsModel.FormField) {
-    this.listField.push(value);
+  saveField(value: FormBuilderUtil.FormDataConfig) {
+    this.inValidFieldForm = value.isValid;
+    this.activeFieldForm = value.formData;
+  }
+
+  onSubmitFieldForm(modal: IonModal) {
+    this.listField.push(this.activeFieldForm);
     this.fields = this.listField.map((field) => {
       return {
         value: field.name,
         label: field.title,
       };
     });
+    this.closeFieldFormModal(modal);
   }
+
+  onSubmit() {}
 }

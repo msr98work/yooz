@@ -56,20 +56,31 @@ export const routes: Routes = [
             (m) => m.RequestListPage
           ),
       },
+      {
+        path: 'request-dialog',
+        loadComponent: () =>
+          import('./pages/request/request-dialog/request-dialog.page').then(
+            (m) => m.RequestDialogPage
+          ),
+      },
+      {
+        path: 'request-type',
+        loadComponent: () =>
+          import('./pages/request/request-type/request-type.page').then(
+            (m) => m.RequestTypePage
+          ),
+      },
+      {
+        path: 'request-state',
+        loadComponent: () =>
+          import('./pages/request/request-state/request-state.page').then(
+            (m) => m.RequestStatePage
+          ),
+      },
     ],
   },
   {
-    path: 'new-request',
-    loadComponent: () =>
-      import('./pages/request/new-request/new-request.page').then(
-        (m) => m.NewRequestPage
-      ),
-  },
-  {
-    path: 'request-type',
-    loadComponent: () =>
-      import('./pages/request-type/request-type.page').then(
-        (m) => m.RequestTypePage
-      ),
+    path: 'request-state-dialog',
+    loadComponent: () => import('./pages/request/request-state/request-state-dialog/request-state-dialog.page').then( m => m.RequestStateDialogPage)
   },
 ];

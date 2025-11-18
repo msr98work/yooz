@@ -1,6 +1,8 @@
 <ion-menu contentId="main-content">
-  <ion-content class="ion-padding">
-    <div class="menu-header-bg"></div>
+  <ion-header>
+    <div class="menu-header-bg">
+      
+    </div>
     <div class="header-content ion-display-flex ion-align-items-center">
       <img [src]="'/assets/icon/avatar.svg'" alt="" />
       <ion-label>
@@ -8,6 +10,9 @@
         <p>{{ user?.position ? user.position : "نامشخص" }}</p>
       </ion-label>
     </div>
+    
+  </ion-header>
+  <ion-content class="ion-padding">
     <!-- <ion-button
       class="ion-margin-bottom me-auto ms-auto ion-display-flex w-50"
       fill="solid"
@@ -64,11 +69,11 @@
         detail="false"
         class="menu-item"
         (click)="toggleProcessSubMenu()"
-        [class.menu-item-active]="isProcessSubMenuOpen"
-      >
+        >
+        <!-- [class.menu-item-active]="isProcessSubMenuOpen" -->
         <ion-icon
           slot="start"
-          name="list"
+          name="git-branch"
           class="menu-icon ion-margin-end"
         ></ion-icon>
         <ion-text class="menu-label">{{ "Process" | translate }}</ion-text>
@@ -87,22 +92,7 @@
           button
           detail="false"
           class="submenu-item"
-          routerLink="/workflow/manage"
-          routerLinkActive="menu-item-active"
-        >
-          <ion-icon
-            slot="start"
-            name="git-branch"
-            class="submenu-icon ion-margin-end"
-          ></ion-icon>
-          <ion-text class="submenu-label">جریان‌های کاری</ion-text>
-        </ion-item>
-
-        <ion-item
-          button
-          detail="false"
-          class="submenu-item"
-          routerLink="/request-types"
+          routerLink="/dashboard/form"
           routerLinkActive="menu-item-active"
         >
           <ion-icon
@@ -110,14 +100,14 @@
             name="document-text"
             class="submenu-icon ion-margin-end"
           ></ion-icon>
-          <ion-text class="submenu-label">نوع درخواست‌ها</ion-text>
+          <ion-text class="submenu-label">{{"Forms"|translate}}</ion-text>
         </ion-item>
 
-        <ion-item
+         <ion-item
           button
           detail="false"
           class="submenu-item"
-          routerLink="/status/manage"
+          routerLink="/dashboard/request-state"
           routerLinkActive="menu-item-active"
         >
           <ion-icon
@@ -125,7 +115,22 @@
             name="flag"
             class="submenu-icon ion-margin-end"
           ></ion-icon>
-          <ion-text class="submenu-label">وضعیت‌ها</ion-text>
+          <ion-text class="submenu-label">{{"States" | translate}}</ion-text>
+        </ion-item>
+
+        <ion-item
+          button
+          detail="false"
+          class="submenu-item"
+          routerLink="/dashboard/request-type"
+          routerLinkActive="menu-item-active"
+        >
+          <ion-icon
+            slot="start"
+            name="list"
+            class="submenu-icon ion-margin-end"
+          ></ion-icon>
+          <ion-text class="submenu-label">نوع درخواست‌</ion-text>
         </ion-item>
       </div>
       }

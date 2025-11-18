@@ -4,6 +4,7 @@ import {
   FormControl,
   FormGroup,
   FormsModule,
+  ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
 import {
@@ -18,6 +19,8 @@ import {
 import { IonModal } from '@ionic/angular/standalone';
 import { ReorderEndCustomEvent } from '@ionic/core';
 import { TranslateModule } from '@ngx-translate/core';
+import { InputTextComponent } from 'src/app/components/widgets/input/input-text/input-text.component';
+import { AutocompleteComponent } from 'src/app/components/autocomplete/autocomplete.component';
 
 @Component({
   selector: 'app-request-state-dialog',
@@ -35,6 +38,9 @@ import { TranslateModule } from '@ngx-translate/core';
     CommonModule,
     FormsModule,
     TranslateModule,
+    InputTextComponent,
+    ReactiveFormsModule,
+    AutocompleteComponent,
   ],
 })
 export class RequestStateDialogPage implements OnInit {
@@ -43,6 +49,7 @@ export class RequestStateDialogPage implements OnInit {
 
   form = new FormGroup({
     title: new FormControl('', Validators.required),
+    users: new FormControl([], Validators.required),
   });
   inValidFieldForm = false;
 

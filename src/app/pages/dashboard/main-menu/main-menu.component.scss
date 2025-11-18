@@ -128,12 +128,14 @@ ion-button {
   transform: translateX(5px);
 }
 
-.menu-icon {
+.menu-icon,
+.submenu-icon {
   color: var(--ion-color-primary);
   font-size: 20px;
 }
 
-.menu-label {
+.menu-label,
+.submenu-label {
   font-weight: 500;
   font-size: 14px;
 }
@@ -190,4 +192,15 @@ ion-button {
       animation-delay: #{$i * 0.05}s;
     }
   }
+}
+
+.submenu-container {
+  border-radius: 8px;
+  margin: 4px 16px;
+  padding: 4px 0;
+}
+
+.submenu-arrow {
+  // font-size: 16px;
+  transition: transform 0.3s ease;
 }

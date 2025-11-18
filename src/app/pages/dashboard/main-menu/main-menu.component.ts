@@ -40,6 +40,7 @@ export class MainMenuComponent implements OnInit {
   private userSerivce = inject(UserService);
 
   user: UserModel.Full;
+  isProcessSubMenuOpen = false;
 
   constructor() {
     effect(() => {
@@ -50,4 +51,8 @@ export class MainMenuComponent implements OnInit {
   ngOnInit(): void {}
 
   logout() {}
+
+  toggleProcessSubMenu() {
+    this.isProcessSubMenuOpen = !this.isProcessSubMenuOpen;
+  }
 }

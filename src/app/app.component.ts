@@ -57,6 +57,10 @@ import {
   fileTrayFull,
   pieChart,
   home,
+  gitBranch,
+  flag,
+  chevronUp,
+  chevronDown,
 } from 'ionicons/icons';
 
 @Component({
@@ -122,6 +126,10 @@ export class AppComponent {
       fileTrayFull,
       pieChart,
       home,
+      gitBranch,
+      flag,
+      chevronUp,
+      chevronDown,
     });
   }
 }

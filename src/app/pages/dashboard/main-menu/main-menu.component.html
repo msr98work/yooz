@@ -8,12 +8,12 @@
         <p>{{ user?.position ? user.position : "نامشخص" }}</p>
       </ion-label>
     </div>
-    <ion-button
+    <!-- <ion-button
       class="ion-margin-bottom me-auto ms-auto ion-display-flex w-50"
       fill="solid"
     >
       پروفایل کاربری
-    </ion-button>
+    </ion-button> -->
 
     <ion-list lines="none" class="menu-list">
       <!-- آیتم‌های منو -->
@@ -57,22 +57,79 @@
         <div slot="end" class="notification-badge">3</div>
       </ion-item>
 
+      <div class="menu-divider"></div>
+
       <ion-item
         button
         detail="false"
         class="menu-item"
-        routerLink="/dashboard/form"
-        routerLinkActive="menu-item-active"
+        (click)="toggleProcessSubMenu()"
+        [class.menu-item-active]="isProcessSubMenuOpen"
       >
         <ion-icon
           slot="start"
           name="list"
           class="menu-icon ion-margin-end"
         ></ion-icon>
-        <ion-text class="menu-label">{{ "Forms" | translate }}</ion-text>
+        <ion-text class="menu-label">{{ "Process" | translate }}</ion-text>
+        <ion-icon
+          slot="end"
+          [name]="isProcessSubMenuOpen ? 'chevron-up' : 'chevron-down'"
+          class="submenu-arrow"
+        >
+        </ion-icon>
       </ion-item>
 
-      <!-- جداکننده -->
+      @if(isProcessSubMenuOpen) {
+      <!-- زیرمنوهای مدیریت فرآیندها -->
+      <div class="submenu-container">
+        <ion-item
+          button
+          detail="false"
+          class="submenu-item"
+          routerLink="/workflow/manage"
+          routerLinkActive="menu-item-active"
+        >
+          <ion-icon
+            slot="start"
+            name="git-branch"
+            class="submenu-icon ion-margin-end"
+          ></ion-icon>
+          <ion-text class="submenu-label">جریان‌های کاری</ion-text>
+        </ion-item>
+
+        <ion-item
+          button
+          detail="false"
+          class="submenu-item"
+          routerLink="/request-types"
+          routerLinkActive="menu-item-active"
+        >
+          <ion-icon
+            slot="start"
+            name="document-text"
+            class="submenu-icon ion-margin-end"
+          ></ion-icon>
+          <ion-text class="submenu-label">نوع درخواست‌ها</ion-text>
+        </ion-item>
+
+        <ion-item
+          button
+          detail="false"
+          class="submenu-item"
+          routerLink="/status/manage"
+          routerLinkActive="menu-item-active"
+        >
+          <ion-icon
+            slot="start"
+            name="flag"
+            class="submenu-icon ion-margin-end"
+          ></ion-icon>
+          <ion-text class="submenu-label">وضعیت‌ها</ion-text>
+        </ion-item>
+      </div>
+      }
+
       <div class="menu-divider"></div>
 
       <ion-item

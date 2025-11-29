@@ -1,8 +1,6 @@
 <ion-menu contentId="main-content">
   <ion-header>
-    <div class="menu-header-bg">
-      
-    </div>
+    <div class="menu-header-bg"></div>
     <div class="header-content ion-display-flex ion-align-items-center">
       <img [src]="'/assets/icon/avatar.svg'" alt="" />
       <ion-label>
@@ -10,7 +8,6 @@
         <p>{{ user?.position ? user.position : "نامشخص" }}</p>
       </ion-label>
     </div>
-    
   </ion-header>
   <ion-content class="ion-padding">
     <!-- <ion-button
@@ -69,7 +66,7 @@
         detail="false"
         class="menu-item"
         (click)="toggleProcessSubMenu()"
-        >
+      >
         <!-- [class.menu-item-active]="isProcessSubMenuOpen" -->
         <ion-icon
           slot="start"
@@ -100,10 +97,10 @@
             name="document-text"
             class="submenu-icon ion-margin-end"
           ></ion-icon>
-          <ion-text class="submenu-label">{{"Forms"|translate}}</ion-text>
+          <ion-text class="submenu-label">{{ "Forms" | translate }}</ion-text>
         </ion-item>
 
-         <ion-item
+        <ion-item
           button
           detail="false"
           class="submenu-item"
@@ -115,7 +112,24 @@
             name="flag"
             class="submenu-icon ion-margin-end"
           ></ion-icon>
-          <ion-text class="submenu-label">{{"States" | translate}}</ion-text>
+          <ion-text class="submenu-label">{{ "States" | translate }}</ion-text>
+        </ion-item>
+
+        <ion-item
+          button
+          detail="false"
+          class="submenu-item"
+          routerLink="/dashboard/workflow"
+          routerLinkActive="menu-item-active"
+        >
+          <ion-icon
+            slot="start"
+            name="flag"
+            class="submenu-icon ion-margin-end"
+          ></ion-icon>
+          <ion-text class="submenu-label">{{
+            "Workflow" | translate
+          }}</ion-text>
         </ion-item>
 
         <ion-item

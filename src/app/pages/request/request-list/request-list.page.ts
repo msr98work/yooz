@@ -86,7 +86,7 @@ export class RequestListPage implements OnInit {
     {
       name: 'Project Alpha',
       client: 'John Doe',
-      status: 'Completed',
+      status: 'success',
       amount: 2300,
       date: 'Oct 12, 2020',
       image: 'assets/img/project1.jpg',
@@ -94,7 +94,7 @@ export class RequestListPage implements OnInit {
     {
       name: 'Project Beta',
       client: 'John Doe',
-      status: 'Cancelled',
+      status: 'reject',
       amount: 1200,
       date: 'Oct 12, 2020',
       image: 'assets/img/project2.jpg',
@@ -102,18 +102,10 @@ export class RequestListPage implements OnInit {
     {
       name: 'Project Gamma',
       client: 'John Doe',
-      status: 'On Going',
+      status: 'in_progress',
       amount: 2500,
       date: 'Oct 12, 2020',
       image: 'assets/img/project3.jpg',
-    },
-    {
-      name: 'Project Delta',
-      client: 'John Doe',
-      status: 'Pending',
-      amount: 1800,
-      date: 'Oct 12, 2020',
-      image: 'assets/img/project4.jpg',
     },
   ];
 

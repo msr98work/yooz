@@ -1,0 +1,25 @@
+<div class="ion-page">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button (click)="close()">
+          <ion-icon name="chevron-back-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title>{{ "AddForm" | translate }}</ion-title>
+      <ion-buttons slot="end">
+        <ion-button [disabled]="form.invalid" (click)="onSubmit()">
+          <ion-icon name="checkmark-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <div class="ion-margin-vertical">
+      <form [formGroup]="form">
+        <input-text [control]="getControl('title')" label="Title"></input-text>
+        <app-autocomplete></app-autocomplete>
+      </form>
+    </div>
+  </ion-content>
+</div>

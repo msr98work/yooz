@@ -50,7 +50,7 @@ export class MainTabsComponent implements OnInit {
     this.presentingElement = document.querySelector('.ion-page');
   }
   gotoNewRequest() {
-    this.navController.navigateForward(['/new-request']);
+    this.navController.navigateForward(['/dashboard/request-dialog']);
     // this.widgetModalService.openTemplate({
     //   templateRef: this.formModal,
     //   buttons: [

@@ -16,9 +16,9 @@ import {
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
 @Component({
-  selector: 'app-new-request',
-  templateUrl: './new-request.page.html',
-  styleUrls: ['./new-request.page.scss'],
+  selector: 'app-request-dialog',
+  templateUrl: './request-dialog.page.html',
+  styleUrls: ['./request-dialog.page.scss'],
   standalone: true,
   imports: [
     IonContent,
@@ -32,7 +32,7 @@ import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
     NzAutocompleteModule,
   ],
 })
-export class NewRequestPage implements OnInit {
+export class RequestDialogPage implements OnInit {
   form = new FormGroup({
     username: new FormControl('', Validators.required),
   });

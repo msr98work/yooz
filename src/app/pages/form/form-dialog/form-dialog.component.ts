@@ -26,7 +26,6 @@ import {
   ReorderEndCustomEvent,
   IonReorder,
 } from '@ionic/angular/standalone';
-import { FormsModel } from '@model/forms.model';
 import { TranslateModule } from '@ngx-translate/core';
 import { InputTextComponent } from 'src/app/components/widgets/input/input-text/input-text.component';
 import { FormBuilderUtil } from 'src/app/components/widgets/form-builder/form-builder.util';

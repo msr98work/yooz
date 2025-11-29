@@ -10,6 +10,8 @@ import {
   IonItem,
   IonList,
   IonText,
+  IonTitle,
+  IonHeader,
 } from '@ionic/angular/standalone';
 import { Component, effect, inject, OnInit } from '@angular/core';
 import { UserService } from '@service/user/user.service';
@@ -21,6 +23,8 @@ import { RouterLinkActive, RouterLinkWithHref } from '@angular/router';
   templateUrl: './main-menu.component.html',
   styleUrls: ['./main-menu.component.scss'],
   imports: [
+    IonHeader,
+    IonTitle,
     IonToolbar,
     IonFooter,
     IonIcon,

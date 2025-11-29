@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NewRequestPage } from './new-request.page';
+import { RequestDialogPage } from './request-dialog.page';
 
-describe('NewRequestPage', () => {
-  let component: NewRequestPage;
-  let fixture: ComponentFixture<NewRequestPage>;
+describe('RequestDialogPage', () => {
+  let component: RequestDialogPage;
+  let fixture: ComponentFixture<RequestDialogPage>;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NewRequestPage);
+    fixture = TestBed.createComponent(RequestDialogPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

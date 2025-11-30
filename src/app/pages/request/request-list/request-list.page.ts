@@ -84,7 +84,7 @@ export class RequestListPage implements OnInit {
 
   projects = [
     {
-      name: 'Project Alpha',
+      name: 'مرخصی / استحقاقی / روزانه',
       client: 'John Doe',
       status: 'success',
       amount: 2300,
@@ -92,7 +92,7 @@ export class RequestListPage implements OnInit {
       image: 'assets/img/project1.jpg',
     },
     {
-      name: 'Project Beta',
+      name: 'اصلاح تردد',
       client: 'John Doe',
       status: 'reject',
       amount: 1200,
@@ -100,7 +100,7 @@ export class RequestListPage implements OnInit {
       image: 'assets/img/project2.jpg',
     },
     {
-      name: 'Project Gamma',
+      name: 'مرخصی / استحقاقی / ساعتی',
       client: 'John Doe',
       status: 'in_progress',
       amount: 2500,

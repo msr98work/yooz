@@ -30,7 +30,7 @@ export class MonthDaysComponent {
       {
         group: '28',
         name: 'هفته پنجم',
-        data: this.generateData(3, {
+        data: this.generateData(2, {
           min: -30,
           max: 55,
         }),

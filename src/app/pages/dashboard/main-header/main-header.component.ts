@@ -10,6 +10,7 @@ import {
   IonText,
   IonSearchbar,
 } from '@ionic/angular/standalone';
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
 
 @Component({
   selector: 'app-main-header',
@@ -25,6 +26,7 @@ import {
     IonToolbar,
     IonHeader,
     IonMenuButton,
+    NzBadgeModule,
   ],
 })
 export class MainHeaderComponent implements OnInit {

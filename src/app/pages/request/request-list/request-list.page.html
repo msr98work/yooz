@@ -1,10 +1,6 @@
 <app-main-header></app-main-header>
 
 <ion-content [fullscreen]="true">
-  <!-- <ion-toolbar class="ion-margin-bottom">
-    <ion-searchbar placeholder="Search projects"></ion-searchbar>
-  </ion-toolbar> -->
-
   <nz-segmented
     [nzBlock]="true"
     [nzOptions]="options"
@@ -14,19 +10,21 @@
   <ion-grid class="ion-margin-vertical">
     <ion-list lines="none">
       @for (item of projects; track item.name) {
-
       <div class="ion-margin-bottom">
         <ion-card>
           <ion-card-content>
             <div class="ion-display-flex ion-margin-bottom">
               <ion-avatar slot="start" class="me-1">
-                <img [src]="'assets/icon/'+ item.status +'.svg'" alt="request" />
+                <img
+                  [src]="'assets/icon/'+ item.status +'.svg'"
+                  alt="request"
+                />
               </ion-avatar>
               <ion-text
                 class="ion-display-flex ion-flex-column ion-justify-content-center"
               >
                 <ion-text class="request-title" color="dark"
-                  >{{ 'درخواست 1' }}</ion-text
+                  >{{ item.name }}</ion-text
                 >
                 <ion-text class="request-sub">{{ 'مجتبی سجادفر' }}</ion-text>
               </ion-text>
@@ -41,8 +39,12 @@
             </div>
             <div class="ion-display-flex">
               <ion-text>{{"وضعیت"}}</ion-text>
-              <ion-text class="mx-3" [color]="item.status == 'success' ? 'success' : item.status == 'reject' ? 'danger' : 'secondary'">
-                {{ item.status == 'success' ? 'تایید شده' : item.status == 'reject' ? 'رد شده' : 'در حال بررسی' }}
+              <ion-text
+                class="mx-3"
+                [color]="item.status == 'success' ? 'success' : item.status == 'reject' ? 'danger' : 'secondary'"
+              >
+                {{ item.status == 'success' ? 'تایید شده' : item.status ==
+                'reject' ? 'رد شده' : 'در حال بررسی' }}
               </ion-text>
               <ion-text class="ms-auto">{{ '1404/08/01' }}</ion-text>
             </div>
@@ -58,14 +60,11 @@
               nzStatus="finish"
             >
               <nz-step
-                nzTitle="Finished"
-                nzDescription="This is a description."
+                nzTitle="مدیر تیم فرانت"
+                nzDescription="توضیحات."
               ></nz-step>
-              <nz-step
-                nzTitle="In Progress"
-                nzDescription="This is a description."
-              ></nz-step>
-              <nz-step nzTitle="Waiting" nzDescription="This is a description."
+              <nz-step nzTitle="مدیر فنی" nzDescription="توضیحات."></nz-step>
+              <nz-step nzTitle="مدیر عامل" nzDescription="توضیحات."
                 >test</nz-step
               >
             </nz-steps>
@@ -76,7 +75,7 @@
             style="font-size: small"
           >
             <nz-divider class="m-0"></nz-divider>
-            {{ isExpanded(item) ? 'Hide details' : 'تاریخچه' }}
+            {{ isExpanded(item) ? 'بستن' : 'تاریخچه' }}
           </ion-text>
         </div>
       </div>

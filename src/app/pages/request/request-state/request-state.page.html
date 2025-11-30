@@ -29,20 +29,20 @@
     </ion-item-sliding>
   </ion-list>
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button color="medium" size="small" id="open-form-dialog">
+    <ion-fab-button color="medium" size="small" id="open-request-state-dialog">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
   <ion-modal
-    #modal
-    trigger="open-form-dialog"
+    #requestStateModal
+    trigger="open-request-state-dialog"
     [canDismiss]="canDismiss"
     [presentingElement]="presentingElement"
     (willPresent)="onWillPresent()"
   >
     <ng-template>
       <app-request-state-dialog
-        [modal]="modal"
+        [modal]="requestStateModal"
         (dismissChange)="onDismissChange($event)"
       ></app-request-state-dialog>
     </ng-template>

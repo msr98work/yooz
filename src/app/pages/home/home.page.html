@@ -2,7 +2,7 @@
 <ion-content [fullscreen]="true">
   <app-card-date></app-card-date>
   <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
-  <ion-refresher-content></ion-refresher-content>
+    <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <app-month-days class="mt-3"></app-month-days>
   <div class="ion-margin-vertical">
@@ -18,8 +18,10 @@
       <div class="ion-display-inline-flex">
         <div class="card-gradient-danger ion-margin-end">
           <div class="card-header">
-            <h3>هشدار مهم</h3>
-            <span class="badge">⚠️ فوری</span>
+            <ion-text color="light">
+              <h4>درخواست 1</h4>
+            </ion-text>
+            <span class="badge">1404/08/01</span>
           </div>
           <div class="card-content">
             <p>این یک اعلان مهم با طراحی جذاب است</p>

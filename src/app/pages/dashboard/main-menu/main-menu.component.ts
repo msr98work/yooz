@@ -24,7 +24,6 @@ import { RouterLinkActive, RouterLinkWithHref } from '@angular/router';
   styleUrls: ['./main-menu.component.scss'],
   imports: [
     IonHeader,
-    IonTitle,
     IonToolbar,
     IonFooter,
     IonIcon,

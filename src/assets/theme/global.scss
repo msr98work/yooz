@@ -72,11 +72,15 @@ body {
 
 html:lang(fa) {
   .menu-header-bg {
-   transform: rotate(16deg);
+    transform: rotate(16deg);
     border-radius: 10px 10px 50px 10px;
     margin-right: -9px;
-    background: linear-gradient(90deg, var(--ion-color-primary-shade) 0%, var(--ion-color-primary) 100%);
-}
+    background: linear-gradient(
+      90deg,
+      var(--ion-color-primary-shade) 0%,
+      var(--ion-color-primary) 100%
+    );
+  }
 }
 
 html:lang(en) {
@@ -122,4 +126,13 @@ ion-content {
 .label-text {
   // border-inline-end: 1px solid #b3b3b3;
   // padding-inline-end: 5px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: unset;
 }

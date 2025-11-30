@@ -71,6 +71,11 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'workflow',
+        loadComponent: () =>
+          import('./pages/workflow/workflow.page').then((m) => m.WorkflowPage),
+      },
+      {
         path: 'request-state',
         loadComponent: () =>
           import('./pages/request/request-state/request-state.page').then(
@@ -81,6 +86,9 @@ export const routes: Routes = [
   },
   {
     path: 'request-state-dialog',
-    loadComponent: () => import('./pages/request/request-state/request-state-dialog/request-state-dialog.page').then( m => m.RequestStateDialogPage)
+    loadComponent: () =>
+      import(
+        './pages/request/request-state/request-state-dialog/request-state-dialog.page'
+      ).then((m) => m.RequestStateDialogPage),
   },
 ];

@@ -68,3 +68,17 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+CHANGELOG.md
+corepack.cmd
+install_tools.bat
+LICENSE
+node.exe
+nodevars.bat
+npm
+npm.cmd
+npm.ps1
+npx
+npx.cmd
+npx.ps1
+README.md
+corepack

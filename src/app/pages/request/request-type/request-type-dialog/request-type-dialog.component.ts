@@ -17,16 +17,15 @@ import {
   IonIcon,
 } from '@ionic/angular/standalone';
 import { IonModal } from '@ionic/angular/standalone';
-import { ReorderEndCustomEvent } from '@ionic/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { InputTextComponent } from '@widget/input/input-text/input-text.component';
 import { InputAutocompleteComponent } from '@widget/input/input-autocomplete/input-autocomplete.component';
+import { ReorderEndCustomEvent } from '@ionic/core';
 
 @Component({
-  selector: 'app-request-state-dialog',
-  templateUrl: './request-state-dialog.page.html',
-  styleUrls: ['./request-state-dialog.page.scss'],
-  standalone: true,
+  selector: 'app-request-type-dialog',
+  templateUrl: './request-type-dialog.component.html',
+  styleUrls: ['./request-type-dialog.component.scss'],
   imports: [
     IonIcon,
     IonButton,
@@ -43,15 +42,15 @@ import { InputAutocompleteComponent } from '@widget/input/input-autocomplete/inp
     InputAutocompleteComponent,
   ],
 })
-export class RequestStateDialogPage implements OnInit {
+export class RequestTypeDialogComponent implements OnInit {
   modal = input<IonModal>();
   dismissChange = output<boolean>();
 
   form = new FormGroup({
     title: new FormControl('', Validators.required),
-    users: new FormControl([], Validators.required),
+    parent: new FormControl(null, Validators.required),
+    workflow: new FormControl(null, Validators.required),
   });
-  inValidFieldForm = false;
 
   constructor() {}
 
@@ -59,10 +58,6 @@ export class RequestStateDialogPage implements OnInit {
 
   getControl(key: string) {
     return this.form.get(key) as FormControl;
-  }
-
-  openForm() {
-    this.inValidFieldForm = false;
   }
 
   close() {

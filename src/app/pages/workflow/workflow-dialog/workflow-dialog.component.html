@@ -6,13 +6,9 @@
           <ion-icon name="chevron-back-outline"></ion-icon>
         </ion-button>
       </ion-buttons>
-      <ion-title>{{ "AddState" | translate }}</ion-title>
+      <ion-title>{{ "AddWorkflow" | translate }}</ion-title>
       <ion-buttons slot="end">
-        <ion-button
-          [disabled]="form.invalid"
-          color="success"
-          (click)="onSubmit()"
-        >
+        <ion-button [disabled]="form.invalid" (click)="onSubmit()">
           <ion-icon name="checkmark-outline"></ion-icon>
         </ion-button>
       </ion-buttons>
@@ -23,8 +19,12 @@
       <form [formGroup]="form">
         <input-text [control]="getControl('title')" label="Title"></input-text>
         <input-autocomplete
-          [control]="getControl('users')"
-          [label]="'کاربران'"
+          [control]="getControl('form')"
+          [label]="'فرم'"
+        ></input-autocomplete>
+        <input-autocomplete
+          [control]="getControl('states')"
+          [label]="'مراحل تایید'"
           [multiple]="true"
         ></input-autocomplete>
       </form>

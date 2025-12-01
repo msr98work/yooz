@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { AutocompleteComponent } from './autocomplete.component';
+import { RequestTypeDialogComponent } from './request-type-dialog.component';
 
-describe('AutocompleteComponent', () => {
-  let component: AutocompleteComponent;
-  let fixture: ComponentFixture<AutocompleteComponent>;
+describe('RequestTypeDialogComponent', () => {
+  let component: RequestTypeDialogComponent;
+  let fixture: ComponentFixture<RequestTypeDialogComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ AutocompleteComponent ],
+      declarations: [ RequestTypeDialogComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(AutocompleteComponent);
+    fixture = TestBed.createComponent(RequestTypeDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

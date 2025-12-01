@@ -50,23 +50,6 @@ export class MainTabsComponent implements OnInit {
     this.presentingElement = document.querySelector('.ion-page');
   }
   gotoNewRequest() {
-    this.navController.navigateForward(['/dashboard/request-dialog']);
-    // this.widgetModalService.openTemplate({
-    //   templateRef: this.formModal,
-    //   buttons: [
-    //     {
-    //       id: 'submit',
-    //       action: (button, modal) => {},
-    //       icon: 'checkmark-outline',
-    //       title: 'ثبت',
-    //       disabled: false,
-    //     },
-    //   ],
-    //   title: 'کاربر جدید',
-    //   actionCloseModal: () => {
-    //     this.widgetModalService.closeModal();
-    //   },
-    //   backdropDismiss: false,
-    // });
+    this.navController.navigateForward(['request-dialog']);
   }
 }

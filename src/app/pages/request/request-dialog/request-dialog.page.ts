@@ -12,9 +12,15 @@ import {
   IonHeader,
   IonTitle,
   IonToolbar,
+  IonText,
+  IonButtons,
+  IonBackButton,
+  IonButton,
+  IonIcon,
 } from '@ionic/angular/standalone';
-import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
+import { NzCascaderModule, NzCascaderOption } from 'ng-zorro-antd/cascader';
+import { TranslateModule } from '@ngx-translate/core';
+
 @Component({
   selector: 'app-request-dialog',
   templateUrl: './request-dialog.page.html',
@@ -28,18 +34,49 @@ import { NzAutocompleteModule } from 'ng-zorro-antd/auto-complete';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    NzButtonModule,
-    NzAutocompleteModule,
+    NzCascaderModule,
+    TranslateModule,
+    IonText,
+    IonButtons,
+    IonBackButton,
+    IonButton,
+    IonIcon,
   ],
 })
 export class RequestDialogPage implements OnInit {
   form = new FormGroup({
-    username: new FormControl('', Validators.required),
+    type: new FormControl(null, Validators.required),
   });
+
+  options: NzCascaderOption[] = [
+    {
+      value: 'مرخصی',
+      label: 'مرخصی',
+      children: [
+        {
+          value: 'استحقاقی',
+          label: 'استحقاقی',
+          children: [
+            { label: 'روزانه', value: 'روزانه', isLeaf: true },
+            { label: 'ساعتی', value: 'ساعتی', isLeaf: true },
+          ],
+        },
+        {
+          value: 'استعلاجی',
+          label: 'استعلاجی',
+          children: [
+            { label: 'روزانه', value: 'روزانه', isLeaf: true },
+            { label: 'ساعتی', value: 'ساعتی', isLeaf: true },
+          ],
+        },
+      ],
+    },
+    { label: 'اصلاح تردد', value: 'اصلاح تردد', isLeaf: true },
+  ];
 
   constructor() {}
 
-  getControl(key: 'username') {
+  getControl(key: string) {
     return this.form.get(key) as FormControl;
   }
 

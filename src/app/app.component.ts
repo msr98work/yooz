@@ -62,7 +62,11 @@ import {
   chevronUp,
   chevronDown,
 } from 'ionicons/icons';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { register } from 'swiper/element/bundle';
 
+// رجیستر کردن Swiper
+register();
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',

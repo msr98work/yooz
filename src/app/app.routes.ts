@@ -22,6 +22,13 @@ export const routes: Routes = [
       import('./pages/welcome/welcome.page').then((m) => m.WelcomePage),
   },
   {
+    path: 'request-dialog',
+    loadComponent: () =>
+      import('./pages/request/request-dialog/request-dialog.page').then(
+        (m) => m.RequestDialogPage
+      ),
+  },
+  {
     path: 'dashboard',
     loadComponent: () =>
       import('./pages/dashboard/dashboard.page').then((m) => m.DashboardPage),
@@ -57,13 +64,6 @@ export const routes: Routes = [
           ),
       },
       {
-        path: 'request-dialog',
-        loadComponent: () =>
-          import('./pages/request/request-dialog/request-dialog.page').then(
-            (m) => m.RequestDialogPage
-          ),
-      },
-      {
         path: 'request-type',
         loadComponent: () =>
           import('./pages/request/request-type/request-type.page').then(
@@ -83,12 +83,5 @@ export const routes: Routes = [
           ),
       },
     ],
-  },
-  {
-    path: 'request-state-dialog',
-    loadComponent: () =>
-      import(
-        './pages/request/request-state/request-state-dialog/request-state-dialog.page'
-      ).then((m) => m.RequestStateDialogPage),
   },
 ];

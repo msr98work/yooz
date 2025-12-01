@@ -9,8 +9,8 @@ describe('InputAutocompleteComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ InputAutocompleteComponent ],
-      imports: [IonicModule.forRoot()]
+      declarations: [InputAutocompleteComponent],
+      imports: [IonicModule.forRoot()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(InputAutocompleteComponent);

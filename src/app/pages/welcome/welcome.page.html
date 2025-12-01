@@ -1,13 +1,32 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>welcome</ion-title>
-  </ion-toolbar>
-</ion-header>
+<div class="swiper-container-wrapper">
+  <!-- Swiper Container -->
+  <swiper-container #swiperContainer init="false" class="my-swiper">
+    @for (slide of slides; track slide.title) {
+    <swiper-slide>
+      <ion-card class="slide-card" mode="ios">
+        <div class="image-container">
+          <img [src]="slide.image" [alt]="slide.title" />
+        </div>
+        <ion-card-header>
+          <ion-card-title>{{ slide.title }}</ion-card-title>
+          <ion-card-subtitle>{{ slide.description }}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-button expand="block" fill="solid"> مشاهده بیشتر </ion-button>
+        </ion-card-content>
+      </ion-card>
+    </swiper-slide>
+    }
+  </swiper-container>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">welcome</ion-title>
-    </ion-toolbar>
-  </ion-header>
-</ion-content>
+  <!-- دکمه‌های کنترل (اختیاری) -->
+  <div class="custom-controls">
+    <ion-button (click)="slidePrev()" fill="clear">
+      <ion-icon name="chevron-back"></ion-icon>
+    </ion-button>
+
+    <ion-button (click)="slideNext()" fill="clear">
+      <ion-icon name="chevron-forward"></ion-icon>
+    </ion-button>
+  </div>
+</div>

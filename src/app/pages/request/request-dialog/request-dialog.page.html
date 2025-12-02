@@ -1,19 +1,33 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>new-request</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{"NewRequest"|translate}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button
+        [disabled]="form.invalid"
+        color="success"
+        (click)="onSubmit()"
+      >
+        <ion-icon name="checkmark-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <!-- <form class="ion-margin-vertical" [formGroup]="form" (ngSubmit)="onSubmit()">
-    <ion-input
-      [formControl]="getControl('username')"
-      label="نام کاربری"
-      fill="outline"
-      class="ion-text-left"
-    ></ion-input>
-  </form> -->
-  <!-- <app-autocomplete></app-autocomplete> -->
-  <!-- <button nz-button nzType="primary">Primary Button</button> -->
-  <!-- <app-autocomplete></app-autocomplete> -->
+  <form class="ion-margin-vertical" [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="mb-1 ms-1">
+      <ion-text>{{ 'RequestType' | translate }}</ion-text>
+    </div>
+    <nz-cascader
+      [nzPlaceHolder]="'SelectRequestType'|translate"
+      nzTriggerAction="hover"
+      nzExpandTrigger="hover"
+      [nzOptions]="options"
+      [formControl]="getControl('type')"
+      class="wI-100 custom-select-height"
+    />
+  </form>
 </ion-content>

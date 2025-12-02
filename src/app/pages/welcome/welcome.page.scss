@@ -1,0 +1,65 @@
+$brand: #1f41bb;
+$brand-light: #3a5de3;
+
+.onboarding {
+  --background: linear-gradient(180deg, #ffffff 0%, #f5f7ff 100%);
+  font-family: "IRANSans", sans-serif;
+
+  .logo-header {
+    text-align: center;
+    padding-top: 30px;
+
+    img {
+      width: 70px;
+      opacity: 0.9;
+    }
+  }
+
+  .slides {
+    margin-top: 10px;
+  }
+
+  .slide-content {
+    text-align: center;
+    padding: 25px;
+
+    h2 {
+      color: $brand;
+      font-size: 22px;
+      font-weight: 700;
+      margin-top: 20px;
+    }
+
+    p {
+      color: #555;
+      font-size: 15px;
+      margin-top: 10px;
+      line-height: 1.7;
+    }
+
+    .illustration {
+      width: 65%;
+      margin: 0 auto;
+      filter: drop-shadow(0 6px 14px rgba(31, 65, 187, 0.15));
+    }
+
+    .start-btn {
+      margin-top: 25px;
+      height: 48px;
+      --background: linear-gradient(135deg, $brand, $brand-light);
+      --border-radius: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #fff;
+    }
+  }
+
+  .next-btn {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    color: $brand;
+    font-weight: 600;
+    font-size: 16px;
+  }
+}

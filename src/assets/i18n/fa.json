@@ -35,5 +35,11 @@
   "NotEmpty": "خالی نباشد",
   "Process": "فرآیند",
   "States": "وضعیت ها",
-  "Workflow": "جریان کاری"
+  "AddState": "افزودن وضعیت",
+  "Workflow": "جریان کاری",
+  "AddWorkflow": "افزودن جریان",
+  "RequestType": "نوع درخواست",
+  "AddRequestType": "افزودن نوع درخواست",
+  "SelectRequestType": "نوع درخواست را انتخاب کنید",
+  "NewRequest": "درخواست جدید"
 }

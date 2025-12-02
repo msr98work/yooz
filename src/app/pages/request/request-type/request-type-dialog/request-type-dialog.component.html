@@ -6,7 +6,7 @@
           <ion-icon name="chevron-back-outline"></ion-icon>
         </ion-button>
       </ion-buttons>
-      <ion-title>{{ "AddState" | translate }}</ion-title>
+      <ion-title>{{ "AddRequestType" | translate }}</ion-title>
       <ion-buttons slot="end">
         <ion-button
           [disabled]="form.invalid"
@@ -23,9 +23,12 @@
       <form [formGroup]="form">
         <input-text [control]="getControl('title')" label="Title"></input-text>
         <input-autocomplete
-          [control]="getControl('users')"
-          [label]="'کاربران'"
-          [multiple]="true"
+          [control]="getControl('parent')"
+          [label]="'والد'"
+        ></input-autocomplete>
+        <input-autocomplete
+          [control]="getControl('workflow')"
+          [label]="'جریان کاری'"
         ></input-autocomplete>
       </form>
     </div>

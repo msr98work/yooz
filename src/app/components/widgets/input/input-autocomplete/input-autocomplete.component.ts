@@ -1,33 +1,22 @@
-import {
-  Component,
-  input,
-  output,
-  signal,
-  OnInit,
-  OnDestroy,
-  ElementRef,
-  ViewChild,
-} from '@angular/core';
-import { ReactiveFormsModule, FormControl } from '@angular/forms';
+import { Component, input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { IonicModule } from '@ionic/angular';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 import {
-  IonInput,
-  IonList,
-  IonItem,
-  IonLabel,
-  IonIcon,
-  IonSpinner,
-} from '@ionic/angular/standalone';
-import { Subject } from 'rxjs';
-import { debounceTime, takeUntil } from 'rxjs/operators';
-
-export interface NgZorroOption {
-  value: any;
-  label: string;
-  disabled?: boolean;
-  icon?: string;
-  group?: string;
-}
+  BehaviorSubject,
+  catchError,
+  debounceTime,
+  map,
+  Observable,
+  of,
+  switchMap,
+} from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { IonText } from '@ionic/angular/standalone';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'input-autocomplete',
@@ -35,199 +24,51 @@ export interface NgZorroOption {
   styleUrls: ['./input-autocomplete.component.scss'],
   standalone: true,
   imports: [
-    IonInput,
-    IonList,
-    IonItem,
-    IonLabel,
-    IonIcon,
-    IonSpinner,
-    CommonModule,
+    FormsModule,
+    NzIconModule,
+    NzSelectModule,
+    IonText,
+    TranslateModule,
     ReactiveFormsModule,
   ],
 })
-export class InputAutocompleteComponent implements OnInit, OnDestroy {
-  @ViewChild('inputRef', { static: false })
-  inputRef!: ElementRef<HTMLIonInputElement>;
-
-  // Inputs
+export class InputAutocompleteComponent implements OnInit {
   control = input.required<FormControl>();
+  class = input<string>('');
+  label = input<string>('');
   placeholder = input<string>('');
-  disabled = input<boolean>(false);
-  loading = input<boolean>(false);
-  size = input<'small' | 'medium' | 'large'>('medium');
-  options = input<NgZorroOption[]>([]);
-  backfill = input<boolean>(false);
-  overlayClassName = input<string>('');
-  defaultActiveFirstOption = input<boolean>(true);
+  multiple = input<boolean>(false);
 
-  // Outputs
-  optionSelected = output<NgZorroOption>();
-  search = output<string>();
-  opened = output<void>();
-  closed = output<void>();
-  blur = output<void>();
-  focus = output<void>();
+  randomUserUrl = 'https://api.randomuser.me/?results=5';
+  searchChange$ = new BehaviorSubject('');
+  optionList: string[] = [];
+  selectedUser?: string;
+  loading = false;
 
-  // Signals
-  isOpen = signal(false);
-  activeIndex = signal(-1);
-  filteredOptions = signal<NgZorroOption[]>([]);
-  groups = signal<{ [key: string]: NgZorroOption[] }>({});
-
-  private destroy$ = new Subject<void>();
-
-  ngOnInit() {
-    this.setupValueChanges();
-    this.filteredOptions.set(this.options());
-    this.groupOptions();
+  onSearch(value: string): void {
+    this.loading = true;
+    this.searchChange$.next(value);
   }
 
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
+  constructor(private http: HttpClient) {}
 
-  private setupValueChanges() {
-    this.control()
-      .valueChanges.pipe(debounceTime(300), takeUntil(this.destroy$))
-      .subscribe((value) => {
-        this.onSearch(value);
+  ngOnInit(): void {
+    this.searchChange$
+      .pipe(
+        debounceTime(500),
+        switchMap((name) => this.getRandomNameList(name))
+      )
+      .subscribe((data) => {
+        this.optionList = data;
+        this.loading = false;
       });
   }
 
-  private groupOptions() {
-    const groups: { [key: string]: NgZorroOption[] } = {};
-    this.options().forEach((option) => {
-      if (option.group) {
-        if (!groups[option.group]) {
-          groups[option.group] = [];
-        }
-        groups[option.group].push(option);
-      }
-    });
-    this.groups.set(groups);
-  }
-
-  onSearch(value: string) {
-    const searchValue = value?.toLowerCase() || '';
-
-    if (searchValue) {
-      const filtered = this.options().filter((option) =>
-        option.label.toLowerCase().includes(searchValue)
-      );
-      this.filteredOptions.set(filtered);
-    } else {
-      this.filteredOptions.set(this.options());
-    }
-
-    this.search.emit(searchValue);
-
-    if (searchValue && this.filteredOptions().length > 0) {
-      this.open();
-      if (this.defaultActiveFirstOption()) {
-        this.activeIndex.set(0);
-      }
-    } else {
-      this.close();
-    }
-  }
-
-  onInputFocus() {
-    if (this.filteredOptions().length > 0) {
-      this.open();
-    }
-    this.focus.emit();
-  }
-
-  onInputBlur() {
-    setTimeout(() => {
-      this.close();
-      this.blur.emit();
-    }, 150);
-  }
-
-  onInputKeydown(event: KeyboardEvent) {
-    switch (event.key) {
-      case 'ArrowDown':
-        event.preventDefault();
-        this.moveActiveIndex(1);
-        break;
-      case 'ArrowUp':
-        event.preventDefault();
-        this.moveActiveIndex(-1);
-        break;
-      case 'Enter':
-        event.preventDefault();
-        this.selectActiveOption();
-        break;
-      case 'Escape':
-        this.close();
-        break;
-    }
-  }
-
-  private moveActiveIndex(direction: number) {
-    if (!this.isOpen()) return;
-
-    const options = this.filteredOptions();
-    let newIndex = this.activeIndex() + direction;
-
-    if (newIndex < 0) newIndex = options.length - 1;
-    if (newIndex >= options.length) newIndex = 0;
-
-    this.activeIndex.set(newIndex);
-
-    // Backfill input with active option label
-    if (this.backfill() && newIndex >= 0) {
-      this.control().setValue(options[newIndex].label, { emitEvent: false });
-    }
-  }
-
-  private selectActiveOption() {
-    const activeIndex = this.activeIndex();
-    const options = this.filteredOptions();
-
-    if (activeIndex >= 0 && activeIndex < options.length) {
-      this.selectOption(options[activeIndex]);
-    }
-  }
-
-  selectOption(option: NgZorroOption) {
-    if (option.disabled) return;
-
-    this.control().setValue(option.label);
-    this.optionSelected.emit(option);
-    this.close();
-  }
-
-  open() {
-    if (this.isOpen() || this.disabled()) return;
-
-    this.isOpen.set(true);
-    this.opened.emit();
-  }
-
-  close() {
-    if (!this.isOpen()) return;
-
-    this.isOpen.set(false);
-    this.activeIndex.set(-1);
-    this.closed.emit();
-  }
-
-  trackByValue(index: number, option: NgZorroOption) {
-    return option.value;
-  }
-
-  hasGroups(): boolean {
-    return Object.keys(this.groups()).length > 0;
-  }
-
-  objectKeys(obj: any): string[] {
-    return Object.keys(obj);
-  }
-
-  isOptionActive(option: NgZorroOption, index: number): boolean {
-    return this.activeIndex() === index && !option.disabled;
+  getRandomNameList(name: string): Observable<string[]> {
+    return this.http.get<{ results: any[] }>(`${this.randomUserUrl}`).pipe(
+      map((res) => res.results),
+      catchError(() => of<any[]>([])),
+      map((list) => list.map((item) => `${item.name.first} ${name}`))
+    );
   }
 }

@@ -33,6 +33,7 @@
       "@core/*":["src/core/*"],
       "@pages/*":["src/app/pages/*"],
       "@shared/*":["src/shared/*"],
+      "@widget/*":["src/app/components/widgets/*"],
     }
   },
   "angularCompilerOptions": {

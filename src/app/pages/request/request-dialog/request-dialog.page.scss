@@ -1,0 +1,26 @@
+:host::ng-deep {
+  /* در فایل CSS مربوطه */
+  .custom-select-height .ant-select-selector {
+    height: 56px !important;
+    padding: 16px 11px !important;
+    align-items: center !important;
+    font-size: 16px !important;
+    background: #f1f4ff !important;
+    border-color: #e9e9e9 !important;
+    color: #626262 !important;
+    border-radius: 10px;
+    nz-select-item {
+      background: transparent;
+      border: none;
+    }
+  }
+  .ant-select-single.ant-select {
+    height: 56px !important;
+  }
+
+  .custom-select-height .ant-select-selection-item {
+    line-height: 24px !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+}

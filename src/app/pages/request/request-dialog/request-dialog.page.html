@@ -26,8 +26,13 @@
       nzTriggerAction="hover"
       nzExpandTrigger="hover"
       [nzOptions]="options"
+      [nzValueProperty]="'id'"
+      [nzLabelProperty]="'title'"
       [formControl]="getControl('type')"
       class="wI-100 custom-select-height"
     />
+    @if(dynamicForm) {
+      <form-builder-creation ></form-builder-creation>
+    }
   </form>
 </ion-content>

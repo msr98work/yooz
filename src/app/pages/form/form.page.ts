@@ -19,6 +19,8 @@ import {
 import { MainHeaderComponent } from '@pages/dashboard/main-header/main-header.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormDialogComponent } from './form-dialog/form-dialog.component';
+import { FormModel } from '@model/form.model';
+import { FormService } from '@service/form/form.service';
 
 @Component({
   selector: 'app-form',
@@ -46,15 +48,29 @@ import { FormDialogComponent } from './form-dialog/form-dialog.component';
   ],
 })
 export class FormPage implements OnInit {
+  private formService = inject(FormService);
   private actionSheetCtrl = inject(ActionSheetController);
   private elementRef = inject(ElementRef);
   presentingElement!: HTMLElement | null;
   private canDismissOverride = false;
+  list: FormModel.Full[] = [];
+  loading = false;
 
   constructor() {}
 
   ngOnInit() {
     this.presentingElement = this.elementRef.nativeElement;
+    this.getList();
+  }
+
+  getList() {
+    this.loading = true;
+    this.formService.getAll().subscribe((response) => {
+      if (response.success) {
+        this.list = response.result.results;
+      }
+      this.loading = false;
+    });
   }
 
   onDismissChange(canDismiss: boolean) {

@@ -19,6 +19,8 @@ import {
 import { MainHeaderComponent } from '@pages/dashboard/main-header/main-header.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { WorkflowDialogComponent } from './workflow-dialog/workflow-dialog.component';
+import { WorkflowService } from '@service/workflow/workflow.service';
+import { WorkflowModel } from '@model/workflow.model';
 @Component({
   selector: 'app-workflow',
   templateUrl: './workflow.page.html',
@@ -45,15 +47,29 @@ import { WorkflowDialogComponent } from './workflow-dialog/workflow-dialog.compo
   ],
 })
 export class WorkflowPage implements OnInit {
+  private workflowService = inject(WorkflowService);
   private actionSheetCtrl = inject(ActionSheetController);
   private elementRef = inject(ElementRef);
   presentingElement!: HTMLElement | null;
   private canDismissOverride = false;
+  loading = false;
+  list: WorkflowModel.Full[] = [];
 
   constructor() {}
 
   ngOnInit() {
     this.presentingElement = this.elementRef.nativeElement;
+    this.getList();
+  }
+
+  getList() {
+    this.loading = true;
+    this.workflowService.getAll().subscribe((response) => {
+      if (response.success) {
+        this.list = response.result.results;
+      }
+      this.loading = false;
+    });
   }
 
   onDismissChange(canDismiss: boolean) {

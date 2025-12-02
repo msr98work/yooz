@@ -1,4 +1,4 @@
-import { Component, input, OnInit, output } from '@angular/core';
+import { Component, inject, input, OnInit, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormControl,
@@ -21,6 +21,7 @@ import { ReorderEndCustomEvent } from '@ionic/core';
 import { TranslateModule } from '@ngx-translate/core';
 import { InputTextComponent } from '@widget/input/input-text/input-text.component';
 import { InputAutocompleteComponent } from '@widget/input/input-autocomplete/input-autocomplete.component';
+import { RequestService } from '@service/request/request.service';
 
 @Component({
   selector: 'app-request-state-dialog',
@@ -44,14 +45,16 @@ import { InputAutocompleteComponent } from '@widget/input/input-autocomplete/inp
   ],
 })
 export class RequestStateDialogPage implements OnInit {
+  private requestService = inject(RequestService);
   modal = input<IonModal>();
   dismissChange = output<boolean>();
 
   form = new FormGroup({
     title: new FormControl('', Validators.required),
-    users: new FormControl([], Validators.required),
+    users: new FormControl(null, Validators.required),
   });
   inValidFieldForm = false;
+  loading = false;
 
   constructor() {}
 
@@ -80,5 +83,17 @@ export class RequestStateDialogPage implements OnInit {
     event.detail.complete();
   }
 
-  onSubmit() {}
+  onSubmit() {
+    this.loading = true;
+    this.requestService
+      .postState({
+        title: this.form.value.title,
+        supervisors: [3],
+      })
+      .subscribe((response) => {
+        if (response.success) {
+        }
+        this.loading = false;
+      });
+  }
 }

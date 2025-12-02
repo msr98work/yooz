@@ -1,4 +1,4 @@
-import { Component, input, OnInit, output } from '@angular/core';
+import { Component, inject, input, OnInit, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormControl,
@@ -21,6 +21,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { InputTextComponent } from '@widget/input/input-text/input-text.component';
 import { InputAutocompleteComponent } from '@widget/input/input-autocomplete/input-autocomplete.component';
 import { ReorderEndCustomEvent } from '@ionic/core';
+import { RequestService } from '@service/request/request.service';
 
 @Component({
   selector: 'app-request-type-dialog',
@@ -43,6 +44,7 @@ import { ReorderEndCustomEvent } from '@ionic/core';
   ],
 })
 export class RequestTypeDialogComponent implements OnInit {
+  private requestService = inject(RequestService);
   modal = input<IonModal>();
   dismissChange = output<boolean>();
 
@@ -51,6 +53,7 @@ export class RequestTypeDialogComponent implements OnInit {
     parent: new FormControl(null, Validators.required),
     workflow: new FormControl(null, Validators.required),
   });
+  loading = false;
 
   constructor() {}
 
@@ -75,5 +78,18 @@ export class RequestTypeDialogComponent implements OnInit {
     event.detail.complete();
   }
 
-  onSubmit() {}
+  onSubmit() {
+    this.loading = true;
+    this.requestService
+      .postType({
+        title: this.form.value.title,
+        parent: 5,
+        workflow: 2,
+      })
+      .subscribe((response) => {
+        if (response.success) {
+        }
+        this.loading = false;
+      });
+  }
 }

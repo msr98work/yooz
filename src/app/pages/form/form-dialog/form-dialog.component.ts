@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, input, OnInit, output } from '@angular/core';
+import { Component, inject, input, OnInit, output } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -31,6 +31,7 @@ import { InputTextComponent } from 'src/app/components/widgets/input/input-text/
 import { FormBuilderUtil } from 'src/app/components/widgets/form-builder/form-builder.util';
 import { InputUtil } from 'src/app/components/widgets/input/input.util';
 import { FormBuilderConfigComponent } from 'src/app/components/widgets/form-builder/form-builder-config/form-builder-config.component';
+import { FormService } from '@service/form/form.service';
 
 type Form = { title: string };
 @Component({
@@ -63,6 +64,8 @@ type Form = { title: string };
   ],
 })
 export class FormDialogComponent implements OnInit {
+  private formService = inject(FormService);
+
   modal = input<IonModal>();
   dismissChange = output<boolean>();
 
@@ -73,6 +76,7 @@ export class FormDialogComponent implements OnInit {
   fields: InputUtil.InputSelectModel[] = [];
   inValidFieldForm = false;
   activeFieldForm: FormBuilderUtil.FormField;
+  loading = false;
 
   constructor() {}
 
@@ -118,5 +122,17 @@ export class FormDialogComponent implements OnInit {
     this.closeFieldFormModal(modal);
   }
 
-  onSubmit() {}
+  onSubmit() {
+    this.loading = true;
+    this.formService
+      .post({
+        title: this.form.value.title,
+        schema: JSON.stringify(this.listField),
+      })
+      .subscribe((response) => {
+        if (response.success) {
+        }
+        this.loading = false;
+      });
+  }
 }

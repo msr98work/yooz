@@ -1,4 +1,4 @@
-import { Component, input, OnInit, output } from '@angular/core';
+import { Component, inject, input, OnInit, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormControl,
@@ -21,6 +21,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { InputTextComponent } from '@widget/input/input-text/input-text.component';
 import { InputAutocompleteComponent } from '@widget/input/input-autocomplete/input-autocomplete.component';
 import { ReorderEndCustomEvent } from '@ionic/core';
+import { WorkflowService } from '@service/workflow/workflow.service';
 
 @Component({
   selector: 'app-workflow-dialog',
@@ -43,6 +44,7 @@ import { ReorderEndCustomEvent } from '@ionic/core';
   ],
 })
 export class WorkflowDialogComponent implements OnInit {
+  private workflowService = inject(WorkflowService);
   modal = input<IonModal>();
   dismissChange = output<boolean>();
 
@@ -51,6 +53,7 @@ export class WorkflowDialogComponent implements OnInit {
     form: new FormControl(null, Validators.required),
     states: new FormControl(null, Validators.required),
   });
+  loading = false;
 
   constructor() {}
 
@@ -75,5 +78,28 @@ export class WorkflowDialogComponent implements OnInit {
     event.detail.complete();
   }
 
-  onSubmit() {}
+  onSubmit() {
+    this.loading = true;
+    this.workflowService
+      .post({
+        title: this.form.value.title,
+        form: 1, //this.form.value.form
+        start_state: 1,
+        states: [
+          {
+            from_state: 1,
+            to_state: 2,
+          },
+          {
+            from_state: 2,
+            to_state: 3,
+          },
+        ],
+      })
+      .subscribe((response) => {
+        if (response.success) {
+        }
+        this.loading = false;
+      });
+  }
 }

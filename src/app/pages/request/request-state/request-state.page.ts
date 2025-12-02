@@ -19,6 +19,8 @@ import {
 import { MainHeaderComponent } from '@pages/dashboard/main-header/main-header.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { RequestStateDialogPage } from './request-state-dialog/request-state-dialog.page';
+import { RequestService } from '@service/request/request.service';
+import { RequestModel } from '@model/request.model';
 
 @Component({
   selector: 'app-request-state',
@@ -46,15 +48,29 @@ import { RequestStateDialogPage } from './request-state-dialog/request-state-dia
   ],
 })
 export class RequestStatePage implements OnInit {
+  private requestService = inject(RequestService);
   private actionSheetCtrl = inject(ActionSheetController);
   private elementRef = inject(ElementRef);
   presentingElement!: HTMLElement | null;
   private canDismissOverride = false;
+  loading = false;
+  list: RequestModel.State[] = [];
 
   constructor() {}
 
   ngOnInit() {
     this.presentingElement = this.elementRef.nativeElement;
+    this.getList();
+  }
+
+  getList() {
+    this.loading = true;
+    this.requestService.getStateAll().subscribe((response) => {
+      if (response.success) {
+        this.list = response.result.results;
+      }
+      this.loading = false;
+    });
   }
 
   onDismissChange(canDismiss: boolean) {

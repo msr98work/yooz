@@ -20,6 +20,8 @@ import { MainHeaderComponent } from '@pages/dashboard/main-header/main-header.co
 import { TranslateModule } from '@ngx-translate/core';
 import { RequestTypeDialogComponent } from './request-type-dialog/request-type-dialog.component';
 import { IonBreadcrumb, IonBreadcrumbs } from '@ionic/angular/standalone';
+import { RequestService } from '@service/request/request.service';
+import { RequestModel } from '@model/request.model';
 
 @Component({
   selector: 'app-request-type',
@@ -49,40 +51,37 @@ import { IonBreadcrumb, IonBreadcrumbs } from '@ionic/angular/standalone';
   ],
 })
 export class RequestTypePage implements OnInit {
+  private requestService = inject(RequestService);
   private actionSheetCtrl = inject(ActionSheetController);
   private elementRef = inject(ElementRef);
   presentingElement!: HTMLElement | null;
   private canDismissOverride = false;
   maxBreadcrumbs? = 3;
-  originalList = [
-    {
-      title: 'مرخصی',
-      children: [
-        {
-          title: 'استحقاقی',
-          workflow: {
-            id: 1,
-            title: 'مرخصی استحقاقی',
-          },
-        },
-        {
-          title: 'استعلاجی',
-          workflow: {
-            id: 2,
-            title: 'مرخصی استعلاجی',
-          },
-        },
-      ],
-    },
-  ];
-  list = [];
+  originalList: RequestModel.Type[] = [];
+  list: RequestModel.Type[] = [];
   breadCrumbs = [];
+  loading = false;
 
   constructor() {}
 
   ngOnInit() {
     this.presentingElement = this.elementRef.nativeElement;
-    this.list = this.originalList;
+    this.getList();
+  }
+
+  getList() {
+    this.loading = true;
+    this.requestService
+      .getTypeAll({
+        is_tree: true,
+      })
+      .subscribe((response) => {
+        if (response.success) {
+          this.originalList = response.result;
+          this.list = response.result;
+        }
+        this.loading = false;
+      });
   }
 
   onDismissChange(canDismiss: boolean) {
@@ -103,9 +102,11 @@ export class RequestTypePage implements OnInit {
     this.breadCrumbs.pop();
   }
 
-  showChildrens(item) {
-    this.breadCrumbs.push(item);
-    this.list = item.children;
+  showChildrens(item: RequestModel.Type) {
+    if (item.children.length) {
+      this.breadCrumbs.push(item);
+      this.list = item.children;
+    }
   }
 
   canDismiss = async () => {

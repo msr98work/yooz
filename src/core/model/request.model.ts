@@ -1,4 +1,5 @@
 import { UserModel } from './user.model';
+import { WorkflowModel } from './workflow.model';
 
 export namespace RequestModel {
   export interface Full {
@@ -21,4 +22,26 @@ export namespace RequestModel {
       };
     };
   }
+
+  export interface State {
+    id: number;
+    title: string;
+    supervisors: any[];
+  }
+
+  export type StateCreate = Pick<State, 'title'> & {
+    supervisors: number[];
+  };
+
+  export interface Type {
+    id: number;
+    title: string;
+    children: Type[];
+    workflow: WorkflowModel.Full;
+  }
+
+  export type TypeCreate = Pick<Type, 'title'> & {
+    parent: number;
+    workflow: number;
+  };
 }

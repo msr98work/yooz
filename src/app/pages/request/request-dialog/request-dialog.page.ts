@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormControl,
@@ -20,6 +20,8 @@ import {
 } from '@ionic/angular/standalone';
 import { NzCascaderModule, NzCascaderOption } from 'ng-zorro-antd/cascader';
 import { TranslateModule } from '@ngx-translate/core';
+import { RequestService } from '@service/request/request.service';
+import { FormBuilderCreationComponent } from '@widget/form-builder/form-builder-creation/form-builder-creation.component';
 
 @Component({
   selector: 'app-request-dialog',
@@ -41,38 +43,18 @@ import { TranslateModule } from '@ngx-translate/core';
     IonBackButton,
     IonButton,
     IonIcon,
+    FormBuilderCreationComponent,
   ],
 })
 export class RequestDialogPage implements OnInit {
+  private requestService = inject(RequestService);
+
   form = new FormGroup({
     type: new FormControl(null, Validators.required),
   });
-
-  options: NzCascaderOption[] = [
-    {
-      value: 'مرخصی',
-      label: 'مرخصی',
-      children: [
-        {
-          value: 'استحقاقی',
-          label: 'استحقاقی',
-          children: [
-            { label: 'روزانه', value: 'روزانه', isLeaf: true },
-            { label: 'ساعتی', value: 'ساعتی', isLeaf: true },
-          ],
-        },
-        {
-          value: 'استعلاجی',
-          label: 'استعلاجی',
-          children: [
-            { label: 'روزانه', value: 'روزانه', isLeaf: true },
-            { label: 'ساعتی', value: 'ساعتی', isLeaf: true },
-          ],
-        },
-      ],
-    },
-    { label: 'اصلاح تردد', value: 'اصلاح تردد', isLeaf: true },
-  ];
+  loading = false;
+  options = [];
+  dynamicForm = null;
 
   constructor() {}
 
@@ -80,7 +62,22 @@ export class RequestDialogPage implements OnInit {
     return this.form.get(key) as FormControl;
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getList();
+  }
 
+  getList() {
+    this.loading = true;
+    this.requestService
+      .getTypeAll({
+        is_tree: true,
+      })
+      .subscribe((response) => {
+        if (response.success) {
+          this.options = response.result;
+        }
+        this.loading = false;
+      });
+  }
   onSubmit() {}
 }

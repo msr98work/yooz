@@ -8,8 +8,8 @@
       </ion-buttons>
       <ion-title>{{ "AddRequestType" | translate }}</ion-title>
       <ion-buttons slot="end">
+        <!-- [disabled]="form.invalid" -->
         <ion-button
-          [disabled]="form.invalid"
           color="success"
           (click)="onSubmit()"
         >

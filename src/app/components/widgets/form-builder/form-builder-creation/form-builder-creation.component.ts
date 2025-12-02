@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-form-builder-creation',
+  selector: 'form-builder-creation',
   templateUrl: './form-builder-creation.component.html',
   styleUrls: ['./form-builder-creation.component.scss'],
 })
-export class FormBuilderCreationComponent  implements OnInit {
-
-  constructor() { }
+export class FormBuilderCreationComponent implements OnInit {
+  constructor() {}
 
   ngOnInit() {}
-
 }

@@ -1,12 +1,13 @@
 <app-main-header></app-main-header>
 <ion-content [fullscreen]="true">
   <ion-list [inset]="true" class="m-0">
-    <ion-item-sliding>
+    @for (item of list; track $index) {
+      <ion-item-sliding>
       <ion-item [button]="true" detail="true" style="--padding-start: 0">
         <ion-avatar aria-hidden="true" slot="start">
           <img alt="" src="assets/icon/form.png" />
         </ion-avatar>
-        <ion-text class="ms-3">Rick Astley</ion-text>
+        <ion-text class="ms-3">{{item.title}}</ion-text>
       </ion-item>
       <ion-item-options slot="end">
         <ion-item-option color="danger" expandable="true">
@@ -14,19 +15,7 @@
         </ion-item-option>
       </ion-item-options>
     </ion-item-sliding>
-    <ion-item-sliding>
-      <ion-item [button]="true" detail="true" style="--padding-start: 0">
-        <ion-avatar aria-hidden="true" slot="start">
-          <img alt="" src="assets/icon/form.png" />
-        </ion-avatar>
-        <ion-text class="ms-3">Rick Astley</ion-text>
-      </ion-item>
-      <ion-item-options slot="end">
-        <ion-item-option color="danger" expandable="true">
-          <ion-icon slot="icon-only" name="trash"></ion-icon>
-        </ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
+    }
   </ion-list>
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
     <ion-fab-button color="medium" size="small" id="open-workflow-dialog">

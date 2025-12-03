@@ -14,7 +14,6 @@ import { InputTextareaComponent } from '../../input/input-textarea/input-textare
 import { InputUtil } from '../../input/input.util';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { TranslateModule } from '@ngx-translate/core';
-import { debounceTime } from 'rxjs';
 
 @Component({
   selector: 'form-builder-config',
@@ -41,7 +40,7 @@ export class FormBuilderConfigComponent implements OnInit {
     title: new FormControl('', Validators.required),
     name: new FormControl('', Validators.required),
     type: new FormControl(null, Validators.required),
-    widget: new FormControl('', Validators.required),
+    widget: new FormControl(null, Validators.required),
     required: new FormControl(false),
     readonly: new FormControl(false),
     placeHolder: new FormControl(''),

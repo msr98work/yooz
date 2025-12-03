@@ -1,19 +1,56 @@
-<!-- <input-autocomplete
-    [control]="getControl('title')"
-    [placeholder]="'Please input'"
-    [options]="options"
-    [size]="'medium'"
-    [backfill]="true"
-  >
-  </input-autocomplete>
-
-  <input-upload-file
-    [accept]="'image/*,video/*,.pdf'"
-    [multiple]="true"
-    [maxCount]="5"
-    [maxSize]="5 * 1024 * 1024"
-    [buttonText]="'آپلود فایل'"
-    [listType]="'picture'"
-    [capture]="'both'"
-  >
-  </input-upload-file> -->
+<form class="dialog" [formGroup]="form">
+  @for (item of model(); track item.name){ @if(item.type == 'string') {
+  @if(item.widget == 'string' || item.widget =='link') {
+  <input-text
+    [label]="item.title"
+    [placeholder]="item.placeHolder"
+    class="ion-margin-bottom"
+    [control]="getControl(item.name)"
+  ></input-text>
+  } else @if(item.widget == 'textarea') {
+  <input-textarea
+    [label]="item.title"
+    [placeholder]="item.placeHolder"
+    class="ion-margin-bottom"
+    [control]="getControl(item.name)"
+  ></input-textarea>
+  } @else if(item.widget == 'select') {
+  <input-select
+    [label]="item.title"
+    [options]="[]"
+    [placeholder]="item.placeHolder"
+    class="ion-margin-bottom"
+    [control]="getControl(item.name)"
+  ></input-select>
+  } @else if(item.widget == "file") {
+  <input-upload-file></input-upload-file>
+  } } @else if (item.type == 'number') { @if(item.widget == "number") {
+  <input-number
+    [label]="item.title"
+    [placeholder]="item.placeHolder"
+    class="ion-margin-bottom"
+    [control]="getControl(item.name)"
+  ></input-number>
+  } @else if (item.widget == "select") {
+  <input-select
+    [label]="item.title"
+    [options]="[]"
+    [placeholder]="item.placeHolder"
+    class="ion-margin-bottom"
+    [control]="getControl(item.name)"
+  ></input-select
+  >} } @else if (item.type == 'datetime') { @if(item.widget == "time") {
+  <input-time
+    [label]="item.title"
+    class="ion-margin-bottom"
+    [control]="getControl(item.name)"
+  ></input-time>
+  } @else { } } @else if (item.type == "boolean") {
+  <input-checkbox
+    [label]="item.title"
+    [placeholder]="item.placeHolder"
+    class="ion-margin-bottom"
+    [control]="getControl(item.name)"
+  ></input-checkbox>
+  } }
+</form>

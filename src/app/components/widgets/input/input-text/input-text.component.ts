@@ -20,7 +20,7 @@ export class InputTextComponent implements OnInit {
   control = input.required<FormControl>();
   class = input<string>('');
   label = input<string>('');
-  placeHolder = input<string>('');
+  placeholder = input<string>('');
   fill = input<string>('outline');
 
   constructor() {}

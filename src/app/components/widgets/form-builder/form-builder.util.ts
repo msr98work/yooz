@@ -35,7 +35,7 @@ export namespace FormBuilderUtil {
     title: string;
     name: string;
     type: FormBuilderTypes;
-    widget: string;
+    widget: FormBuilderWidget;
     placeHolder: string;
     default: string;
     description: string;
@@ -53,12 +53,25 @@ export namespace FormBuilderUtil {
   }
 
   export type FormBuilderTypes = 'string' | 'number' | 'boolean' | 'datetime';
+  export type FormBuilderWidget =
+    | 'string'
+    | 'textarea'
+    | 'select'
+    | 'computational'
+    | 'file'
+    | 'number'
+    | 'datetime'
+    | 'date'
+    | 'time'
+    | 'checkbox'
+    | 'link';
+
   export interface FormBuilder {
     label: string;
     value: FormBuilderTypes;
     widgets: {
       label: string;
-      value: string;
+      value: FormBuilderWidget;
     }[];
   }
 
@@ -80,7 +93,11 @@ export namespace FormBuilderUtil {
           label: 'Select',
         },
         {
-          value: 'Computational',
+          value: 'link',
+          label: 'Link',
+        },
+        {
+          value: 'computational',
           label: 'ComputationalField',
         },
         {
@@ -102,7 +119,7 @@ export namespace FormBuilderUtil {
           label: 'Select',
         },
         {
-          value: 'Computational',
+          value: 'computational',
           label: 'ComputationalField',
         },
       ],
